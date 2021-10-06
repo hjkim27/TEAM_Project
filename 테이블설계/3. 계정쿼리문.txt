@@ -1,0 +1,10 @@
+cmd창에서 sqlplus 접속 후 아래 쿼리문 입력
+
+
+create user projecthome identified by 1234;
+grant connect, resource to projecthome;
+
+
+** 계정생성, 권한 확인 **
+connect projecthome/1234;
+show user;
