@@ -14,7 +14,7 @@ WARNCOUNT number default 0
 
 create table MEMBER_CHOICE(
 NUM number primary key,
-MEMBERID varchar2(20) not null,
+NICKNAME varchar2(20) not null,
 ADDRNUM varchar2(10),
 ADDR varchar2(100),
 ADDRSUB varchar2(100),
@@ -119,8 +119,6 @@ WARNTYPE varchar2(30),
 WARNWHY varchar2(300),
 WARNTIME date default sysdate
 );
-
-
 
 create sequence MEMBER_SEQ
 start with 1 
