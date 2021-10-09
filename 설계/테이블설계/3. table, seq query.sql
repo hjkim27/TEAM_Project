@@ -78,8 +78,10 @@ NUM number primary key,
 GOODSCODE varchar2(100),
 GOODS varchar2(100) not null,
 CONTENT varchar2(100) not null,
-PRICE number default 0
+PRICE number default 0,
+HEART varchar2(10) default 'N' not null 
 );
+
 
 create table GOODS_IMAGE(
 NUM number primary key,
