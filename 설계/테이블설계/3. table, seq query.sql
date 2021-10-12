@@ -5,6 +5,7 @@ PASSWORD varchar2(50) not null,
 NAME varchar2(20) not null,
 NICKNAME varchar2(20) not null unique,
 WARNCOUNT number default 0,
+SESSIONID varchar2(100),
 OUTDATE date
 );
 
@@ -76,12 +77,11 @@ ENDDATE date not null
 create table GOODS(
 NUM number primary key,
 GOODSCODE varchar2(100),
-GOODS varchar2(100) not null,
+GOODSNAME varchar2(100) not null,
 CONTENT varchar2(100) not null,
 PRICE number default 0,
-HEART varchar2(10) default 'N' not null 
+HEART varchar2(10) default 'NO' not null
 );
-
 
 create table GOODS_IMAGE(
 NUM number primary key,
