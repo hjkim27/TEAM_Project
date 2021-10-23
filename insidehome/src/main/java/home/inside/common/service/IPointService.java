@@ -1,8 +1,7 @@
 package home.inside.common.service;
 
-import java.util.Date;
+import java.util.List;
 
-import home.inside.common.repository.IPointDao;
 import home.inside.common.vo.PointVo;
 
 public interface IPointService {
@@ -13,7 +12,7 @@ public interface IPointService {
 	public int selectCheck(String nickname) throws Exception;
 	
 	// 이번달 포인트 변동내역 확인
-	public PointVo selectMonth(String nickname, int month) throws Exception;
+	public List<PointVo> selectMonth(String nickname, int month) throws Exception;
 	
 	// 회원 탈퇴 시 내용 삭제
 	public void deletePoint(String nickname) throws Exception;

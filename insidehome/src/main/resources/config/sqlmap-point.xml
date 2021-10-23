@@ -13,7 +13,7 @@
 	<select id="selectMonth" parameterType="HashMap" resultType="pointVo">
 		select * from POINT 
 			where CHANGEDATE <![CDATA[>=]]> (select add_months(trunc(sysdate, 'mm'),#{month}) from dual) 
-    		and CHANGEDATE <![CDATA[<]]> (select add_months(trunc(sysdate, 'mm'),#{month-1}) from dual)
+    		and CHANGEDATE <![CDATA[<]]> last_day(sysdate)
     		and NICKNAME = #{nickname};
 	</select>
 	<select id="">

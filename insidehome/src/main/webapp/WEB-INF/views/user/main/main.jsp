@@ -11,4 +11,4 @@
 	<button onclick="location.href='<c:url value="/user/main.do"/>'">intercepterUser</button>	
 	<a href="<c:url value="/manager/main.do"/>">intercepterManager</a>
 
-<%@include file="/WEB-INF/views/user/main/userHeader.jsp" %>
+<%@include file="/WEB-INF/views/user/main/userFooter.jsp" %>

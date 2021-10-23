@@ -14,8 +14,8 @@
 	<h2>SELECT</h2>
 	<h3>SELECT</h3>
 </div>
-	<button onclick="location.href='<c:url value="/main.do"/>'">메인페이지 이동</button>
-	<button onclick="location.href='<c:url value="/user/main.do"/>'">intercepterUser</button>	
+	<button class="move-btn" onclick="location.href='<c:url value="/main.do"/>'">메인페이지 이동</button>
+	<button class="move-btn" onclick="location.href='<c:url value="/user/main.do"/>'">intercepterUser</button>	
 	<a href="<c:url value="/manager/main.do"/>">intercepterManager</a>
 
 </body>

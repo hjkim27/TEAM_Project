@@ -2,6 +2,7 @@ package home.inside.common.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class PointServiceImpl implements IPointService {
 		return pointDao.selectCheck(nickname);
 	}
 	
-	public PointVo selectMonth(String nickname, int month) throws Exception {
+	public List<PointVo> selectMonth(String nickname, int month) throws Exception {
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("nickname", nickname);
 		hm.put("month", month);

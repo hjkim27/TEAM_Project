@@ -1,6 +1,7 @@
 package home.inside.common.repository;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,8 +20,8 @@ public class PointDaoImpl implements IPointDao {
 		return sqlSessionTemplate.selectOne("selectCheck", nickname);
 	}
 
-	public PointVo selectMonth(HashMap<String, Object> hm) throws Exception {
-		return sqlSessionTemplate.selectOne("selectCountMonth", hm);
+	public List<PointVo> selectMonth(HashMap<String, Object> hm) throws Exception {
+		return sqlSessionTemplate.selectList("selectCountMonth", hm);
 	}
 
 	public void delete(String nickname) throws Exception {

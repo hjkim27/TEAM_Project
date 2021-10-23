@@ -20,23 +20,25 @@ public class PointController {
 	//출석
 	@RequestMapping(value = "/inside/check.do")
 	public String checkIn(String nickname, Date changeDate, HttpServletRequest req) throws Exception {
-		if(pointService.selectCheck(nickname)<=0) {
+		if(nickname!=null && pointService.selectCheck(nickname)<=0) {
 			PointVo vo = new PointVo();
 			vo.setNickname(nickname);
 			vo.setChangePoint(300);
 			vo.setChangeWhy("checkIn");
 			pointService.insertPoint(vo);
-			req.setAttribute("check", "fail");
+			req.setAttribute("check", "success");
 		}
-		req.setAttribute("check", "success");
-		return "forward:/inside/checkin.do";
+		req.setAttribute("check", "fail");
+		return "error/commonException";
 	}
 	
 	
 	//출석페이지
 	@RequestMapping(value = "/inside/checkin.do")
-	public String checkList(String nickname, int month, Model model) throws Exception {
+	public String checkList(String nickname, Integer month, Model model) throws Exception {
+		System.out.println("month: "+month);
 		if(nickname!=null) {
+			month=(month==null)?0:month;
 			model.addAttribute("checkList", pointService.selectMonth(nickname, month));
 		}
 		return "user/main/checkIn";
