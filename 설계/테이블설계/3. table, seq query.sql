@@ -1,23 +1,23 @@
-create table MEMBER(
+create table MEMBER_MAIN(
 NUM number primary key,
 EMAIL varchar2(50) not null unique,
 NICKNAME varchar2(20) not null unique,
 PASSWORD varchar2(50) not null,
-NAME varchar2(20) not null,
-GENDER varchar2(10),
-STOREDATE date
+SESSIONID varchar2(100),
+LOGINTIME date,
+REGDATE date default sysdate
 );
 
 
-create table MEMBER_AUTO(
+create table MEMBER_SUB(
 NUM number primary key,
 NICKNAME varchar2(20) not null unique,
+NAME varchar2(20) not null,
+GENDER varchar2(10),
 WARNCOUNT number default 0,
 POINT number default 0,
-REGDATE date,
 MODDATE date default sysdate,
-SESSIONID varchar2(100),
-LOGINTIME date
+STOREDATE date
 );
 
 create table MEMBER_ADDR(
@@ -28,6 +28,13 @@ PHONE2 varchar2(20),
 ADDRNUM varchar2(10),
 ADDR varchar2(100),
 ADDRSUB varchar2(100)
+);
+
+create table MEMBER_DROP(
+NUM number primary key,
+EMAIL varchar2(50) not null,
+NICKNAME varchar2(20) not null,
+DROPDATE date default sysdate
 );
 
 create table POINT(
