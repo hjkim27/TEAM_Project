@@ -199,3 +199,16 @@ start with 1
 increment by 1 
 nomaxvalue nocycle nocache noorder;
 
+
+
+
+create table MEMBER_DROP(
+NUM number primary key,
+EMAIL varchar2(50) not null,
+NICKNAME varchar2(20) not null,
+DROPDATE date default sysdate
+);
+create sequence MEMBER_DROP_SEQ
+start with 1 
+increment by 1 
+nomaxvalue nocycle nocache noorder;
