@@ -82,6 +82,7 @@ GOODSCODE varchar2(100),
 GOODSNAME varchar2(100) not null,
 CONTENT varchar2(100) not null,
 PRICE number default 0,
+REGDATE date default sysdate not null,
 HEART varchar2(10) default 'NO' not null,
 STOCK number default 20
 );
