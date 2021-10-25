@@ -1,4 +1,4 @@
-package home.inside.member.utils;
+package util;
 
 import java.util.Date;
 

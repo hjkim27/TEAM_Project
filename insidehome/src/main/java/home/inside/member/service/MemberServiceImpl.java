@@ -9,6 +9,7 @@ import home.inside.member.repository.IMemberAddrDao;
 import home.inside.member.repository.IMemberAutoDao;
 import home.inside.member.repository.IMemberDao;
 import home.inside.member.vo.MemberAddrVo;
+import home.inside.member.vo.MemberAutoVo;
 import home.inside.member.vo.MemberVo;
 
 @Service
@@ -30,9 +31,9 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public void updateInfo(MemberVo vo, MemberAddrVo addrVo) throws Exception {
+	public void updateInfo(MemberVo vo,MemberAutoVo autoVo,  MemberAddrVo addrVo) throws Exception {
 		dao.updateInfo(vo);
-		autoDao.updateInfo();
+		autoDao.update(autoVo);
 		addrDao.updateInfo(addrVo);
 	}
 
@@ -45,8 +46,13 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public String findInfo(String email, String phone1, String phone2) throws Exception {
-		return dao.findEmail(email, phone1, phone2);
+	public String findInfo(String type, String email, String phone1, String phone2) throws Exception {
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("type", type);
+		hsm.put("email", email);
+		hsm.put("phone1", phone1);
+		hsm.put("phone2", phone2);
+		return dao.findEmail(hsm);
 	}
 
 	@Override
@@ -64,7 +70,11 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Override
 	public void upatePassword(String nickname, String password, String newPassword) throws Exception {
-		dao.updatePw(nickname, password, newPassword);
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("nickname", nickname);
+		hsm.put("password", password);
+		hsm.put("newPassword", newPassword);
+		dao.updatePw(hsm);
 	}
 
 }

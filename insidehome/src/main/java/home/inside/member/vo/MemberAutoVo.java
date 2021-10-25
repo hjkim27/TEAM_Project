@@ -59,6 +59,12 @@ public class MemberAutoVo {
 	public void setLoginTime(Date loginTime) {
 		this.loginTime = loginTime;
 	}
+	@Override
+	public String toString() {
+		return "MemberAutoVo [num=" + num + ", nickname=" + nickname + ", warnCount=" + warnCount + ", point=" + point
+				+ ", regdate=" + regdate + ", moddate=" + moddate + ", sessionId=" + sessionId + ", loginTime="
+				+ loginTime + "]";
+	}
 
 
 }

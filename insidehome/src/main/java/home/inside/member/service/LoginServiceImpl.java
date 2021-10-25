@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import home.inside.member.repository.IMemberAutoDao;
 import home.inside.member.repository.IMemberDao;
+import home.inside.member.vo.MemberAutoVo;
 
 @Service
 public class LoginServiceImpl implements ILoginService {
@@ -17,12 +18,18 @@ public class LoginServiceImpl implements ILoginService {
 	
 	@Override
 	public int loginCheck(String email, String password) throws Exception {
-		return dao.selectExistInfo(email, password);
+		HashMap<String, Object> hsm = new  HashMap<String, Object>();
+		hsm.put("email", email);
+		hsm.put("password", password);
+		return dao.selectExistInfo(hsm);
 	}
 
 	@Override
 	public void loginSuccess(String nickname, String sessionId) throws Exception {
-		autoDao.updateLogin(nickname, sessionId);
+		MemberAutoVo vo = new MemberAutoVo();
+		vo.setNickname(nickname);
+		vo.setSessionId(sessionId);
+		autoDao.update(vo);
 	}
 
 }

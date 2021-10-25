@@ -1,23 +1,10 @@
-package home.inside.member.utils;
+package util;
 
 public class SendEmailCommand {
-	private String senderName;
-	private String senderEmail;
 	private String receiverMail;
 	private String emailTitle;
 	private String emailContent;
-	public String getSenderName() {
-		return senderName;
-	}
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-	public String getSenderEmail() {
-		return senderEmail;
-	}
-	public void setSenderEmail(String senderEmail) {
-		this.senderEmail = senderEmail;
-	}
+
 	public String getReceiverMail() {
 		return receiverMail;
 	}

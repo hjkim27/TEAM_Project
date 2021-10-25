@@ -1,9 +1,9 @@
-package home.inside.member.utils;
+package util;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class RegistRequireCommandValidator implements Validator{
+public class LoginCommandValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -16,5 +16,5 @@ public class RegistRequireCommandValidator implements Validator{
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

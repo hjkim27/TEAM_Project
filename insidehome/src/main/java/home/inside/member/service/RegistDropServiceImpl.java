@@ -23,18 +23,18 @@ public class RegistDropServiceImpl implements IRegistDropService {
 	
 	
 	@Override
-	public void registMember(MemberVo vo, MemberAutoVo autoVo, MemberAddrVo addrVo) throws Exception {
+	public void registMember(MemberVo vo, MemberAddrVo addrVo) throws Exception {
 		dao.insert(vo);
-		autoDao.insert(autoVo);
+		autoDao.insert(vo.getNickname());
 		addrDao.insert(addrVo);
 	}
 
 	@Override
 	public String registCheck(String str, String type) throws Exception {
-		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("type", type);
-		hm.put("str", str);
-		return dao.selectCheck(hm);
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("type", type);
+		hsm.put("str", str);
+		return dao.selectCheck(hsm);
 	}
 
 	@Override

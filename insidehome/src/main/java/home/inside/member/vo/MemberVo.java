@@ -52,6 +52,11 @@ public class MemberVo {
 	public void setStoredate(Date storedate) {
 		this.storedate = storedate;
 	}
+	@Override
+	public String toString() {
+		return "MemberVo [num=" + num + ", email=" + email + ", nickname=" + nickname + ", password=" + password
+				+ ", name=" + name + ", gender=" + gender + ", storedate=" + storedate + "]";
+	}
 
 	
 }

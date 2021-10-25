@@ -16,7 +16,10 @@
 		<a class="head-list" href="<c:url value="#"/>">정보게시판</a> <a
 			class="head-list" href="<c:url value="#"/>">익명게시판</a> <a
 			class="head-list" href="<c:url value="#"/>">공지사항</a> <a
-			class="head-list" href="<c:url value="#"/>">공지사항</a> <a
+			class="head-list" href="<c:url value="#"/>">포인트몰</a> <a
 			class="head-list" href="<c:url value="/inside/checkin.do"/>">출석체크</a>
+	</div>
+	<div>
+		<button class="move-btn" onclick="location.href='<c:url value="/inside/memberList.do"/>'">목록</button>	
 	</div>
 	

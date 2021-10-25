@@ -1,12 +1,13 @@
-package home.inside.member.utils;
+package util;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class FindInfoValidator implements Validator {
+public class RegistRequireCommandValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -15,5 +16,5 @@ public class FindInfoValidator implements Validator {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

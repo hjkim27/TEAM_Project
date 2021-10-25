@@ -17,6 +17,7 @@
 	<button class="move-btn" onclick="location.href='<c:url value="/main.do"/>'">메인페이지 이동</button>
 	<button class="move-btn" onclick="location.href='<c:url value="/user/main.do"/>'">intercepterUser</button>	
 	<a href="<c:url value="/manager/main.do"/>">intercepterManager</a>
+	<a href="<c:url value="/inside/email.do"/>">메일발송 테스트</a>
 
 </body>
 </html>

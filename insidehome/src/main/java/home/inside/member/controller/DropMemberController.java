@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 
 import home.inside.common.service.IPointService;
 import home.inside.member.service.IMemberService;
-import home.inside.member.utils.DropMemberCommand;
+import util.DropMemberCommand;
 
 public class DropMemberController {
 /*

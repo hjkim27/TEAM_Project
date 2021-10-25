@@ -4,71 +4,57 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import home.inside.member.vo.MemberAutoVo;
 
 @Repository
 public class MemberAutoDaoImpl implements IMemberAutoDao {
+	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
+
 	@Override
-	public void insert(MemberAutoVo autoVo) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void insert(String nickname) throws Exception {
+		sqlSessionTemplate.insert("insertAuto", nickname);
 	}
 
 	@Override
 	public void deleteInfo(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.update("deleteInfo", nickname);
+
 	}
 
 	@Override
-	public void updateInfo() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateLogin(String nickname, String sessionId) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public MemberAutoVo selectOne(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<MemberAutoVo> selectAll(String type) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(MemberAutoVo vo) throws Exception {
+		sqlSessionTemplate.update("updateAuto", vo);
 	}
 
 	@Override
 	public void updateWarning(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.update("updateWarning", nickname);
 	}
 
 	@Override
-	public void updatePoint(HashMap<String, Object> hm) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void updatePoint(HashMap<String, Object> hsm) throws Exception {
+		sqlSessionTemplate.update("updatePoint", hsm);
+
 	}
 
 	@Override
-	public HashMap<String, Object> selectSessionId(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberAutoVo selectOne(String nickname) throws Exception {
+		List<MemberAutoVo> result = sqlSessionTemplate.selectList("selectOneAuto", nickname);
+		return result.isEmpty() ? null : result.get(0);
 	}
 
 	@Override
-	public void updateSessionId(HashMap<String, Object> hm) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public List<MemberAutoVo> selectAll(String type) throws Exception {
+		return sqlSessionTemplate.selectList("selectAllAuto", type);
+	}
+
+	@Override
+	public String selectSessionId(String nickname) throws Exception {
+		List<String> result = sqlSessionTemplate.selectList("selectSessionId", nickname);
+		return result.isEmpty() ? null : result.get(0);
 	}
 }

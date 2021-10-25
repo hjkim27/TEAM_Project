@@ -4,65 +4,60 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import home.inside.member.vo.MemberVo;
 
 @Repository
 public class MemberDaoImpl implements IMemberDao {
-	SqlSessionTemplate sqlSessionTemplate;
+	@Autowired
+	public SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
 	public void insert(MemberVo memberVo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.insert("insert", memberVo);
 	}
 
 	@Override
 	public void deleteInfo(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.update("deleteInfo", nickname);
 	}
 
 	@Override
 	public void updateInfo(MemberVo memberVo) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("updateInfo", memberVo);
 		
+	}
+
+	@Override
+	public void updatePw(HashMap<String, Object> hsm) throws Exception {
+		sqlSessionTemplate.update("updatePw", hsm);
 	}
 
 	@Override
 	public MemberVo selectOne(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<MemberVo> result = sqlSessionTemplate.selectList("selectOne", nickname);
+		return result.isEmpty()? null:result.get(0);
 	}
 
 	@Override
 	public List<MemberVo> selectAll(String type) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("selectAll", type);
 	}
 
 	@Override
-	public void updatePw(String nickname, String password, String newPassword) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public String selectCheck(HashMap<String, Object> hsm) throws Exception {
+		return sqlSessionTemplate.selectOne("selectCheck", hsm);
 	}
 
 	@Override
-	public String selectCheck(HashMap<String, Object> hm) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public int selectExistInfo(HashMap<String, Object> hsm) throws Exception {
+		return sqlSessionTemplate.selectOne("selectExistinfo", hsm);
 	}
 
 	@Override
-	public int selectExistInfo(String email, String password) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String findEmail(String email, String phone1, String phone2) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String findEmail(HashMap<String, Object> hsm) throws Exception {
+		return sqlSessionTemplate.selectOne("findEmail", hsm);
 	}
 }

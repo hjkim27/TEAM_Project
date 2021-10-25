@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 
 import home.inside.member.service.IMemberService;
-import home.inside.member.utils.ChangePwCommand;
-import home.inside.member.utils.UpdateInfoCommand;
+import util.ChangePwCommand;
+import util.UpdateInfoCommand;
 
 @Controller
 public class UpdateController {

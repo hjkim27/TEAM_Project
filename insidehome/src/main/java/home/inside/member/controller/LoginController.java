@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 
 import home.inside.member.service.IMemberService;
-import home.inside.member.utils.LoginCommand;
+import util.LoginCommand;
 
 @Controller
 public class LoginController {

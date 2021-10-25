@@ -1,4 +1,4 @@
-package home.inside.member.utils;
+package util;
 
 public class LoginCommand {
 	private String email;

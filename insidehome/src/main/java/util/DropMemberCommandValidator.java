@@ -1,4 +1,4 @@
-package home.inside.member.utils;
+package util;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
