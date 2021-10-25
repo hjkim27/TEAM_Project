@@ -50,6 +50,11 @@ public class MemberAddrVo {
 	public void setAddrSub(String addrSub) {
 		this.addrSub = addrSub;
 	}
+	@Override
+	public String toString() {
+		return "MemberAddrVo [num=" + num + ", nickname=" + nickname + ", phone1=" + phone1 + ", phone2=" + phone2
+				+ ", addrNum=" + addrNum + ", addr=" + addr + ", addrSub=" + addrSub + "]";
+	}
 
 	
 }
