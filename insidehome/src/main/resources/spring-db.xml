@@ -44,9 +44,9 @@
 			지정 -->
 		<property name="mapperLocations">
 			<list>
+			<!--
 				<value>classpath:config/sqlmap-member.xml</value>
 				<value>classpath:config/sqlmap-memberAuto.xml</value>
-			<!--
 				<value>classpath:config/sqlmap-memberAddr.xml</value>
 				<value>classpath:config/sqlmap-goods.xml</value>
 				<value>classpath:config/sqlmap-goodsImage.xml</value>
