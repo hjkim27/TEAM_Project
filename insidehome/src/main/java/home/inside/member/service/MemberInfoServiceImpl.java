@@ -33,7 +33,11 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 		result.put("addr", addrDao.selectAddrInfo(nickname));
 		return result;
 	}
-
+	
+	@Override
+	public MemberAddrVo selectAddrInfo(String nickname) throws Exception {
+		return addrDao.selectAddrInfo(nickname);
+	}
 	@Override
 	public List<HashMap<String, Object>> selectMemberList(String nickname) throws Exception {
 		return mainDao.selectMainList(nickname);
@@ -60,19 +64,14 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 
 	@Override
 	public void updateMyInfo(MemberSubVo subVo, MemberAddrVo addrVo) throws Exception {
-		if(subVo.getGender()!=null || subVo.getStoredate()!=null) {
-			subDao.updateSubInfo(subVo);
-		}
-		if(addrVo.getAddrNum()!=null || addrVo.getPhone2()!=null) {
-			addrDao.updateAddrInfo(addrVo);			
-		}
+		subDao.updateSubInfo(subVo);
+		addrDao.updateAddrInfo(addrVo);			
 	}
 
 	@Override
-	public void updateMyCcount(String nickname, String type, String point) throws Exception {
+	public void updateMyCcount(String nickname, int point) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("nickname", nickname);
-		hsm.put("type", type);
 		hsm.put("point", point);
 		subDao.updatePointOrWarn(hsm);
 

@@ -27,7 +27,7 @@ public class RegistDropServiceImpl implements IRegistDropService {
 	private IMemberDropDao dropDao;
 	
 	@Override
-	public void registMember(RegistCommand regCmd, String gender, Integer Storedate, MemberAddrVo addrVo) throws Exception {
+	public void registMember(RegistCommand regCmd, String gender, Integer storedate, MemberAddrVo addrVo) throws Exception {
 		HashMap<String , Object> mainInfo = new HashMap<String, Object>();
 		mainInfo.put("Email", regCmd.getEmail());
 		mainInfo.put("nickname", regCmd.getNickname());
@@ -37,8 +37,10 @@ public class RegistDropServiceImpl implements IRegistDropService {
 		HashMap<String, Object> subInfo = new HashMap<String, Object>();
 		subInfo.put("nickname", regCmd.getNickname());
 		subInfo.put("name", regCmd.getNickname());
+		gender = (gender==null)?"w":gender;
 		subInfo.put("gender", gender);
-		subInfo.put("storedate", Storedate);
+		storedate = (storedate==null)?100:storedate;
+		subInfo.put("storedate", storedate);
 		subDao.insertSubInfo(subInfo);
 
 		addrDao.insertAddrInfo(addrVo);

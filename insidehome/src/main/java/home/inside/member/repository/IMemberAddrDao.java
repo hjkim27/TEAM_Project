@@ -1,7 +1,5 @@
 package home.inside.member.repository;
 
-import java.util.HashMap;
-
 import home.inside.member.vo.MemberAddrVo;
 
 public interface IMemberAddrDao {

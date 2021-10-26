@@ -17,11 +17,25 @@
 			where NICKNAME like '%'||#{nickname}||'%'
 		</if>
 	</select>
-	<update id="updatePw" parameterType="HashMap"></update>
-	<delete id="deleteMainInfo" parameterType="String"></delete>
+	<update id="updatePw" parameterType="HashMap">
+		update MEMBER_MAIN set PASSWORD=#{password} 
+		where NICKNAME=#{nickname}] and PASSORD=#{password}
+	</update>
+	<delete id="deleteMainInfo" parameterType="String">
+		delete from MEMBER_MAIN where NICKNAME=#{nickname}
+	</delete>
 	
-	<select id="selectLoginInfo" parameterType="String" resultType="HashMap"></select>
-	<select id="selectIsEqualsToInsert" parameterType="HashMap" resultType="String"></select>
-	<update id="updateLoginSuccess" parameterType="HashMap"></update>
-	<select id="overlapCheck" parameterType="HashMap" resultType="String"></select>
+	
+	<select id="selectLoginInfo" parameterType="String" resultType="HashMap">
+		select EMAIL, PASSWORD from MEMBER_MAIN where SESSIONID=#{sessionId}
+	</select>
+	<select id="selectIsEqualsToInsert" parameterType="HashMap" resultType="String">
+		select NICKNAME from MEMBER_MAIN where EMAIL=#{email} and PASSWORD=#{password}
+	</select>
+	<update id="updateLoginSuccess" parameterType="HashMap">
+		update MEMBER_MAIN set SESSIONID=#{sessionId} where NICKNAME=#{nickname}
+	</update>
+	<select id="overlapCheck" parameterType="HashMap" resultType="String">
+		select ${type} from MEMBER_MAIN where ${type}=#{str}
+	</select>
 </mapper>
