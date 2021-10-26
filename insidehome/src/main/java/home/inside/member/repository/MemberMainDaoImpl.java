@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import home.inside.member.vo.MemberInfoDto;
+
 @Repository
 public class MemberMainDaoImpl implements IMemberMainDao {
 	@Autowired
@@ -15,11 +17,6 @@ public class MemberMainDaoImpl implements IMemberMainDao {
 	@Override
 	public void insertMainInfo(HashMap<String, Object> hsm) throws Exception {
 		sqlSessionTemplate.insert("insertMainInfo", hsm);
-	}
-
-	@Override
-	public HashMap<String, Object> selectMainInfo(String nickname) throws Exception {
-		return sqlSessionTemplate.selectOne("selectMainInfo", nickname);
 	}
 
 	@Override
@@ -58,6 +55,17 @@ public class MemberMainDaoImpl implements IMemberMainDao {
 	public String overlapCheck(HashMap<String, Object> hsm) throws Exception {
 		List<String> result = sqlSessionTemplate.selectList("overlapCheck", hsm);
 		return result.isEmpty()?null: result.get(0);
+	}
+
+	@Override
+	public String findMemberInfo(HashMap<String, Object> hsm) throws Exception {
+		List<String> result = sqlSessionTemplate.selectList("findMemberInfo", hsm);
+		return result.isEmpty()?null: result.get(0);
+	}
+
+	@Override
+	public MemberInfoDto selectInfo(String nickname) throws Exception {
+		return sqlSessionTemplate.selectOne("selectInfo", nickname);
 	}
 
 }

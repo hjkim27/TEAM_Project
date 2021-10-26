@@ -38,4 +38,14 @@
 	<select id="overlapCheck" parameterType="HashMap" resultType="String">
 		select ${type} from MEMBER_MAIN where ${type}=#{str}
 	</select>
+	<select id="findMemberInfo" parameterType="HashMap" resultType="String">
+		select main.EMAIL from MEMBER_MAIN main, MEMBER_ADDR addr
+		where addr.PHONE1=#{phone1} and addr.PHONE2=#{phone}
+		<if test="type.equals('email')">
+			and main.EMAIL=#{email}
+		</if>
+		<if test="type.equals('password')">
+			and mail.EMAIL like '%'||#{email}
+		</if>
+	</select>
 </mapper>

@@ -16,7 +16,7 @@ import home.inside.member.vo.MemberAddrVo;
 import home.inside.member.vo.MemberDropVo;
 
 @Service
-public class RegistDropServiceImpl implements IRegistDropService {
+public class RegistServiceImpl implements IRegistService {
 	@Autowired
 	private IMemberMainDao mainDao;
 	@Autowired
@@ -57,13 +57,5 @@ public class RegistDropServiceImpl implements IRegistDropService {
 		return result;
 	}
 
-	@Override
-	public void dropMember(MemberDropVo dropVo) throws Exception {
-		dropDao.insertDropInfo(dropVo);
-		String nickname = dropVo.getNickname();
-		mainDao.deleteMainInfo(nickname);
-		subDao.deleteSubInfo(nickname);
-		addrDao.deleteAddrInfo(nickname);
-	}
 
 }

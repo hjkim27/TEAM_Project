@@ -19,11 +19,6 @@ public class MemberSubDaoImpl implements IMemberSubDao {
 	}
 
 	@Override
-	public MemberSubVo selectSubInfo(String nickname) throws Exception {
-		return sqlSessionTemplate.selectOne("selectSubInfo", nickname);
-	}
-
-	@Override
 	public void updateSubInfo(MemberSubVo subVo) throws Exception {
 		sqlSessionTemplate.update("updateSubInfo", subVo);
 	}

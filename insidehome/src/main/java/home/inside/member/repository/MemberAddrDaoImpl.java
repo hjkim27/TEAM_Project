@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import home.inside.member.vo.MemberAddrVo;import oracle.security.o3logon.a;
+import home.inside.member.vo.MemberAddrVo;
 
 @Repository
 public class MemberAddrDaoImpl implements IMemberAddrDao {

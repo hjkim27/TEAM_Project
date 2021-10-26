@@ -4,6 +4,6 @@
 
 <%@include file="/WEB-INF/views/user/main/userHeader.jsp"%>
 
-이메일, 비밀번호 찾기 페이지 요청
+이메일, 비밀번호 찾기 결과 페이지
 
 <%@include file="/WEB-INF/views/user/main/userFooter.jsp"%>
