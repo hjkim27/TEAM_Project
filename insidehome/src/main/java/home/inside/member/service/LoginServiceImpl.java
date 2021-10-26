@@ -27,10 +27,12 @@ public class LoginServiceImpl implements ILoginService {
 
 	@Override
 	public void loginSuccess(String nickname, String sessionId) throws Exception {
-		HashMap<String, Object> hsm = new HashMap<String, Object>();
-		hsm.put("nickname", nickname);
-		hsm.put("sessionId", sessionId);
-		mainDao.updateLoginSuccess(hsm);
+		if(sessionId!=null) {
+			HashMap<String, Object> hsm = new HashMap<String, Object>();
+			hsm.put("nickname", nickname);
+			hsm.put("sessionId", sessionId);
+			mainDao.updateLoginSuccess(hsm);			
+		}
 	}
 
 }
