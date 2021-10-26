@@ -19,7 +19,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 				
 			}
 		}
-		request.setAttribute("err", "접근 불가");
+		request.setAttribute("err", "로그인이 필요한 화면입니다.");
 		response.sendRedirect(request.getContextPath()+"/main.do");
 		return false;
 	}

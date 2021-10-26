@@ -14,26 +14,26 @@ import home.inside.common.vo.PointVo;
 public class PointServiceImpl implements IPointService {
 
 	@Autowired
-	private IPointDao pointDao;	
-	
+	private IPointDao pointDao;
+
 	public void insertPoint(PointVo vo) throws Exception {
-		pointDao.insert(vo);
+		pointDao.insertPoint(vo);
 	}
 
 	public int selectCheck(String nickname) throws Exception {
-		return pointDao.selectCheck(nickname);
+		return pointDao.selectCheckIn(nickname);
 	}
-	
-	public List<PointVo> selectMonth(String nickname, int month) throws Exception {
-		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("nickname", nickname);
-		hm.put("month", month);
-		return pointDao.selectMonth(hm);
+
+	public List<PointVo> selectList(String nickname) throws Exception {
+		return pointDao.selectPointList(nickname);
+	}
+
+	public List<Date> selectMonth(String nickname) throws Exception {
+		return pointDao.selectCheckMonth(nickname);
 	}
 
 	public void deletePoint(String nickname) throws Exception {
-		pointDao.delete(nickname);
+		pointDao.deletePoint(nickname);
 	}
-
 
 }
