@@ -2,3 +2,10 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberAddrDao">
+	<insert id="insertAddrInfo" parameterType="memberAddrVo"></insert>
+	<select id="selectAddrInfo" parameterType="String" resultType="memberAddrVo"></select>
+	<update id="updateAddrInfo" parameterType="memberAddrVo"></update>
+	<delete id="deleteAddrInfo" parameterType="String"></delete>
+</mapper>

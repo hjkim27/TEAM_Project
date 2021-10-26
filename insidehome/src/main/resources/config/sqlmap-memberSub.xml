@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberSubDao">
+	<insert id="insertSubInfo" parameterType="HashMap"></insert>
+	<select id="selectSubInfo" parameterType="String" resultType="memberSubVo"></select>
+	<update id="updateSubInfo" parameterType="memberSubVo"></update>
+	<delete id="deleteSubInfo" parameterType="String"></delete>
+	
+	<select id="selectPointAndWarn" parameterType="String" resultType="HashMap"></select>
+	<update id="updatePointOrWarn" parameterType="HashMap"></update>
+</mapper>
