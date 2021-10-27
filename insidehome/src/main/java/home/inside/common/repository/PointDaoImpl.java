@@ -1,7 +1,6 @@
 package home.inside.common.repository;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,7 +17,6 @@ public class PointDaoImpl implements IPointDao {
 	@Override
 	public void insertPoint(PointVo vo) throws Exception {
 		sqlSessionTemplate.insert("insertPoint", vo);
-
 	}
 
 	@Override

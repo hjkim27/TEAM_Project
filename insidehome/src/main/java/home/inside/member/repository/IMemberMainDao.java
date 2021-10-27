@@ -23,7 +23,8 @@ public interface IMemberMainDao {
 	// 로그인 성공 후 로그인시간 및 옵션에 의한 정보 업데이트
 	public void updateLoginSuccess(HashMap<String, Object> hsm) throws Exception;
 	// 회원가입 시 중복조회용
-	public String overlapCheck(HashMap<String, Object> hsm) throws Exception;
+	public int emailCheck(String email) throws Exception;
+	public int nicknameCheck(String nickname) throws Exception;
 	//-----------------------------------------------------------------
 	// 아이디 비밀번호 찾기(main, addr)
 	public String findMemberInfo(HashMap<String, Object> hsm) throws Exception;

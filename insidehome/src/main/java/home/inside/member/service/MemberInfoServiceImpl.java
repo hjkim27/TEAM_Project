@@ -62,7 +62,13 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	@Override
 	public String findMemberInfo(FindInfoCommand cmd) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
-		hsm.put("email", cmd.getEmail());
+		String email = cmd.getEmail();
+		if(cmd.getType().equals("email")) {
+			email = email.split("@")[1];
+			hsm.put("email", email);
+		}else {
+			hsm.put("email", email);
+		}
 		String phone = cmd.getPhone();
 		hsm.put("phone1", phone.substring(0,3));
 		hsm.put("phone1", phone.substring(3));

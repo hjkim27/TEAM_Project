@@ -27,7 +27,7 @@ public class RegistServiceImpl implements IRegistService {
 	private IMemberDropDao dropDao;
 	
 	@Override
-	public void registMember(RegistCommand regCmd, String gender, Integer storedate, MemberAddrVo addrVo) throws Exception {
+	public void registMember(RegistCommand regCmd) throws Exception {
 		HashMap<String , Object> mainInfo = new HashMap<String, Object>();
 		mainInfo.put("Email", regCmd.getEmail());
 		mainInfo.put("nickname", regCmd.getNickname());
@@ -37,23 +37,31 @@ public class RegistServiceImpl implements IRegistService {
 		HashMap<String, Object> subInfo = new HashMap<String, Object>();
 		subInfo.put("nickname", regCmd.getNickname());
 		subInfo.put("name", regCmd.getNickname());
+		String gender = regCmd.getGender();
 		gender = (gender==null)?"w":gender;
 		subInfo.put("gender", gender);
+		Integer storedate = regCmd.getStoredate();
 		storedate = (storedate==null)?100:storedate;
 		subInfo.put("storedate", storedate);
 		subDao.insertSubInfo(subInfo);
-
+		
+		MemberAddrVo addrVo = new MemberAddrVo();
+		addrVo.setNickname(regCmd.getNickname());
+		addrVo.setAddrNum(regCmd.getAddrNum());
+		addrVo.setAddr(regCmd.getAddr());
+		addrVo.setAddrSub(regCmd.getAddrSub());
 		addrDao.insertAddrInfo(addrVo);
 	}
 
 	@Override
-	public List<String> overlapCheck(String type, String str) throws Exception {		
-		HashMap<String, Object> hsm = new HashMap<String, Object>();
-		hsm.put("type", type);
-		hsm.put("str", str);
-		List<String> result = new ArrayList<String>();
-		result.add(mainDao.overlapCheck(hsm));
-		result.add(dropDao.overlapCheckDrop(hsm));
+	public int overlapCheck(String email, String nickname) throws Exception  {
+		int result=0;
+		if(email!=null) {
+			result = mainDao.emailCheck(email)+dropDao.emailCheckDrop(email);
+		} else if(nickname!=null) {
+			result = mainDao.nicknameCheck(nickname)+dropDao.nicknameCheckDrop(nickname);
+		}
+		System.out.println(result);
 		return result;
 	}
 

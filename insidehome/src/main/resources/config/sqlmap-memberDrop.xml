@@ -8,8 +8,11 @@
 		insert into MEMBER_DROP(NUM, EMAIL, NICKNAME)
 		value (MEMBER_DROP_SEQ.nextval, #{email}, #{nickname}, #{warnCount})
 	</insert>
-	<select id="overlapChecckDrop" parameterType="HashMap" resultType="String">
-		select ${type} from MEMBER_DROP where ${type}=#{str}
+	<select id="emailCheckDrop" parameterType="String" resultType="int">
+		select count(*) from MEMBER_DROP where EMAIL=#{email}
+	</select>
+	<select id="nicknameCheckDrop" parameterType="String" resultType="int">
+		select count(*) from MEMBER_DROP where NICKNAME=#{nickname}
 	</select>
 	<select id="selectDropList" parameterType="String" resultType="memberDropVo">
 		select * from MEMBER_DROP

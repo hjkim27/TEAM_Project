@@ -35,8 +35,11 @@
 	<update id="updateLoginSuccess" parameterType="HashMap">
 		update MEMBER_MAIN set SESSIONID=#{sessionId} where NICKNAME=#{nickname}
 	</update>
-	<select id="overlapCheck" parameterType="HashMap" resultType="String">
-		select ${type} from MEMBER_MAIN where ${type}=#{str}
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*) from MEMBER_MAIN where EMAIL=#{email}
+	</select>
+	<select id="nicknameCheck" parameterType="String" resultType="int">
+		select count(*) from MEMBER_MAIN where NICKNAME=#{nickname}
 	</select>
 	<select id="findMemberInfo" parameterType="HashMap" resultType="String">
 		select main.EMAIL from MEMBER_MAIN main, MEMBER_ADDR addr
