@@ -14,7 +14,12 @@ public class MemberMgrController {
 	private IMemberInfoService infoSer;
 
 	@RequestMapping(value = "/member/list.do")
-	public String memberList(String type, Model model) throws Exception {
+	public String memberList(String nickname, String type, Model model) throws Exception {
+		model.addAttribute("memberList", infoSer.selectMemberList(nickname, type));
+		if(type==null) {
+			type = "normal";
+		}
+		model.addAttribute("type", type);
 		return "manager/member/infoList";
 	}
 }

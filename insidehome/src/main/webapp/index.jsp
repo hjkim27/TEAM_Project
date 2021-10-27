@@ -18,6 +18,7 @@
 	<button class="move-btn" onclick="location.href='<c:url value="/user/main.do"/>'">intercepterUser</button>	
 	<a href="<c:url value="/manager/main.do"/>">intercepterManager</a>
 	<a href="<c:url value="/inside/registForm.do"/>">회원가입</a>
+			<a class="head-list" href="<c:url value="/manager/member/list.do"/>">회원정보</a>
 	
 	<form action="<c:url value="/inside/email.do"/>" method="post">
 		<input type="submit" value="메일발송 테스트">

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-
 	<div>관리자 발입니다.</div>
+</section>
 </body>
 </html>

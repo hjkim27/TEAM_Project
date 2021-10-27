@@ -7,13 +7,81 @@
 	src: url("../font/Cafe24SsurroundAir.ttf");
 	font-family: "24normal";
 }
-
-h1 {
+body{
+	margin: 0;
+	padding: 0;
+}
+header.inside-header{
+	position: sticky;
+	top: 0;
+	width: 100%;
+	height: auto;
+	background: grey;
+	margin: 0;
+	padding: 0;
+	line-height: 60px;
+}
+.head-area{
+	text-align: right;
+	height: 20px;
+	left: 80%;
+	right: 0;
+	margin: 0 0 0 0;
+}
+ul.service-head{
+	list-style: none;
+	line-height: normal;
+	margin-top: -3px;
+	margin-bottom: -3px;
+	float: right;
+}
+a.head-header {
+	margin-right: 10px;
+	text-decoration: none;
+	color: #C9D6DF;
+	font-size: 15px;
 	font-family: "24bold";
 }
+.logo-area{
+	display: inline-block;
+	height: 110px;
+	width: 225px;
+}
+.logo{
+	width: 225px;
+	height: 106px;
+	float: left;
+}
+.service-area{
+	display: inline-block;
+	left: 225px;
+	width: 70%;
+}
+ul.service-list{
+	list-style: none;
+	text-align: center;
+}
+li{
+	float: left;
+}
+.head-list {
+	float: center;
+	margin-right: 10px;
+	text-decoration: none;
+	color: #C9D6DF;
+	font-size: 20px;
+	font-family: "24bold";
+}
+.head-list:hover {
+	text-align: center;
+	text-decoration: none;
+	color: #B8DFD8;
+	font-family: "24bold";
+	font-size: 20px;
+}
 
-h2 {
-	font-family: "24normal";
+.inside-body{
+	margin : 30px 30px 30px 30px;
 }
 
 .move-btn {
@@ -31,19 +99,6 @@ h2 {
 	font-family: "24normal";
 }
 
-.head-list {
-	text-align: center;
-	text-decoration: none;
-	color: #C9D6DF;
-	font-family: "24bold";
-}
-
-.head-list:hover {
-	text-align: center;
-	text-decoration: none;
-	color: #B8DFD8;
-	font-family: "24bold";
-}
 
 .noDrag {
 	-ms-user-select: none;
@@ -65,4 +120,36 @@ h2 {
 	padding: 0 0 0 0;
 	border: 0;
 	float: left;
+}
+
+.listhead {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-family: "24bold";
+}
+
+.listbody {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-family: "24normal";
+}
+
+.listhead-date {
+	margin: 0 20px 0 0;
+	padding: 0 0 0 0;
+	border: 0;
+	float: left;
+}
+
+.listbody-date {
+	margin: 0 20px 0 0;
+	padding: 0 0 0 0;
+	border: 0;
+	float: left;
+}
+
+.list-date {
+	width: 200px;
 }

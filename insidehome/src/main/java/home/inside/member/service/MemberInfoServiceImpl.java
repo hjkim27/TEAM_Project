@@ -32,7 +32,7 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	}
 	@Override
 	public Object selectMemberList(String nickname, String type) throws Exception {
-		if(type.equals("black")) {
+		if(type!=null && type.equals("black")) {
 			return dropDao.selectDropList(nickname);
 		} else {
 			return mainDao.selectMainList(nickname);
