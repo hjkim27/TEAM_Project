@@ -12,7 +12,7 @@ body {min-height:100%; margin: 0; padding: 0; font-family: "24normal"; -ms-user-
 a { text-decoration: none; }
 ul{list-style: none;}
 div.bodyinfo {margin: 5% 15% 5% 15%;}
-h1.info-detail{
+h1.info-title{
 	font-family: "24bold"; color: #4D4F6F;display: inline; margin: 0 20px 0 0;
 }
 div.info-detail{
@@ -42,7 +42,7 @@ li.head-list, li.head-header, li.foot-header {float: left;}
 li.info{display: block; font-size: 12px;}
 
 .head-list:hover {text-align: center;text-decoration: none;color: #C9D6DF;font-family: "24bold";font-size: 20px;color: #C9D6DF;}
-
+.error{display: block; margin: auto; padding: 0 0 0 0; height: 75%; align-content: center;}
 
 .info-inner{
 	text-align: center;
@@ -88,7 +88,7 @@ td{
 	font-family: "24normal";
 }
 
-input[type=submit]{
+input[type=submit], button{
 	border: 1px solid white;
 	border-radius: 3px;
 	color: #4D4F6F;
@@ -99,7 +99,10 @@ input[type=submit]{
 	margin: 0 0 10px 5px;
 	padding: 4px 5px 4px 5px;
 }
-input:hover[type=submit] {
+button.mainpage{
+	width: auto;
+}
+input:hover[type=submit], button:hover {
 	border: 1px solid #B8DFD8;
 	border-radius: 3px;
 	color: #B8DFD8;

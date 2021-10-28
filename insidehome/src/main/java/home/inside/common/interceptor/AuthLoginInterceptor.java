@@ -16,7 +16,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 			Object authLogin = session.getAttribute("loginInside");
 			if(authLogin!=null) {
 				return true;
-				
 			}
 		}
 		request.setAttribute("err", "로그인이 필요한 화면입니다.");

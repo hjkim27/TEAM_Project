@@ -21,11 +21,15 @@
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</mvc:view-resolvers>
-
+	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**"/>
 			<bean class="home.inside.common.interceptor.AuthLoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/manager/**"/>
+			<bean class="home.inside.common.interceptor.AuthManagerInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

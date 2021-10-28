@@ -4,7 +4,7 @@
 
 <footer class="inside-footer">
 	<div class="page-name">
-		<h3><a href="<c:url value="/inside/main.do"/>">
+		<h3><a href="<c:url value="/manager/inside/main.do"/>">
 				<h2 class="page-name">INSIDE.HOME</h2>
 		</a></h3>
 	</div>

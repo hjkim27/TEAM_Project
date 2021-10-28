@@ -16,7 +16,7 @@ public class LoginController {
 	@Autowired
 	private IMemberInfoService infoSer;
 	
-	@RequestMapping(value = "/loginForm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginForm.do")
 	public String loginForm() throws Exception {
 		return "user/member/loginForm";
 	}

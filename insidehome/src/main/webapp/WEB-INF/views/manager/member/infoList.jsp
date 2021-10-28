@@ -10,7 +10,7 @@
 
 <div class="bodyinfo">
 	<div class="info-detail">
-	<h1 class="info-detail">회원정보</h1>
+	<h1 class="info-title">회원정보</h1>
 	<c:choose>
 		<c:when test="${type eq 'black' }">제적 혹은 탈퇴한 회원  : ${fn:length(memberList) }</c:when>
 		<c:otherwise>일반회원 : ${fn:length(memberList) }</c:otherwise>
