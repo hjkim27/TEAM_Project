@@ -8,8 +8,9 @@ import home.inside.member.vo.MemberInfoDto;
 public interface IMemberMainDao {
 	// 회원가입
 	public void insertMainInfo(HashMap<String, Object> hsm) throws Exception;
-	// 관리자 회원 목록 조회
-	public List<HashMap<String, Object>> selectMainList(String nickname) throws Exception;	
+	// 관리자 회원 목록 조회 및 검색
+	public List<HashMap<String, Object>> selectMainList() throws Exception;	
+	public List<HashMap<String, Object>> searchMainList(String nickname) throws Exception;	
 	// 비밀번호 수정
 	public int updatePw(HashMap<String, Object> hsm) throws Exception;
 	// 회원탈퇴

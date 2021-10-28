@@ -20,8 +20,13 @@ public class MemberMainDaoImpl implements IMemberMainDao {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> selectMainList(String nickname) throws Exception {
-		return sqlSessionTemplate.selectList("selectMainList", nickname);
+	public List<HashMap<String, Object>> selectMainList() throws Exception {
+		return sqlSessionTemplate.selectList("selectMainList");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> searchMainList(String nickname) throws Exception {
+		return sqlSessionTemplate.selectList("searchMainList", nickname);
 	}
 
 	@Override

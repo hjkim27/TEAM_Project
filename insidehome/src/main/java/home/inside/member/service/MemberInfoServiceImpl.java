@@ -30,12 +30,22 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	public MemberInfoDto selectInfo(String nickname) throws Exception {
 		return mainDao.selectInfo(nickname);
 	}
+
 	@Override
-	public Object selectMemberList(String nickname, String type) throws Exception {
-		if(type!=null && type.equals("black")) {
-			return dropDao.selectDropList(nickname);
+	public Object selectMemberList(String type) throws Exception {
+		if (type != null && type.equals("black")) {
+			return dropDao.selectDropList();
 		} else {
-			return mainDao.selectMainList(nickname);
+			return mainDao.selectMainList();
+		}
+	}
+
+	@Override
+	public Object searchMemberList(String nickname, String type) throws Exception {
+		if (type != null && type.equals("black")) {
+			return dropDao.searchDropList(nickname);
+		} else {
+			return mainDao.searchMainList(nickname);
 		}
 	}
 
@@ -56,21 +66,21 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	@Override
 	public void updateMyInfo(MemberSubVo subVo, MemberAddrVo addrVo) throws Exception {
 		subDao.updateSubInfo(subVo);
-		addrDao.updateAddrInfo(addrVo);			
+		addrDao.updateAddrInfo(addrVo);
 	}
 
 	@Override
 	public String findMemberInfo(FindInfoCommand cmd) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		String email = cmd.getEmail();
-		if(cmd.getType().equals("email")) {
+		if (cmd.getType().equals("email")) {
 			email = email.split("@")[1];
 			hsm.put("email", email);
-		}else {
+		} else {
 			hsm.put("email", email);
 		}
 		String phone = cmd.getPhone();
-		hsm.put("phone1", phone.substring(0,3));
+		hsm.put("phone1", phone.substring(0, 3));
 		hsm.put("phone1", phone.substring(3));
 		return mainDao.findMemberInfo(hsm);
 	}

@@ -30,8 +30,13 @@ public class MemberDropDaoImpl implements IMemberDropDao {
 	}
 
 	@Override
-	public List<MemberDropVo> selectDropList(String nickname) throws Exception {
-		return sqlSessionTemplate.selectList("selectDropList", nickname);
+	public List<HashMap<String, Object>> selectDropList() throws Exception {
+		return sqlSessionTemplate.selectList("selectDropList");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> searchDropList(String nickname) throws Exception {
+		return sqlSessionTemplate.selectList("searchDropList", nickname);
 	}
 
 }

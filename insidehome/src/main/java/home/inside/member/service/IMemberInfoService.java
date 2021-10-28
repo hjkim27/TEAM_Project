@@ -12,7 +12,9 @@ public interface IMemberInfoService {
 	//마이페이지 개인정보 조회
 	public MemberInfoDto selectInfo(String nickname) throws Exception;
 	//관리자페이지 회원목록 조회
-	public Object selectMemberList(String nickname, String type) throws Exception;
+	public Object selectMemberList(String type) throws Exception;
+	//관리자페이지 회원목록 검색
+	public Object searchMemberList(String nickname, String type) throws Exception;
 	//비밀번호 변경
 	public int updatePassword(String nickname, String pw, String newPw) throws Exception;
 	//포인트, 경고횟수 조회

@@ -9,12 +9,12 @@
 <link href="<%=request.getContextPath()%>/resources/css/style.css"
 	rel="stylesheet">
 </head>
-<body class="noDrag">
+<body>
 <header class="inside-header">
-	<div class="head-area">
-		<ul class="service-head">
-			<li><a class="head-header" href="<c:url value="#"/>">고객센터</a></li>
-			<li><a class="head-header" href="<c:url value="/member/logout.do"/>">로그아웃</a></li>				
+	<div class="head-header">
+		<ul class="head-header">
+			<li class="head-header"><a class="head-header" href="<c:url value="#"/>">고객센터</a></li>
+			<li class="head-header"><a class="head-header" href="<c:url value="/member/logout.do"/>">로그아웃</a></li>				
 		</ul>
 	</div>
 	<div class="logo-area">
@@ -26,14 +26,16 @@
 	</div>
 	<div class="service-area">
 		<ul class="service-list">
-			<li><a class="head-list" href="<c:url value="#"/>">정보게시판</a></li>
-			<li><a class="head-list" href="<c:url value="#"/>">익명게시판</a></li>
-			<li><a class="head-list" href="<c:url value="#"/>">공지사항</a></li>
-			<li><a class="head-list" href="<c:url value="#"/>">상품관리</a></li>
-			<li><a class="head-list" href="<c:url value="/manager/member/list.do"/>">회원정보</a></li>			
+			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">정보게시판</a></li>
+			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">익명게시판</a></li>
+			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">공지사항</a></li>
+			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">상품관리</a></li>
+			<li class="head-list"><a class="head-list" href="<c:url value="/manager/member/list.do"/>">회원정보</a></li>			
+			<li class="head-list"><a href="<c:url value="#"/>">
+				<img class="icon" src="<%=request.getContextPath()%>/resources/img/btn_assatalk.png">
+				</a></li>			
 		</ul>
 	</div>
 </header>
-<section class="inside-body">
 
 	
