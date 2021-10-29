@@ -14,7 +14,7 @@ public class AuthManagerInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		if(session!=null) {
-			Object authMgr = session.getAttribute("mgrinside");
+			Object authMgr = session.getAttribute("mgrInside");
 			if(authMgr!=null) {
 				return true;
 				

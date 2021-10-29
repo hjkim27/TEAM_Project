@@ -18,7 +18,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			}
 		}
-		request.setAttribute("err", "로그인이 필요한 화면입니다.");
 		response.sendRedirect(request.getContextPath()+"/main.do");
 		return false;
 	}

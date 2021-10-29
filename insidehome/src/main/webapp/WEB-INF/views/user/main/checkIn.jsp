@@ -30,14 +30,14 @@
 </div>
 <div>
 	<img
-		src="<%= request.getContextPath()%>/resources/img/check-off.png" 
-		onmouseover="this.src='<%= request.getContextPath() %>/resources/img/check-on.png'" 
-		onmouseout="this.src='<%= request.getContextPath() %>/resources/img/check-off.png'" 
+		src="<c:url vavlue="/resources/img/check-off.png"/>" 
+		onmouseover="this.src='<c:url value="/resources/img/check-on.png"/>'" 
+		onmouseout="this.src='<c:url value="/resources/img/check-off.png"/>'" 
 		onclick="<c:url value="/inside/check.do"/>" />
 </div>
 <div>
 	<a href="<c:url value="/inside/check.do"/>">
-		<img src="<%= request.getContextPath()%>/resources/img/check-on.png">
+		<img src="<c:url value="/resources/img/check-on.png"/>">
 	</a>
 </div>
 

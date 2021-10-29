@@ -49,9 +49,5 @@ public class PointController {
 		req.setAttribute("check", "fail");
 		return "error/commonException";
 	}
-	
-	@RequestMapping("/main.do")
-	public String view() {
-		return "user/main/main";
-	}
+
 }

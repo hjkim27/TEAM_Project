@@ -27,8 +27,16 @@ public class RegistCommandValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		RegistCommand regCmd = (RegistCommand) target;
+		if(regCmd.getAgree() == null || regCmd.getAgree().trim().isEmpty()) {
+			errors.rejectValue("agree", "bad");
+		}
 		if (regCmd.getEmail() == null || regCmd.getEmail().trim().isEmpty()) {
 			errors.rejectValue("email", "required");
+		}else {
+			Matcher matcher = pattern.matcher(regCmd.getEmail());
+			if(!matcher.matches()) {
+				errors.rejectValue("email", "bad");
+			}
 		}
 		if (regCmd.getNickname() == null || regCmd.getNickname().trim().isEmpty()) {
 			errors.rejectValue("nickname", "required");

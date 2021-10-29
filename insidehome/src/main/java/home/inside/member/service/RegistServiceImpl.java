@@ -54,16 +54,13 @@ public class RegistServiceImpl implements IRegistService {
 	}
 
 	@Override
-	public int overlapCheck(String email, String nickname) throws Exception  {
-		int result=0;
-		if(email!=null) {
-			result = mainDao.emailCheck(email)+dropDao.emailCheckDrop(email);
-		} else if(nickname!=null) {
-			result = mainDao.nicknameCheck(nickname)+dropDao.nicknameCheckDrop(nickname);
-		}
-		System.out.println(result);
-		return result;
+	public int emailCheck(String email) throws Exception  {
+		return mainDao.emailCheck(email)+dropDao.emailCheckDrop(email);
 	}
 
+	@Override
+	public int nicknameCheck(String nickname) throws Exception  {
+		return mainDao.nicknameCheck(nickname)+dropDao.nicknameCheckDrop(nickname);
+	}
 
 }

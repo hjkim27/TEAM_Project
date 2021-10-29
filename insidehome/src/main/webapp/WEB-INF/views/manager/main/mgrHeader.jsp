@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="<%=request.getContextPath()%>/resources/css/style.css"
-	rel="stylesheet">
+<link rel="shortcut icon" type="image⁄x-icon" href="<c:url value="/resources/img/home-icon.ico"/>">
+<title>INSIDE.HOME</title>
+<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet"/>
 </head>
 <body>
 <header class="inside-header">
@@ -20,7 +20,7 @@
 	<div class="logo-area">
 		<h2>
 			<a href="<c:url value="/inside/main.do"/>">
-				<img class="logo" src="<%=request.getContextPath()%>/resources/img/inside-logo.png">
+				<img class="logo" src="<c:url value="/resources/img/inside-logo.png"/>">
 			</a>
 		</h2>
 	</div>
@@ -32,7 +32,7 @@
 			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">상품관리</a></li>
 			<li class="head-list"><a class="head-list" href="<c:url value="/manager/member/list.do"/>">회원정보</a></li>			
 			<li class="head-list"><a href="<c:url value="#"/>">
-				<img class="icon" src="<%=request.getContextPath()%>/resources/img/btn_assatalk.png">
+				<img class="icon" src="<c:url value="/resources/img/btn_assatalk.png" />">
 				</a></li>			
 		</ul>
 	</div>

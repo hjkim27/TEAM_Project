@@ -17,22 +17,24 @@
 	<!-- mvc관련 -->
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
-
+   
+   	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</mvc:view-resolvers>
-	
+	<!-- 
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**"/>
 			<bean class="home.inside.common.interceptor.AuthLoginInterceptor"/>
 		</mvc:interceptor>
-		<mvc:interceptor>
+ 		<mvc:interceptor>
 			<mvc:mapping path="/manager/**"/>
 			<bean class="home.inside.common.interceptor.AuthManagerInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+ -->
 
 
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

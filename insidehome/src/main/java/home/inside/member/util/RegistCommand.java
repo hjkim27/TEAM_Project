@@ -13,7 +13,7 @@ public class RegistCommand {
 	private String addrNum;
 	private String addr;
 	private String addrSub;
-	
+	private String agree;
 
 	public RegistCommand() {
 	}
@@ -113,6 +113,14 @@ public class RegistCommand {
 	public void setAddrSub(String addrSub) {
 		this.addrSub = addrSub;
 	}
+	
+	public String getAgree() {
+		return agree;
+	}
+	
+	public void setAgree(String agree) {
+		this.agree = agree;
+	}
 
 	public boolean passwordEqualsToCheck() {
 		if (password.equals(passwordCheck)) {
@@ -126,7 +134,9 @@ public class RegistCommand {
 	public String toString() {
 		return "RegistCommand [email=" + email + ", nickname=" + nickname + ", password=" + password
 				+ ", passwordCheck=" + passwordCheck + ", name=" + name + ", phone1=" + phone1 + ", phone2=" + phone2
-				+ ", gender=" + gender + ", storedate=" + storedate + "]";
+				+ ", gender=" + gender + ", storedate=" + storedate + ", addrNum=" + addrNum + ", addr=" + addr
+				+ ", addrSub=" + addrSub + ", agree=" + agree + "]";
 	}
+	
 	
 }

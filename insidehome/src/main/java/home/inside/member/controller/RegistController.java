@@ -8,6 +8,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import home.inside.member.service.IRegistService;
@@ -27,25 +28,20 @@ public class RegistController {
 		return "user/member/registForm";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/registCheck.do", method = RequestMethod.POST)
-	public int registCheck(String email, String nickname) throws Exception{
-		return regSer.overlapCheck(email, nickname);
-	}
-	
 	@RequestMapping(value="/regist.do",method = RequestMethod.POST)
 	public String registSubmit(@ModelAttribute("regCmd")RegistCommand regCmd, Errors errors) {
-		System.out.println(regCmd);
 		new RegistCommandValidator().validate(regCmd, errors);
 		if(errors.hasErrors()) {
 			System.out.println("error!");
 			return "user/member/registForm";
 		}
 		try {
-			int result = regSer.overlapCheck(regCmd.getEmail(), regCmd.getNickname());
-			if(result>0) {
-				System.out.println("이메일중복");
+			if(regSer.emailCheck(regCmd.getEmail())>0) {
 				errors.rejectValue("email", "overlap");
+				return "user/member/registForm";
+			} 
+			if(regSer.nicknameCheck(regCmd.getNickname())>0) {
+				errors.rejectValue("nickname", "overlap");
 				return "user/member/registForm";
 			}
 		} catch (Exception e) {}
