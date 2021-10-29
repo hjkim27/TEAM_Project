@@ -3,6 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%@include file="/WEB-INF/views/user/member/common/commHeader.jsp"%>
+
 <div class="bodyinfo">
 	<div class="info-detail">
 		<h1 class="info-title">회원가입</h1>
@@ -50,7 +51,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 비밀번호</td>
-						<td class="reg-need"><form:password path="password" class="reg-info-label" /><form:errors path="password" /></td>
+						<td class="reg-need"><form:password path="password" class="reg-info-label" placeholder="영문소문자,숫자,특수문자포함 8글자 이상"/><form:errors path="password" /></td>
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 비밀번호 확인</td>
@@ -85,7 +86,12 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 				<tbody>
 					<tr class="reg-need">
 						<td class="reg-need-label">주소</td>
-						<td class="reg-need"><form:input path="addr" class="reg-info-label" placeholder="주소"/></td>
+						<td class="reg-need">
+							<input type="text" id="addrNum" placeholder="우편번호">
+							<form:input path="addr" class="reg-info-label" placeholder="주소"/>
+							<span id="guide" style="color: #999; display: none"></span>
+							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+						</td>
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label"></td>

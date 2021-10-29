@@ -24,7 +24,7 @@ h1 {
 
 section .box {
 	height: 500px;
-	background: red;
+	background: grey;
 }
 
 section .box p {

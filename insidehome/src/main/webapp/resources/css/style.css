@@ -98,8 +98,9 @@ input[type=text], input[type=password], select {
   	background:#B8DFD8;
   }
 input.reg-info-label { width: 60%; font:10px #EAEAEA;}
-input.reg-info-phone2 { width: 45%; }
-select.reg-info-phone1 { width: 15%; }
+input.reg-info-phone2, input[id="addr"] { width: 45%; }
+select.reg-info-phone1 { width: 14.5%; }
+input[id="addrNum"] { width: 12.5%; }
 hr {margin: 10px 0 10px 0;}
 .daylist {
 	list-style: none;
