@@ -17,7 +17,7 @@ public class MemberSubDaoImpl implements IMemberSubDao {
 	public void insertSubInfo(HashMap<String, Object> hsm) throws Exception {
 		sqlSessionTemplate.insert("insertSubInfo", hsm);
 	}
-
+	
 	@Override
 	public void updateSubInfo(MemberSubVo subVo) throws Exception {
 		sqlSessionTemplate.update("updateSubInfo", subVo);

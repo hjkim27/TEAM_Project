@@ -46,7 +46,7 @@ public class RegistCommandValidator implements Validator {
 		if (regCmd.getNickname() == null || regCmd.getNickname().trim().isEmpty()) {
 			errors.rejectValue("nickname", "required");
 		} else {
-			if (regCmd.getNickname().length() < 3) {
+			if (regCmd.getNickname().length() < 2) {
 				errors.rejectValue("nickname", "bad");
 			}
 		}
@@ -57,9 +57,7 @@ public class RegistCommandValidator implements Validator {
 			if (!matcher.matches()) {
 				errors.rejectValue("password", "bad");
 			} else {
-				if (regCmd.getPasswordCheck() == null || regCmd.getPasswordCheck().trim().isEmpty()) {
-					errors.rejectValue("passwordCheck", "bad");
-				} else if (!regCmd.passwordEqualsToCheck()) {
+				if (!regCmd.passwordEqualsToCheck()) {
 					errors.rejectValue("password", "notmatch");
 				}
 			}
@@ -75,5 +73,4 @@ public class RegistCommandValidator implements Validator {
 			}
 		}
 	}
-
 }

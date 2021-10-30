@@ -21,32 +21,29 @@ import home.inside.member.vo.MemberAddrVo;
 public class RegistController {
 	@Autowired
 	private IRegistService regSer;
-	
+
 	@RequestMapping("/registForm.do")
-	public String registForm(RegistCommand cmd, Model model) throws Exception{
+	public String registForm(RegistCommand cmd, Model model) throws Exception {
 		model.addAttribute("regCmd", new RegistCommand());
 		return "user/member/registForm";
 	}
-	
-	@RequestMapping(value="/regist.do",method = RequestMethod.POST)
-	public String registSubmit(@ModelAttribute("regCmd")RegistCommand regCmd, Errors errors) {
+
+	@RequestMapping(value = "/regist.do", method = RequestMethod.POST)
+	public String registSubmit(@ModelAttribute("regCmd") RegistCommand regCmd, Errors errors) throws Exception {
 		new RegistCommandValidator().validate(regCmd, errors);
-		if(errors.hasErrors()) {
-			System.out.println("error!");
+		if (errors.hasErrors()) {
 			return "user/member/registForm";
 		}
-		try {
-			if(regSer.emailCheck(regCmd.getEmail())>0) {
-				errors.rejectValue("email", "overlap");
-				return "user/member/registForm";
-			} 
-			if(regSer.nicknameCheck(regCmd.getNickname())>0) {
-				errors.rejectValue("nickname", "overlap");
-				return "user/member/registForm";
-			}
-		} catch (Exception e) {}
-		System.out.println("test");
+		if (regSer.emailCheck(regCmd.getEmail()) > 0) {
+			errors.rejectValue("email", "overlap");
+			return "user/member/registForm";
+		}
+		if (regSer.nicknameCheck(regCmd.getNickname()) > 0) {
+			errors.rejectValue("nickname", "overlap");
+			return "user/member/registForm";
+		}
+		regSer.registMember(regCmd);
 		return "user/member/loginForm";
 	}
-	
+
 }

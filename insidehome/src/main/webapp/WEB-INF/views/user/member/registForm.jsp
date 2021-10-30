@@ -47,7 +47,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 닉네임</td>
-						<td class="reg-need"><form:input path="nickname" class="reg-info-label" placeholder="4글자 이상 입력" /><form:errors path="nickname" /></td>
+						<td class="reg-need"><form:input path="nickname" class="reg-info-label" placeholder="2글자 이상 입력" /><form:errors path="nickname" /></td>
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 비밀번호</td>
@@ -78,7 +78,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 				</tbody>
 			</table>
 			<hr>
-			<table>
+			<table class="regist-info">
 				<caption class="regist-info">
 					<h2 class="info-title">선택정보 입력</h2>
 					<p class="info-title-sub">미입력 시 홈페이지 이용에 제약이 있을 수 있습니다.</p>
@@ -87,10 +87,10 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					<tr class="reg-need">
 						<td class="reg-need-label">주소</td>
 						<td class="reg-need">
-							<input type="text" id="addrNum" placeholder="우편번호">
-							<form:input path="addr" class="reg-info-label" placeholder="주소"/>
 							<span id="guide" style="color: #999; display: none"></span>
-							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+							<form:input path="addrNum" placeholder="우편번호"/>
+							<form:input path="addr" class="reg-info-label" placeholder="주소"/>
+							<input id="find-addr" type="button" onclick="find_addr()" value="우편번호 찾기"><br>
 						</td>
 					</tr>
 					<tr class="reg-need">
@@ -100,9 +100,9 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					<tr class="reg-need">
 						<td class="reg-need-label">개인정보 유지기간</td>
 						<td class="reg-need">
-							<label><form:radiobutton path="storedate" value="100" checked="checked"/>탈퇴시까지</label> &nbsp;
-							<label><form:radiobutton path="storedate" value="1"/>1년</label> &nbsp;
-							<label><form:radiobutton path="storedate" value="2"/>2년</label> &nbsp;
+							<label><form:radiobutton path="storedate" value="12"/>1년</label> &nbsp;
+							<label><form:radiobutton path="storedate" value="24"/>2년</label> &nbsp;
+							<label><form:radiobutton path="storedate" value="240" checked="checked"/>탈퇴시까지</label> &nbsp;
 						</td>
 					</tr>
 					<tr class="reg-need">
@@ -115,7 +115,9 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 				</tbody>
 			</table>	
 			<hr>
-			<input type="submit" value="회원가입">
+			<div align="center">
+				<input id="save-info" type="submit" value="회원가입">
+			</div>
 		</form:form>
 	</div>
 </div>

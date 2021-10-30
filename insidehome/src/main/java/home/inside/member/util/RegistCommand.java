@@ -9,7 +9,7 @@ public class RegistCommand {
 	private String phone1;
 	private String phone2;
 	private String gender;
-	private int storedate;
+	private Integer storedate;
 	private String addrNum;
 	private String addr;
 	private String addrSub;
@@ -82,11 +82,11 @@ public class RegistCommand {
 		this.gender = gender;
 	}
 
-	public int getStoredate() {
+	public Integer getStoredate() {
 		return storedate;
 	}
 
-	public void setStoredate(int storedate) {
+	public void setStoredate(Integer storedate) {
 		this.storedate = storedate;
 	}
 
