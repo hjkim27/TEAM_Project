@@ -2,11 +2,13 @@ package home.inside.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import home.inside.member.service.ILoginService;
 import home.inside.member.service.IMemberInfoService;
+import home.inside.member.util.LoginCommand;
 
 @Controller
 @RequestMapping("/member")
@@ -17,7 +19,8 @@ public class LoginController {
 	private IMemberInfoService infoSer;
 	
 	@RequestMapping(value = "/loginForm.do")
-	public String loginForm() throws Exception {
+	public String loginForm(LoginCommand cmd, Model model) throws Exception {
+		model.addAttribute("loginCmd", new LoginCommand());
 		return "user/member/loginForm";
 	}
 

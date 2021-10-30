@@ -31,7 +31,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 			<p align="right">
 				<label id="reg-agree">
 					<form:errors path="agree"/>
-					<form:checkbox path="agree" value="agree"/>이용 약관에 동의합니다.
+					<form:checkbox path="agree" value="agree"/> 홈페이지 이용 약관에 동의합니다.
 				</label>
 			</p>
 			<hr>
@@ -100,16 +100,16 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					<tr class="reg-need">
 						<td class="reg-need-label">개인정보 유지기간</td>
 						<td class="reg-need">
-							<label><form:radiobutton path="storedate" value="12"/>1년</label> &nbsp;
-							<label><form:radiobutton path="storedate" value="24"/>2년</label> &nbsp;
-							<label><form:radiobutton path="storedate" value="240" checked="checked"/>탈퇴시까지</label> &nbsp;
+							<label><form:radiobutton path="storedate" value="12"/> 1년</label> &nbsp;&nbsp;&nbsp;
+							<label><form:radiobutton path="storedate" value="24"/> 2년</label> &nbsp;
+							<label><form:radiobutton path="storedate" value="240" checked="checked"/> 탈퇴시까지</label> &nbsp;
 						</td>
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">성별</td>
 						<td class="reg-need">
-							<label><form:radiobutton path="gender" value="w" checked="checked"/>여자</label> &nbsp;
-							<label><form:radiobutton path="gender" value="m"/>남자</label> &nbsp;
+							<label><form:radiobutton path="gender" value="w" checked="checked"/> 여자</label> &nbsp;
+							<label><form:radiobutton path="gender" value="m"/> 남자</label> &nbsp;
 						</td>
 					</tr>
 				</tbody>

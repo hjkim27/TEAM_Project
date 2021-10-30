@@ -7,7 +7,8 @@
 	src: url("../font/Cafe24SsurroundAir.ttf");
 	font-family: "24normal";
 }
-body {min-height:100%; margin: 0; padding: 0; font-family: "24normal"; -ms-user-select: none;-moz-user-select: -moz-none;-webkit-user-select: none;-khtml-user-select: none;user-select: none;}
+html {min-height: 100%; position: relative;}
+body {min-height: 100%; margin: 0; padding: 0 0 10% 0; font-family: "24normal"; -ms-user-select: none;-moz-user-select: -moz-none;-webkit-user-select: none;-khtml-user-select: none;user-select: none; BAC}
 a { text-decoration: none; }
 ul{list-style: none;}
 div.bodyinfo {margin: 5% 15% 5% 15%;}
@@ -19,7 +20,7 @@ input::placeholder{color: #D5D5D5; font-weight: bold;}
 hr{background-color: #EAEAEA; height: 1px; border: 0px white;}
 
 header.inside-header {z-index: 20; position: sticky; top: 0; width: 100%; height: auto; background: white; margin: 0; padding: 0; line-height: 60px; border-bottom: 1px solid #4D4F6F;  text-align: center;}
-footer.inside-footer { bottom: 0; width: 100%;height: auto; background: #EAEAEA; margin: auto 0 0 0; padding: 0 0 -5px 0; line-height: 60px; text-align: center;}
+footer.inside-footer { bottom: 0; width: 100%;height: auto; background: #EAEAEA; margin: auto 0 0 0; padding: 0 0 -5px 0; line-height: 60px; text-align: center; position: absolute;}
 div.head-header{ text-align: right; height: 20px; left: 80%; right: 0; margin: 0 0 0 0; bottom: 0;}
 ul.head-header { list-style: none; line-height: normal; margin: 3px 0 -3px 0; float: right; display: inline-block;}
 ul.foot-header { list-style: none; line-height: normal; margin: 10px 10% 0 10%; float: right; }
@@ -60,8 +61,8 @@ input[type=button]{ border: 1px solid #B8DFD8; border-radius: 3px; color: #B8DFD
 input:hover[type=button]{ border: 1px solid #B8DFD8; border-radius: 3px; color:white; background: #B8DFD8; font-family: "24bold"; width: auto; margin: 0 0 10px 5px; padding: 4px 5px 4px 5px; }
 input:focus{ outline: none; }
 
-input[id="save-info"]{ border: 1px solid #B8DFD8; border-radius: 3px; color:white; background: #B8DFD8; font-size: 20px; font-family: "24bold"; width: 30%; margin: 0 0 10px 5px; padding: 4px 5px 4px 5px; }
-input:hover[id="save-info"]{ border: 1px solid #B8DFD8; border-radius: 3px; color: #B8DFD8; background: white; font-size: 20px; font-family: "24bold"; width: 30%; margin: 0 0 10px 5px; padding: 4px 5px 4px 5px; }
+input[id="save-info"]{ border: 1px solid #B8DFD8; border-radius: 3px; color:white; background: #B8DFD8; font-size: 20px; font-family: "24bold"; width: 50%; margin: 0 10% 10px 5px; padding: 4px 5px 4px 5px; }
+input:hover[id="save-info"]{ border: 1px solid #B8DFD8; border-radius: 3px; color: #B8DFD8; background: white; font-size: 20px; font-family: "24bold"; width: 50%; margin: 0 10% 10px 5px; padding: 4px 5px 4px 5px; }
 
 textarea.agreeContent {width: 90%; resize: none; background: #EAEAEA; font-size: 10px; padding: 10px 10px 10px 10px; margin: 10px 10px -10px 10px; }
 textarea:focus.agreeContent{outline: none;}
@@ -77,33 +78,16 @@ input[type=text], input[type=password], select {
 	padding: 4px 0 6px 10px;
 	margin: 1px 0 0 0;
 }
- input[type='radio'], input[type='checkbox']{
-    -webkit-appearance:none;
-    width:12px;
-    height:12px;
-    border:0 solid ;
-     border-radius:50%;
-    outline:none;
-    background:#e6e6e6;
-    position: relative;
-    top: 5px;
-  }
-  input[type='radio']:before, input[type='checkbox']:before {
-    content:'';
-    display:block;
-    width:100%;
-    height:100%;
-    margin: 0;  
-    border-radius:50%;  
-  }
-  input[type='radio']:checked:before , input[type='checkbox']:checked:before{
-  	background:#B8DFD8;
-  }
+input[type='radio'], input[type='checkbox']{ -webkit-appearance:none; width:12px; height:12px; border:0 solid ; border-radius:50%; outline:none; background:#e6e6e6; position: relative; top: 5px;}
+input[type='radio']:before, input[type='checkbox']:before { content:''; display:block; width:100%; height:100%; margin: 0; border-radius:50%;}
+input[type='radio']:checked:before , input[type='checkbox']:checked:before{ background:#B8DFD8; }
+
 input.reg-info-label { width: 60%; font:10px #EAEAEA;}
 input.reg-info-phone2, input[id="addr"] { width: 45%; }
 select.reg-info-phone1 { width: 14.5%; }
 input[id="addrNum"] { width: 12.5%; }
 hr {margin: 10px 0 10px 0;}
+
 .daylist {
 	list-style: none;
 	margin: 0;
@@ -118,4 +102,7 @@ hr {margin: 10px 0 10px 0;}
 }
 
 
-
+ul.login-info-first{width: 50%; padding: 0 0 0 0; margin: 0 0 0 0; float: left;text-align: center;}
+ul.login-info-second{width: 50%; padding: 5% 0 0 0; margin: 0 0 0 0; float: left; }
+label.login-option{font-size: 80%;}
+.login-info-label{width: 80%; }
