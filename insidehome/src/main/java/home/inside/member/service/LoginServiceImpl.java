@@ -13,8 +13,8 @@ public class LoginServiceImpl implements ILoginService {
 	private IMemberMainDao mainDao;
 	
 	@Override
-	public HashMap<String, Object> loginOptionCheck(String sessionId) throws Exception {
-		return mainDao.selectLoginInfo(sessionId);
+	public HashMap<String, Object> loginOptionCheck(String email) throws Exception {
+		return mainDao.selectLoginInfo(email);
 	}
 
 	@Override
@@ -26,10 +26,10 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	@Override
-	public void loginSuccess(String nickname, String sessionId) throws Exception {
+	public void loginSuccess(String email, String sessionId) throws Exception {
 		if(sessionId!=null) {
 			HashMap<String, Object> hsm = new HashMap<String, Object>();
-			hsm.put("nickname", nickname);
+			hsm.put("email", email);
 			hsm.put("sessionId", sessionId);
 			mainDao.updateLoginSuccess(hsm);			
 		}

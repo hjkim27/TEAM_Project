@@ -18,10 +18,11 @@
 	<div class="head-header">
 		<ul class="head-header">
 			<li class="head-header"><a class="head-header" href="<c:url value="#"/>">고객센터</a></li>
-			<c:if test="${loginChk != null}">
+			<c:if test="${loginInside != null}">
+				<li class="head-header"><a class="head-header" href="<c:url value="/user/mypage/main.do"/>">마이페이지</a></li>
 				<li class="head-header"><a class="head-header" href="<c:url value="/member/logout.do"/>">로그아웃</a></li>				
 			</c:if>
-			<c:if test="${loginChk == null }">
+			<c:if test="${loginInside == null }">
 				<li class="head-header"><a class="head-header" href="<c:url value="/inside/registForm.do"/>">회원가입</a></li>
 				<li class="head-header">
 					<a class="head-header" href="<c:url value="/member/loginForm.do"/>">로그인</a>

@@ -40,8 +40,8 @@ public class MemberMainDaoImpl implements IMemberMainDao {
 	}
 
 	@Override
-	public HashMap<String, Object> selectLoginInfo(String sessionId) throws Exception {
-		List<HashMap<String, Object>> result = sqlSessionTemplate.selectList("selectLoginInfo", sessionId);
+	public HashMap<String, Object> selectLoginInfo(String email) throws Exception {
+		List<HashMap<String, Object>> result = sqlSessionTemplate.selectList("selectLoginInfo", email);
 		return result.isEmpty() ? null : result.get(0);
 	}
 

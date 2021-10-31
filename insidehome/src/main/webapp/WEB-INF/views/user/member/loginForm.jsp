@@ -5,7 +5,7 @@
 
 <div class="bodyinfo">
 	<div class="info-detail">
-			<form:form action="login.do" commandName="loginCmd" class="login-info">
+			<form:form action="login.do" commandName="cmd" class="login-info">
 			<ul class="login-info-first">
 				<li><img src="<c:url value="/resources/img/inside-logo.png"/>" width="80%"></li>
 				<li style="margin-right: 5%;">
@@ -17,7 +17,8 @@
 			<ul class="login-info-second">
 				<li><form:input path="email" class="login-info-label" placeholder="@를 포함한 이메일 전체 입력"/></li>
 				<li><form:password path="password" class="login-info-label" placeholder="비밀번호 입력"/></li>
-				<li></li>
+				<li><form:errors path="email"/><form:errors path="password"/> </li>				
+				<li><input id="save-info" type="submit" value="로그인"> </li>
 				<li></li>
 			</ul>
 		</form:form>

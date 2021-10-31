@@ -3,8 +3,9 @@ package home.inside.member.util;
 public class LoginCommand {
 	private String email;
 	private String password;
-	private boolean rememberEmail;
-	private boolean autoLogin;
+	private String loginOption;
+	private int failCount;
+	
 	public String getEmail() {
 		return email;
 	}
@@ -17,18 +18,23 @@ public class LoginCommand {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isRememberEmail() {
-		return rememberEmail;
+	public String getLoginOption() {
+		return loginOption;
 	}
-	public void setRememberEmail(boolean rememberEmail) {
-		this.rememberEmail = rememberEmail;
+	public void setLoginOption(String loginOption) {
+		this.loginOption = loginOption;
 	}
-	public boolean isAutoLogin() {
-		return autoLogin;
+	public int getFailCount() {
+		return failCount;
 	}
-	public void setAutoLogin(boolean autoLogin) {
-		this.autoLogin = autoLogin;
+	public void setFailCount(int failCount) {
+		this.failCount = failCount;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "LoginCommand [email=" + email + ", password=" + password + ", loginOption=" + loginOption
+				+ ", failCount=" + failCount + "]";
+	}
 	
 }

@@ -28,13 +28,13 @@
 	
 	
 	<select id="selectLoginInfo" parameterType="String" resultType="HashMap">
-		select EMAIL, PASSWORD from MEMBER_MAIN where SESSIONID=#{sessionId}
+		select NICKNAME, EMAIL, SESSIONID from MEMBER_MAIN where SESSIONID=#{sessionId}
 	</select>
 	<select id="selectIsEqualsToInsert" parameterType="HashMap" resultType="String">
 		select NICKNAME from MEMBER_MAIN where EMAIL=#{email} and PASSWORD=#{password}
 	</select>
 	<update id="updateLoginSuccess" parameterType="HashMap">
-		update MEMBER_MAIN set SESSIONID=#{sessionId} where NICKNAME=#{nickname}
+		update MEMBER_MAIN set SESSIONID=#{sessionId}, LOGINTIME=sysdate where EMAIL=#{email}
 	</update>
 	<select id="emailCheck" parameterType="String" resultType="int">
 		select count(*) from MEMBER_MAIN where EMAIL=#{email}

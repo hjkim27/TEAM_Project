@@ -18,7 +18,7 @@ public interface IMemberMainDao {
 	
 	//-----------------------------------------------------------------
 	// 로그인 옵션에 의한 정보 조회
-	public HashMap<String, Object> selectLoginInfo(String sessionId) throws Exception; 
+	public HashMap<String, Object> selectLoginInfo(String email) throws Exception; 
 	// 로그인/본인인증 성공 확인
 	public String selectIsEqualsToInsert(HashMap<String, Object> hsm) throws Exception;
 	// 로그인 성공 후 로그인시간 및 옵션에 의한 정보 업데이트
