@@ -128,6 +128,7 @@ public class LoginController {
 			return "user/member/findEmailForm";
 		} else {
 			model.addAttribute("findResult", infoSer.findMemberInfo(emailCmd, null));
+			model.addAttribute("type", "email");
 			return "user/member/findInfoResult";
 		}
 	}
@@ -153,7 +154,8 @@ public class LoginController {
 			resp.addCookie(tmpCookie);
 		}
 		model.addAttribute("findResult", result);
-		
+		model.addAttribute("type", "password");
+
 		return "user/member/findInfoResult";
 	}
 
