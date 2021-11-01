@@ -67,7 +67,7 @@ public class MemberMainDaoImpl implements IMemberMainDao {
 	}
 	
 	@Override
-	public String tmpLogin(String email) throws Exception {
+	public HashMap<String, Object> tmpLogin(String email) throws Exception {
 		return sqlSessionTemplate.selectOne("tmpLogin", email);
 	}
 

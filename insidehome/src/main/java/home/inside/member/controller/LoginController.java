@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -36,6 +37,8 @@ public class LoginController {
 	private IMemberInfoService infoSer;
 	@Autowired
 	private EmailService emailSer;
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
 
 	@RequestMapping(value = "/loginForm.do")
 	public String loginForm(@ModelAttribute("cmd") LoginCommand cmd, Model model,
@@ -54,7 +57,7 @@ public class LoginController {
 				} else if (loginOption != null && loginOption.equals("autoLogin")) {
 					session.setAttribute("loginInside", nickname);
 					logSer.loginSuccess(email, sessionId, loginOption);
-					return "redirect:/user/main/main";
+					return "redirect:/inside/main.do";
 				}
 			}
 		} else {
@@ -71,14 +74,18 @@ public class LoginController {
 		if (errors.hasErrors()) {
 			return "user/member/loginForm";
 		}
-		String nickname = logSer.loginOrIdentifyRequest(cmd.getEmail(), cmd.getPassword());
-		if(tmpCookie!=null && cmd.getPassword().equals(tmpCookie.getValue())) {
-			nickname = logSer.loginTmpSuccess(cmd.getEmail());
+		HashMap<String, Object> info = logSer.loginTmpSuccess(cmd.getEmail());
+		boolean pwdChk = pwdEncoder.matches(cmd.getPassword(), (String) info.get("PASSWORD"));
+		if(tmpCookie!=null) {
+			pwdChk = pwdEncoder.matches(cmd.getPassword(), tmpCookie.getValue());
+			
+			System.out.println("일치확인: "+pwdChk);
 		}
+		String nickname = (String) info.get("NICKNAME");
 		if (nickname == null || nickname.equals("")) {
 			errors.rejectValue("email", "notmatch");
 			return "user/member/loginForm";
-		} else {
+		} else if(nickname!=null && pwdChk) {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginInside", nickname);
 			String sessionId = session.getId();
@@ -149,6 +156,7 @@ public class LoginController {
 		String result = infoSer.findMemberInfo(null, cmd);
 		if(result!=null) {
 			String tmpPw = emailSer.emailSend(result);
+			tmpPw = pwdEncoder.encode(tmpPw);
 			Cookie tmpCookie = new Cookie("tmpPwinssa", tmpPw);
 			tmpCookie.setMaxAge(60*10);//10분간만 유지
 			resp.addCookie(tmpCookie);

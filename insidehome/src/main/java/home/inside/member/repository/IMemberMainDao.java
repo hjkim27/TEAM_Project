@@ -27,7 +27,7 @@ public interface IMemberMainDao {
 	public int emailCheck(String email) throws Exception;
 	public int nicknameCheck(String nickname) throws Exception;
 	//비밀번호 찾기로 임시 로그인 허용
-	public String tmpLogin(String email) throws Exception;
+	public HashMap<String, Object> tmpLogin(String email) throws Exception;
 	//-----------------------------------------------------------------
 	// 아이디 비밀번호 찾기(main, addr)
 	public String emailFind(HashMap<String, Object> hsm) throws Exception;

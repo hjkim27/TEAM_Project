@@ -46,8 +46,8 @@
 	<select id="nicknameCheck" parameterType="String" resultType="int">
 		select count(*) from MEMBER_MAIN where NICKNAME=#{nickname}
 	</select>
-	<select id="tmpLogin" parameterType="String" resultType="String">
-		select NICKNAME from MEMBER_MAIN where EMAIL=#{email}
+	<select id="tmpLogin" parameterType="String" resultType="HashMap">
+		select NICKNAME, PASSWORD from MEMBER_MAIN where EMAIL=#{email}
 	</select>
 	
 	
