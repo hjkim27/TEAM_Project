@@ -11,10 +11,10 @@ EMAIL varchar2(50) not null unique,
 NICKNAME varchar2(20) not null unique,
 PASSWORD varchar2(50) not null,
 SESSIONID varchar2(100),
+LOGINOPTION varchar2(20),
 LOGINTIME date,
 REGDATE date default sysdate
 );
-
 
 create table MEMBER_SUB(
 NUM number primary key,
