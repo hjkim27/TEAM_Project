@@ -102,7 +102,12 @@ hr {margin: 10px 0 10px 0;}
 }
 
 
+input[id="save-info2"]{ border: 1px solid #FFE194; border-radius: 3px; color:white; background: #FFE194; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
+input:hover[id="save-info2"]{ border: 1px solid #FFE194; border-radius: 3px; color: #FFE194; background: white; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
+
 ul.login-info-first{width: 50%; padding: 0 0 0 0; margin: 0 0 0 0; float: left;text-align: center;}
 ul.login-info-second{width: 50%; padding: 5% 0 0 0; margin: 0 0 0 0; float: left; }
+li.login-info-second{margin: 0 0 2% 0;}
 label.login-option{font-size: 80%;}
-.login-info-label{width: 80%; }
+.login-info-label{width: 95%; padding: 3% 0 3% 0; margin: 0 0 0 0;}
+a.login-other { margin-right: 10px; color: #7F7F7F; font-size: 12px; }

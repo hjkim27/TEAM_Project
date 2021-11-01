@@ -19,7 +19,7 @@
 		<ul class="head-header">
 			<li class="head-header"><a class="head-header" href="<c:url value="#"/>">고객센터</a></li>
 			<c:if test="${loginInside != null}">
-				<li class="head-header"><a class="head-header" href="<c:url value="/user/mypage/main.do"/>">마이페이지</a></li>
+				<li class="head-header"><a class="head-header" href="<c:url value="/user/mypage/main.do"/>">${loginInside }</a></li>
 				<li class="head-header"><a class="head-header" href="<c:url value="/member/logout.do"/>">로그아웃</a></li>				
 			</c:if>
 			<c:if test="${loginInside == null }">

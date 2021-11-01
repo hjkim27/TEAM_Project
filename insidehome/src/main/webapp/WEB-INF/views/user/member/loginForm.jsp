@@ -5,6 +5,10 @@
 
 <div class="bodyinfo">
 	<div class="info-detail">
+		<h1 class="info-title" style="margin-left: 5%;">로그인</h1>
+	</div>
+	<hr>
+	<div class="info-detail">
 			<form:form action="login.do" commandName="cmd" class="login-info">
 			<ul class="login-info-first">
 				<li><img src="<c:url value="/resources/img/inside-logo.png"/>" width="80%"></li>
@@ -15,11 +19,11 @@
 				</li>
 			</ul>
 			<ul class="login-info-second">
-				<li><form:input path="email" class="login-info-label" placeholder="@를 포함한 이메일 전체 입력"/></li>
-				<li><form:password path="password" class="login-info-label" placeholder="비밀번호 입력"/></li>
-				<li><form:errors path="email"/><form:errors path="password"/> </li>				
-				<li><input id="save-info" type="submit" value="로그인"> </li>
-				<li></li>
+				<li class="login-info-second"><form:input path="email" class="login-info-label" placeholder="@를 포함한 이메일 전체 입력"/></li>
+				<li class="login-info-second"><form:password path="password" class="login-info-label" placeholder="비밀번호 입력"/></li>
+				<li class="login-info-second"><form:errors path="email"/><form:errors path="password"/> </li>				
+				<li class="login-info-second"><input id="save-info2" type="submit" value="로그인"> </li>
+				<li class="login-info-second" style="text-align: center;"><a class="login-other" href="<c:url value="/member/searchForm.do" />">아이디/비밀번호 찾기</a> | <a class="login-other" href="<c:url value="/inside/registForm.do" />">회원가입</a></li>
 			</ul>
 		</form:form>
 	</div>

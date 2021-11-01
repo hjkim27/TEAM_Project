@@ -31,74 +31,63 @@ public class LoginController {
 	private IMemberInfoService infoSer;
 
 	@RequestMapping(value = "/loginForm.do")
-	public String loginForm(@ModelAttribute("cmd")LoginCommand cmd, Model model,
+	public String loginForm(@ModelAttribute("cmd") LoginCommand cmd, Model model,
 			@CookieValue(value = "inssahouse", required = false) Cookie rememberCookie, HttpSession session)
 			throws Exception {
 		if (rememberCookie != null) {
 			String sessionId = rememberCookie.getValue();
-			HashMap<String, Object> hsm = logSer.loginOptionCheck(sessionId);
-			if (hsm != null) {
-				if (hsm.get("SESSIONID") != null && !hsm.get("SESSIONID").equals("")) {
-					session.setAttribute("loginInside", hsm);
-					System.out.println("><");
+			HashMap<String, Object> info = logSer.loginOptionCheck(sessionId);
+			if (info != null) {
+				String loginOption = (String) info.get("LOGINOPTION");
+				String email = (String) info.get("EMAIL");
+				String nickname = (String) info.get("NICKNAME");
+				session.setAttribute("loginInside", nickname);
+				if (loginOption != null && loginOption.equals("rememberEmail")) {
+					cmd.setEmail(email);
+					cmd.setLoginOption(loginOption);
+				} else if (loginOption != null && loginOption.equals("autoLogin")) {
+					logSer.loginSuccess(email, sessionId, loginOption);
 					return "user/main/main";
-				} else {
-					cmd.setEmail((String) hsm.get("EMAIL"));
-					cmd.setLoginOption("rememberEmail");
 				}
 			}
 		} else {
 			cmd = new LoginCommand();
 		}
 		model.addAttribute("cmd", cmd);
-		System.out.println(cmd);
 		return "user/member/loginForm";
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginSubmit(@ModelAttribute("cmd")LoginCommand cmd, Errors errors, HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
+	public String loginSubmit(@ModelAttribute("cmd") LoginCommand cmd, Errors errors, HttpServletRequest req,
+			HttpServletResponse resp) throws Exception {
 		new LoginCommandValidator().validate(cmd, errors);
 		if (errors.hasErrors()) {
 			return "user/member/loginForm";
 		}
 		String nickname = logSer.loginOrIdentifyRequest(cmd.getEmail(), cmd.getPassword());
 		if (nickname == null || nickname.equals("")) {
-			ValidationUtils.rejectIfEmpty(errors, "email", "notmatch");
-			int failCount = cmd.getFailCount();
-			if (failCount == 2) {
-				return "user/member/findInfoForm";
-			} else {
-				cmd.setFailCount(failCount + 1);
-			}
-			System.out.println("로그인 실패" + (cmd.getFailCount() + 1));
+			errors.rejectValue("email", "notmatch");
 			return "user/member/loginForm";
 		} else {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginInside", nickname);
 			String sessionId = session.getId();
-			System.out.println("sessionId"+ sessionId);
-			Cookie rememberCookie = new Cookie("inssahouse", sessionId);
-			rememberCookie.setPath("/");
 			if (cmd.getLoginOption() != null && !cmd.getLoginOption().equals("")) {
+				Cookie rememberCookie = new Cookie("inssahouse", sessionId);
+				rememberCookie.setPath("/");
 				rememberCookie.setMaxAge(60 * 60 * 24 * 7);
-				if (cmd.getLoginOption().equals("autoLogin")) {
-					logSer.loginSuccess(cmd.getEmail(), sessionId);
-				}
+				resp.addCookie(rememberCookie);
+				logSer.loginSuccess(cmd.getEmail(), sessionId, cmd.getLoginOption());
 			} else {
-				
-				rememberCookie.setMaxAge(0);
-				logSer.loginSuccess(cmd.getEmail(), null);
+				logSer.loginSuccess(cmd.getEmail(), null, null);
 			}
-			resp.addCookie(rememberCookie);
 		}
-		System.out.println("로그인성공: " + cmd);
 		return "user/main/main";
 	}
 
 	@RequestMapping(value = "/logout.do")
 	public String logoutSubmit(HttpSession session) throws Exception {
-		session.invalidate();
+		session.removeAttribute("loginInside");
 		return "user/main/main";
 	}
 

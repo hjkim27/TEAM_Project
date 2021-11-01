@@ -8,5 +8,5 @@ public interface ILoginService {
 	//로그인(본인인증) 정보 확인
 	public String loginOrIdentifyRequest(String email, String password) throws Exception;
 	//로그인 성공시 업데이트
-	public void loginSuccess(String email, String sessionId) throws Exception;
+	public void loginSuccess(String email, String sessionId, String loginOption) throws Exception;
 }

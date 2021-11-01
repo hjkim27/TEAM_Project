@@ -26,11 +26,12 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	@Override
-	public void loginSuccess(String email, String sessionId) throws Exception {
+	public void loginSuccess(String email, String sessionId, String loginOption) throws Exception {
 		if(sessionId!=null) {
 			HashMap<String, Object> hsm = new HashMap<String, Object>();
 			hsm.put("email", email);
 			hsm.put("sessionId", sessionId);
+			hsm.put("loginOption", loginOption);
 			mainDao.updateLoginSuccess(hsm);			
 		}
 	}
