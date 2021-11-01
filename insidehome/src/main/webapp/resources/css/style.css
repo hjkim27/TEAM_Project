@@ -64,8 +64,8 @@ input:focus{ outline: none; }
 input[id="save-info"]{ border: 1px solid #B8DFD8; border-radius: 3px; color:white; background: #B8DFD8; font-size: 20px; font-family: "24bold"; width: 50%; margin: 0 10% 10px 5px; padding: 4px 5px 4px 5px; }
 input:hover[id="save-info"]{ border: 1px solid #B8DFD8; border-radius: 3px; color: #B8DFD8; background: white; font-size: 20px; font-family: "24bold"; width: 50%; margin: 0 10% 10px 5px; padding: 4px 5px 4px 5px; }
 
-textarea.agreeContent {width: 90%; resize: none; background: #EAEAEA; font-size: 10px; padding: 10px 10px 10px 10px; margin: 10px 10px -10px 10px; }
-textarea:focus.agreeContent{outline: none;}
+textarea.guideContent {width: 90%; resize: none; background: #EAEAEA; font-size: 10px; padding: 10px 10px 10px 10px; margin: 10px 10px -10px 10px; }
+textarea:focus.guideContent{outline: none;}
 caption.regist-info{text-align: left; padding-left: 2%;}
 
 .searchText{ border: 2px #EAEAEA solid; border-radius: 3px; background: white; width: 60%; padding: 4px 0 6px 10px; margin: 1px 0 0 0; }
@@ -102,8 +102,8 @@ hr {margin: 10px 0 10px 0;}
 }
 
 
-input[id="save-info2"]{ border: 1px solid #FFE194; border-radius: 3px; color:white; background: #FFE194; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
-input:hover[id="save-info2"]{ border: 1px solid #FFE194; border-radius: 3px; color: #FFE194; background: white; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
+input[id="save-info2"], input.find-info-input{ border: 1px solid #FFE194; border-radius: 3px; color:white; background: #FFE194; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
+input:hover[id="save-info2"], input:hover.find-info-input{ border: 1px solid #FFE194; border-radius: 3px; color: #FFE194; background: white; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
 
 ul.login-info-first{width: 50%; padding: 0 0 0 0; margin: 0 0 0 0; float: left;text-align: center;}
 ul.login-info-second{width: 50%; padding: 5% 0 0 0; margin: 0 0 0 0; float: left; }
@@ -111,3 +111,6 @@ li.login-info-second{margin: 0 0 2% 0;}
 label.login-option{font-size: 80%;}
 .login-info-label{width: 95%; padding: 3% 0 3% 0; margin: 0 0 0 0;}
 a.login-other { margin-right: 10px; color: #7F7F7F; font-size: 12px; }
+.find-info{width: 95%;}
+td.find-info-label{border: 0px solid; width:20%;}
+td.find-info-input{border: 0px solid; width: 40%;}

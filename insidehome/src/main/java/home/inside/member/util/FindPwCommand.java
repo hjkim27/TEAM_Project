@@ -1,9 +1,8 @@
 package home.inside.member.util;
 
-public class FindInfoCommand {
+public class FindPwCommand {
 	private String email;
 	private String phone;
-	private String type;
 	
 	public String getEmail() {
 		return email;
@@ -17,12 +16,4 @@ public class FindInfoCommand {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	
 }

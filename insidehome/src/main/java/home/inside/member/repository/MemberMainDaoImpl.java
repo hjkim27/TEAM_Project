@@ -64,12 +64,22 @@ public class MemberMainDaoImpl implements IMemberMainDao {
 	@Override
 	public int nicknameCheck(String nickname) throws Exception {
 		return sqlSessionTemplate.selectOne("nicknameCheck", nickname);
-
+	}
+	
+	@Override
+	public String tmpLogin(String email) throws Exception {
+		return sqlSessionTemplate.selectOne("tmpLogin", email);
 	}
 
 	@Override
-	public String findMemberInfo(HashMap<String, Object> hsm) throws Exception {
-		List<String> result = sqlSessionTemplate.selectList("findMemberInfo", hsm);
+	public String emailFind(HashMap<String, Object> hsm) throws Exception {
+		List<String> result = sqlSessionTemplate.selectList("emailFind", hsm);
+		return result.isEmpty() ? null : result.get(0);
+	}
+
+	@Override
+	public String passwordFind(HashMap<String, Object> hsm) throws Exception {
+		List<String> result = sqlSessionTemplate.selectList("passwordFind", hsm);
 		return result.isEmpty() ? null : result.get(0);
 	}
 

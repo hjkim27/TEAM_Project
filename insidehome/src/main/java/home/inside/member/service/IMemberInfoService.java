@@ -2,7 +2,8 @@ package home.inside.member.service;
 
 import java.util.HashMap;
 
-import home.inside.member.util.FindInfoCommand;
+import home.inside.member.util.FindEmailCommand;
+import home.inside.member.util.FindPwCommand;
 import home.inside.member.vo.MemberAddrVo;
 import home.inside.member.vo.MemberDropVo;
 import home.inside.member.vo.MemberInfoDto;
@@ -22,7 +23,7 @@ public interface IMemberInfoService {
 	//개인정보 수정
 	public void updateMyInfo(MemberSubVo subVo, MemberAddrVo addrVo) throws Exception;
 	//아이디/비밀번호 찾기
-	public String findMemberInfo(FindInfoCommand cmd) throws Exception;
+	public String findMemberInfo(FindEmailCommand emailCmd, FindPwCommand pwCmd) throws Exception;
 	//회원탈퇴
 	public void dropMember(MemberDropVo dropVo) throws Exception;
 }

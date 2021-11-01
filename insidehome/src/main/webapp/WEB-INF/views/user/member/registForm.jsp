@@ -13,7 +13,7 @@
 		<h2 class="info-title">약관동의</h2>
 		<p class="info-title-sub">INSIDE.HOME의 홈페이지 이용약관, 개인정보 수집 밎 이용동의에 동의합니다.</p>
 		<div>
-			<textarea class="agreeContent" rows="10" readonly="readonly">* 홈페이지 이용 약관 동의
+			<textarea class="guideContent" rows="10" readonly="readonly">* 홈페이지 이용 약관 동의
 INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감사합니다. 본 약관은 다양한 홈페이지 서비스의 이용과 관련하여 서비스를 제공하는 INSIDE.HOME(이하 '인싸')과 이를 이용하는 인싸 회원(이하 '회원') 또는 비회원과의 관계를 설명하며, 아울러 여러분의 인싸 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 
 홈페이지 이용 시 아이디(이메일)정보 혹은 비밀번호를 검색하고자 할 경우, 회원 가입 시 선택사항으로 입력한 전화번호가 필요합니다. 이를 미입력하여 정보를 조회하지 못할 경우, 이로인해 일어나는 불이익은 인싸에서 책임지지 않습니다.

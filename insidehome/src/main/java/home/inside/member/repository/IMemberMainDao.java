@@ -26,9 +26,12 @@ public interface IMemberMainDao {
 	// 회원가입 시 중복조회용
 	public int emailCheck(String email) throws Exception;
 	public int nicknameCheck(String nickname) throws Exception;
+	//비밀번호 찾기로 임시 로그인 허용
+	public String tmpLogin(String email) throws Exception;
 	//-----------------------------------------------------------------
 	// 아이디 비밀번호 찾기(main, addr)
-	public String findMemberInfo(HashMap<String, Object> hsm) throws Exception;
+	public String emailFind(HashMap<String, Object> hsm) throws Exception;
+	public String passwordFind(HashMap<String, Object> hsm) throws Exception;
 	// 회원 마이페이지 개인정보 조회용 
 	public MemberInfoDto selectInfo(String nickname) throws Exception;
 }

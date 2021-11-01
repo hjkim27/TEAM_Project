@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import home.inside.member.service.EmailService;
 import home.inside.member.service.ILoginService;
 import home.inside.member.service.IMemberInfoService;
+import home.inside.member.util.FindEmailCommand;
+import home.inside.member.util.FindPwCommand;
+import home.inside.member.util.FindPwCommandValidator;
 import home.inside.member.util.LoginCommand;
 import home.inside.member.util.LoginCommandValidator;
+import home.inside.member.vo.EmailVo;
 
 @Controller
 @RequestMapping("/member")
@@ -29,6 +34,8 @@ public class LoginController {
 	private ILoginService logSer;
 	@Autowired
 	private IMemberInfoService infoSer;
+	@Autowired
+	private EmailService emailSer;
 
 	@RequestMapping(value = "/loginForm.do")
 	public String loginForm(@ModelAttribute("cmd") LoginCommand cmd, Model model,
@@ -41,13 +48,13 @@ public class LoginController {
 				String loginOption = (String) info.get("LOGINOPTION");
 				String email = (String) info.get("EMAIL");
 				String nickname = (String) info.get("NICKNAME");
-				session.setAttribute("loginInside", nickname);
 				if (loginOption != null && loginOption.equals("rememberEmail")) {
 					cmd.setEmail(email);
 					cmd.setLoginOption(loginOption);
 				} else if (loginOption != null && loginOption.equals("autoLogin")) {
+					session.setAttribute("loginInside", nickname);
 					logSer.loginSuccess(email, sessionId, loginOption);
-					return "user/main/main";
+					return "redirect:/user/main/main";
 				}
 			}
 		} else {
@@ -59,12 +66,15 @@ public class LoginController {
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginSubmit(@ModelAttribute("cmd") LoginCommand cmd, Errors errors, HttpServletRequest req,
-			HttpServletResponse resp) throws Exception {
+			HttpServletResponse resp, @CookieValue(value = "tmpPwinssa", required = false)Cookie tmpCookie) throws Exception {
 		new LoginCommandValidator().validate(cmd, errors);
 		if (errors.hasErrors()) {
 			return "user/member/loginForm";
 		}
 		String nickname = logSer.loginOrIdentifyRequest(cmd.getEmail(), cmd.getPassword());
+		if(tmpCookie!=null && cmd.getPassword().equals(tmpCookie.getValue())) {
+			nickname = logSer.loginTmpSuccess(cmd.getEmail());
+		}
 		if (nickname == null || nickname.equals("")) {
 			errors.rejectValue("email", "notmatch");
 			return "user/member/loginForm";
@@ -101,13 +111,49 @@ public class LoginController {
 		return null;
 	}
 
-	@RequestMapping(value = "/searchForm.do")
-	public String findInfoForm() throws Exception {
-		return "user/member/findInfoForm";
+	@RequestMapping(value = "/searchEmailForm.do")
+	public String findInfoForm(@ModelAttribute("emailCmd") FindEmailCommand emailCmd, Model model) throws Exception {
+		model.addAttribute("emailCmd", new FindEmailCommand());
+		return "user/member/findEmailForm";
 	}
 
-	@RequestMapping(value = "/search.do", method = RequestMethod.POST)
-	public String findInfoSubmit() throws Exception {
+	@RequestMapping(value = "/searchEmail.do", method = RequestMethod.POST)
+	public String findInfoSubmit(@ModelAttribute("emailCmd") FindEmailCommand emailCmd, Errors errors, Model model)
+			throws Exception {
+		if(emailCmd.getEmailAddr()==null || emailCmd.getEmailAddr().trim().isEmpty()) {
+			errors.rejectValue("emailAddr", "required");
+			return "user/member/findEmailForm";
+		} else if(emailCmd.getPhoneNum()==null || emailCmd.getPhoneNum().trim().isEmpty()) {
+			errors.rejectValue("phoneNum", "required");
+			return "user/member/findEmailForm";
+		} else {
+			model.addAttribute("findResult", infoSer.findMemberInfo(emailCmd, null));
+			return "user/member/findInfoResult";
+		}
+	}
+
+	@RequestMapping(value = "/searchPwForm.do")
+	public String findInfoForm(@ModelAttribute("pwCmd") FindPwCommand pwCmd, Model model) throws Exception {
+		model.addAttribute("pwCmd", new FindPwCommand());
+		return "user/member/findPasswordForm";
+	}
+	
+	@RequestMapping(value = "/searchPw.do", method = RequestMethod.POST)
+	public String findInfoSubmit(@ModelAttribute("pwCmd") FindPwCommand cmd, Errors errors, Model model, HttpServletResponse resp)
+			throws Exception {
+		new FindPwCommandValidator().validate(cmd, errors);
+		if (errors.hasErrors()) {
+			return "user/member/findPasswordForm";
+		}
+		String result = infoSer.findMemberInfo(null, cmd);
+		if(result!=null) {
+			String tmpPw = emailSer.emailSend(result);
+			Cookie tmpCookie = new Cookie("tmpPwinssa", tmpPw);
+			tmpCookie.setMaxAge(60*10);//10분간만 유지
+			resp.addCookie(tmpCookie);
+		}
+		model.addAttribute("findResult", result);
+		
 		return "user/member/findInfoResult";
 	}
 

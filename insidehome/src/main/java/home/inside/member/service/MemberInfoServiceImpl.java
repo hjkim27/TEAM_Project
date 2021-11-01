@@ -9,7 +9,8 @@ import home.inside.member.repository.IMemberAddrDao;
 import home.inside.member.repository.IMemberDropDao;
 import home.inside.member.repository.IMemberMainDao;
 import home.inside.member.repository.IMemberSubDao;
-import home.inside.member.util.FindInfoCommand;
+import home.inside.member.util.FindEmailCommand;
+import home.inside.member.util.FindPwCommand;
 import home.inside.member.vo.MemberAddrVo;
 import home.inside.member.vo.MemberDropVo;
 import home.inside.member.vo.MemberInfoDto;
@@ -70,19 +71,23 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	}
 
 	@Override
-	public String findMemberInfo(FindInfoCommand cmd) throws Exception {
+	public String findMemberInfo(FindEmailCommand emailCmd, FindPwCommand pwCmd) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
-		String email = cmd.getEmail();
-		if (cmd.getType().equals("email")) {
-			email = email.split("@")[1];
-			hsm.put("email", email);
-		} else {
-			hsm.put("email", email);
+		String result = null;
+		if (emailCmd != null) {
+			hsm.put("email", emailCmd.getEmailAddr());
+			String phone = emailCmd.getPhoneNum();
+			hsm.put("phone1", phone.substring(0, 3));
+			hsm.put("phone2", phone.substring(3));
+			result = mainDao.emailFind(hsm);
+		} else if (pwCmd != null) {
+			hsm.put("email", pwCmd.getEmail());
+			String phone = pwCmd.getPhone();
+			hsm.put("phone1", phone.substring(0, 3));
+			hsm.put("phone2", phone.substring(3));
+			result = mainDao.passwordFind(hsm);
 		}
-		String phone = cmd.getPhone();
-		hsm.put("phone1", phone.substring(0, 3));
-		hsm.put("phone1", phone.substring(3));
-		return mainDao.findMemberInfo(hsm);
+		return result;
 	}
 
 	@Override

@@ -46,17 +46,18 @@
 	<select id="nicknameCheck" parameterType="String" resultType="int">
 		select count(*) from MEMBER_MAIN where NICKNAME=#{nickname}
 	</select>
+	<select id="tmpLogin" parameterType="String" resultType="String">
+		select NICKNAME from MEMBER_MAIN where EMAIL=#{email}
+	</select>
 	
 	
 	
-	<select id="findMemberInfo" parameterType="HashMap" resultType="String">
+	<select id="emailFind" parameterType="HashMap" resultType="String">
 		select main.EMAIL from MEMBER_MAIN main, MEMBER_ADDR addr
-		where addr.PHONE1=#{phone1} and addr.PHONE2=#{phone}
-		<if test="type eq 'email'.toString()">
-			and main.EMAIL=#{email}
-		</if>
-		<if test="type eq 'password'.toString()">
-			and mail.EMAIL like '%'||#{email}
-		</if>
+		where addr.PHONE1=#{phone1} and addr.PHONE2=#{phone2} and main.EMAIL like '%'||#{email}
+	</select>
+	<select id="passwordFind" parameterType="HashMap" resultType="String">
+		select main.EMAIL from MEMBER_MAIN main, MEMBER_ADDR addr
+		where addr.PHONE1=#{phone1} and addr.PHONE2=#{phone2} and main.EMAIL=#{email}
 	</select>
 </mapper>
