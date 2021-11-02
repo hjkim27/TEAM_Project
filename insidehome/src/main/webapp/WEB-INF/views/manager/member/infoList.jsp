@@ -34,10 +34,12 @@
 				</form:form>
 			</caption>
 			<thead>
-				<td class="table-inner"><b>이메일</b></td>
-				<td class="table-inner"><b>닉네임</b></td>
-				<td class="table-inner"><b>가입일자</b></td>
-				<td class="table-inner"><b>최근 접속 시간</b></td>
+				<tr>
+					<td class="table-inner"><b>이메일</b></td>
+					<td class="table-inner"><b>닉네임</b></td>
+					<td class="table-inner"><b>가입일자</b></td>
+					<td class="table-inner"><b>최근 접속 시간</b></td>
+				</tr>
 			</thead>
 			<tbody>
 				<c:if test="${fn:length(memberList) == 0}">

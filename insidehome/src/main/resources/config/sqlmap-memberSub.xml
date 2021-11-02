@@ -24,7 +24,6 @@
 		where NICKNAME=#{nickname}
 	</delete>
 
-
 	<select id="selectPointAndWarn" parameterType="String"
 		resultType="HashMap">
 		select WARNCOUNT, POINT from MEMBER_SUB where

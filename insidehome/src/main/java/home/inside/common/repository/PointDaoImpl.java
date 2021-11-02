@@ -1,6 +1,7 @@
 package home.inside.common.repository;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,8 +16,8 @@ public class PointDaoImpl implements IPointDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public void insertPoint(PointVo vo) throws Exception {
-		sqlSessionTemplate.insert("insertPoint", vo);
+	public void insertPoint(HashMap<String, Object> hsm) throws Exception {
+		sqlSessionTemplate.insert("insertPoint", hsm);
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class PointDaoImpl implements IPointDao {
 	}
 
 	@Override
-	public List<PointVo> selectPointList(String nickname) throws Exception {
+	public List<HashMap<String, Object>> selectPointList(String nickname) throws Exception {
 		return sqlSessionTemplate.selectList("selectPointList", nickname);
 	}
 

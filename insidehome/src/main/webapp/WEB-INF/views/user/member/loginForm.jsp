@@ -7,7 +7,7 @@
 <div class="bodyinfo">
 	<div class="info-detail">
 			<form:form action="login.do" commandName="cmd" class="login-info">
-			<ul class="login-info-first">
+			<ul class="first-box">
 				<li><img src="<c:url value="/resources/img/inside-logo.png"/>" width="80%"></li>
 				<li style="margin-right: 5%;">
 					<label class="login-option"><input type="radio" name="loginOption" checked="checked"/>옵션 사용 안함</label>&nbsp;&nbsp; 
@@ -15,7 +15,7 @@
 					<label class="login-option"><input type="radio" name="loginOption" value="autoLogin"/>자동로그인</label> &nbsp;	&nbsp;
 				</li>
 			</ul>
-			<ul class="login-info-second">
+			<ul class="second-box">
 				<li class="login-info-second"><form:input path="email" class="login-info-label" placeholder="@를 포함한 이메일 전체 입력"/></li>
 				<li class="login-info-second"><form:password path="password" class="login-info-label" placeholder="비밀번호 입력"/></li>
 				<li class="login-info-second"><form:errors path="email"/><form:errors path="password"/> </li>				

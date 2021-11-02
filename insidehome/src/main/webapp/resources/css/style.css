@@ -13,6 +13,8 @@ a { text-decoration: none; }
 ul{list-style: none;}
 div.bodyinfo {margin: 5% 15% 5% 15%;}
 .info-title{font-family: "24bold"; color: #4D4F6F;display: inline; margin: 0 20px 0 0;}
+a.info-title{font-family: "24bold"; color: #4D4F6F;display: inline; margin: 0 20px 0 0; font-size: 30px;}
+a.info-title:hover{font-family: "24bold"; color: #FFE194;display: inline; margin: 0 20px 0 0;}
 h2.info-title{color: #7F7F7F;}
 .info-title-sub{display: inline; font-size: 10px;}
 div.info-detail{display: inline; margin: 0 0 40px 10px; }
@@ -105,8 +107,8 @@ hr {margin: 10px 0 10px 0;}
 input[id="save-info2"], input.find-info-input{ border: 1px solid #FFE194; border-radius: 3px; color:white; background: #FFE194; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
 input:hover[id="save-info2"], input:hover.find-info-input{ border: 1px solid #FFE194; border-radius: 3px; color: #FFE194; background: white; font-size: 20px; font-family: "24bold"; width: 100%; margin: 0 0 0 0; }
 
-ul.login-info-first{width: 50%; padding: 0 0 0 0; margin: 0 0 0 0; float: left;text-align: center;}
-ul.login-info-second{width: 50%; padding: 5% 0 0 0; margin: 0 0 0 0; float: left; }
+ul.first-box{width: 50%; padding: 0 0 0 0; margin: 0 0 0 0; float: left;text-align: center;}
+ul.second-box{width: 50%; padding: 5% 0 0 0; margin: 0 0 0 0; float: left; }
 li.login-info-second{margin: 0 0 2% 0;}
 label.login-option{font-size: 80%;}
 .login-info-label{width: 95%; padding: 3% 0 3% 0; margin: 0 0 0 0;}
@@ -116,3 +118,18 @@ td.find-info-label{border: 0px solid; width:20%;}
 td.find-info-input{border: 0px solid; width: 40%;}
 .next-find { margin-right: 20px;color: #FFE194; font-size: 15px; font-family: "24bold"; }
 .next-find:hover {color: #C9D6DF;font-family: "24bold";font-size: 15px;}
+
+
+
+td.mypage-title{ text-align: center; font-size: 15px; width: 20%; border: 0px white; }
+a.mypage-title-sub{ text-decoration: none; color: #B8DFD8;}
+a.mypage-title-sub:hover{ text-decoration: none; color: #FFE194;}
+td.mypage-title-sub{ text-align: center; font-size: 20px; width: 20%; border: 0px white; padding: 5px 0 5px 0; font-family: "24bold";}
+td.mypage-title-sub2{ text-align: center; font-size: 20px; width: 20%; border: 0px white; padding: 5px 0 5px 0; font-family: "24bold"; color: pink;}
+thead.mypage-title{background: white; width: 100%;}
+img.explain{width: 25px; height: 25px; vertical-align: middle}
+
+td.sub-date{width: 20%; font-size: 15px; border: 0px; padding: 5px 0 5px 20px; border-bottom: 1px black solid;}
+td.sub-type{width: 15%; font-size: 15px; border: 0px; padding: 5px 0 5px 0; border-bottom: 1px black solid;}
+td.sub-detail{font-size: 15px; border: 0px; padding: 5px 0 5px 20%; border-bottom: 1px black solid; text-align: right;}
+td.sub-none-info{font-size: 15px; border: 0px; text-align: center; }

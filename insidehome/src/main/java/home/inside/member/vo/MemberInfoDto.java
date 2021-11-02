@@ -4,6 +4,7 @@ public class MemberInfoDto {
 	private String email;
 	private String nickname;
 	private String loginTime;
+	private String regdate;
 	private String name;
 	private String gender;
 	private String storedate;
@@ -12,6 +13,7 @@ public class MemberInfoDto {
 	private String addrNum;
 	private String addr;
 	private String addrSub;
+	
 	public String getEmail() {
 		return email;
 	}
@@ -29,6 +31,12 @@ public class MemberInfoDto {
 	}
 	public void setLoginTime(String loginTime) {
 		this.loginTime = loginTime;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 	public String getName() {
 		return name;

@@ -60,4 +60,13 @@
 		select main.EMAIL from MEMBER_MAIN main, MEMBER_ADDR addr
 		where addr.PHONE1=#{phone1} and addr.PHONE2=#{phone2} and main.EMAIL=#{email}
 	</select>
+	<select id="selectInfo" parameterType="String" resultType="memberInfoDto">
+		select main.EMAIL, main.NICKNAME, main.LOGINTIME, main.REGDATE,
+    			sub.NAME, sub.GENDER, sub.STOREDATE,
+			    addr.PHONE1, addr.PHONE2, addr.ADDRNUM, addr.ADDR, addr.ADDRSUB
+    	from MEMBER_MAIN main, MEMBER_SUB sub, MEMBER_ADDR addr
+    	where main.NICKNAME = sub.NICKNAME
+        		and sub.NICKNAME = addr.NICKNAME
+		        and addr.NICKNAME = #{nickname}
+	</select>
 </mapper>

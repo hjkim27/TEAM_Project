@@ -74,18 +74,22 @@ public class LoginController {
 		if (errors.hasErrors()) {
 			return "user/member/loginForm";
 		}
-		HashMap<String, Object> info = logSer.loginTmpSuccess(cmd.getEmail());
-		boolean pwdChk = pwdEncoder.matches(cmd.getPassword(), (String) info.get("PASSWORD"));
+		boolean pwdChk;
+		String nickname = null;
+		HashMap<String, Object> info = null;
 		if(tmpCookie!=null) {
-			pwdChk = pwdEncoder.matches(cmd.getPassword(), tmpCookie.getValue());
-			
-			System.out.println("일치확인: "+pwdChk);
+			pwdChk = pwdEncoder.matches(cmd.getPassword(), tmpCookie.getValue());	
+		} else {
+			info = logSer.loginTmpSuccess(cmd.getEmail());
+			pwdChk = pwdEncoder.matches(cmd.getPassword(), (String) info.get("PASSWORD"));
 		}
-		String nickname = (String) info.get("NICKNAME");
-		if (nickname == null || nickname.equals("")) {
+		if(pwdChk) {
+			nickname = (String)info.get("NICKNAME");
+		} else if(!pwdChk || info==null) {
 			errors.rejectValue("email", "notmatch");
 			return "user/member/loginForm";
-		} else if(nickname!=null && pwdChk) {
+		}
+		if(nickname!=null && pwdChk) {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginInside", nickname);
 			String sessionId = session.getId();
@@ -106,16 +110,6 @@ public class LoginController {
 	public String logoutSubmit(HttpSession session) throws Exception {
 		session.removeAttribute("loginInside");
 		return "user/main/main";
-	}
-
-	@RequestMapping(value = "/IdentifyForm.do")
-	public String identifyForm() throws Exception {
-		return "user/member/IdentifyForm";
-	}
-
-	@RequestMapping(value = "/Identify.do", method = RequestMethod.POST)
-	public String identifySubmit() throws Exception {
-		return null;
 	}
 
 	@RequestMapping(value = "/searchEmailForm.do")
@@ -166,5 +160,4 @@ public class LoginController {
 
 		return "user/member/findInfoResult";
 	}
-
 }
