@@ -13,8 +13,10 @@
 		from POINT where CHANGEDATE=sysdate and NICKNAME=#{nickname}
 	</select>
 	<select id="selectPointList" parameterType="String" resultType="HashMap">
-		select * from POINT
+		select CHANGEDATE, CHANGEWHY, CHANGEPOINT 
+		from POINT
 		where NICKNAME=#{nickname} and CHANGEDATE<![CDATA[>=]]> sysdate-30
+		order by CHANGEDATE desc
 	</select>
 	<select id="selectCheckMonth" parameterType="String" resultType="date">
 		select CHANGEDATE from POINT 

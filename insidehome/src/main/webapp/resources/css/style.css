@@ -88,7 +88,7 @@ input.reg-info-label { width: 60%; font:10px #EAEAEA;}
 input.reg-info-phone2, input[id="addr"] { width: 45%; }
 select.reg-info-phone1 { width: 14.5%; }
 input[id="addrNum"] { width: 12.5%; }
-hr {margin: 10px 0 10px 0;}
+hr {margin: 10px 0 10px 0; border: 0px; background: #EAEAEA; height: 2px;}
 
 .daylist {
 	list-style: none;
@@ -129,7 +129,7 @@ td.mypage-title-sub2{ text-align: center; font-size: 20px; width: 20%; border: 0
 thead.mypage-title{background: white; width: 100%;}
 img.explain{width: 25px; height: 25px; vertical-align: middle}
 
-td.sub-date{width: 20%; font-size: 15px; border: 0px; padding: 5px 0 5px 20px; border-bottom: 1px black solid;}
-td.sub-type{width: 15%; font-size: 15px; border: 0px; padding: 5px 0 5px 0; border-bottom: 1px black solid;}
-td.sub-detail{font-size: 15px; border: 0px; padding: 5px 0 5px 20%; border-bottom: 1px black solid; text-align: right;}
+td.sub-date{width: 20%; font-size: 15px; border: 0px; padding: 10px 0 5px 20px; border-bottom: 1px #D5D5D5 solid;}
+td.sub-type{width: 60%; font-size: 15px; border: 0px; padding: 10px 0 5px 0; border-bottom: 1px #D5D5D5 solid;}
+td.sub-detail{font-size: 15px; border: 0px; padding: 10px 0 5px 0; border-bottom: 1px #D5D5D5 solid; text-align: right;}
 td.sub-none-info{font-size: 15px; border: 0px; text-align: center; }

@@ -9,8 +9,10 @@
 	<div class="info-detail">
 		<a class="info-title" href="<c:url value="/user/mypage/info/view.do" />">내 정보 관리
 			<img class="explain" title="개인정보 확인" src="<c:url value="/resources/img/icon-infoEdit.png"/>">
-		</a>		
-		<hr>
+		</a>
+	</div>				
+	<hr>
+	<div class="info-detail">
 		<table class="mypage-title">
 			<thead class="mypage-title">
 				<tr>
@@ -31,11 +33,10 @@
 					<td class="mypage-title-sub"><a class="mypage-title-sub" href="#">${qaCount }</a></td>
 					<td class="mypage-title-sub2">${infoCount.WARNCOUNT }</td>
 				</tr>
-			</thead>
 			</tbody>
 		</table>
 	</div>
-	<br><br><br>
+	<br><hr ><br>
 	<div style="padding-left: 10%; width: 80%;">
 		<c:if test="${viewPage eq 'board'}">
 			<div class="info-detail">
@@ -87,9 +88,11 @@
 							<tr>
 								<td class="sub-date"><fmt:formatDate value="${po.CHANGEDATE}" pattern="yyyy-MM-dd" /></td>
 								<td class="sub-type">
-									<c:if test="${po.CHANGEWHY eq 'check'}">[출석]</c:if>
-									<c:if test="${po.CHANGEWHY eq 'write'}">[글작성]</c:if>
-									<c:if test="${po.CHANGEWHY eq 'sales'}">[상품구매]</c:if>
+									<c:choose>
+										<c:when test="${po.CHANGEWHY eq 'check'}">[출석]</c:when>
+										<c:when test="${po.CHANGEWHY eq 'write'}">[글작성]</c:when>
+										<c:otherwise>[상품구매] ${po.CHANGEWHY }</c:otherwise>
+									</c:choose>
 								</td>
 								<td class="sub-detail">${po.CHANGEPOINT }</td>
 							</tr>
@@ -122,7 +125,9 @@
 									<c:if test="${order.SENDSTATE eq 'ING'}">[배송중]</c:if>
 									 ${order.GOODSNAME }
 								</td>
-								<td class="sub-detail">${order.PRICE}</td>
+								<td class="sub-detail">
+									${order.PRICE}
+								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -131,7 +136,6 @@
 			</div>	
 		</c:if>
 	</div>
-		
 </div>
 
 

@@ -19,7 +19,7 @@
 	</div>
 	<div class="logo-area">
 		<h2>
-			<a href="<c:url value="/inside/main.do"/>">
+			<a href="<c:url value="/manager/main.do"/>">
 				<img class="logo" src="<c:url value="/resources/img/inside-logo.png"/>">
 			</a>
 		</h2>
