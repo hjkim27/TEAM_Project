@@ -3,7 +3,6 @@
 
 <%@include file="/WEB-INF/views/user/main/userHeader.jsp"%>
 
-
 <div class="bodyinfo">
 	<div class="info-detail">
 		<a class="info-title" href="<c:url value="/user/mypage/info/view.do" />">내 정보 관리
@@ -18,9 +17,8 @@
 				
 			</div>
 			<div class="info-detail">
-				
+				<input type="button" onclick="showIdentify();" value="개인정보 수정"/>
 			</div>
-		
 	</div>
 </div>
 

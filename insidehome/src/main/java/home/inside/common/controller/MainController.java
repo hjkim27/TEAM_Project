@@ -19,4 +19,9 @@ public class MainController {
 	public String userView() throws Exception{
 		return "user/main/main";
 	}
+	
+	@RequestMapping(value = "/info/identify.do")
+	public String identify() throws Exception {
+		return "user/member/mypage/identify";
+	}
 }

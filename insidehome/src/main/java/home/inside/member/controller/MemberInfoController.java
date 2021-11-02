@@ -52,7 +52,7 @@ public class MemberInfoController {
 		model.addAttribute("myInfo", infoSer.selectInfo(nickname));
 		return "user/member/mypage/memberInfo";
 	}
-
+	
 	@RequestMapping(value = "/info/updateForm.do", method = RequestMethod.POST)
 	public String infoUpdateForm(Model model, HttpSession session) throws Exception {
 		String nickname = (String) session.getAttribute("loginInside");

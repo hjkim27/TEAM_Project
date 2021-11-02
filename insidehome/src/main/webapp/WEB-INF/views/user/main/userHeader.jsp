@@ -12,6 +12,12 @@
 <link rel="shortcut icon" type="image⁄x-icon" href="<c:url value="/resources/img/home-icon.ico"/>">
 <title>INSIDE.HOME</title>
 <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet"/>
+<script type="text/javascript">
+	function showIdentify(){
+		var url = "${pageContext.request.contextPath}/info/identify.do";
+		window.open(url, "Identify", "height=2000, left=1000, top=1000");
+	}
+</script>
 </head>
 <body>
 <header class="inside-header">
