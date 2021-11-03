@@ -21,7 +21,7 @@ function removeCheck(){
 		alert('잘못 선택하셨습니다.');
 	}
 </script>
-<div class="bodyinfo">
+<div class="body-info">
 	<form name="goodsForm" method="post">
 		<div class="info-detail">
 			<h1 class="info-title">상품관리</h1>

@@ -8,7 +8,7 @@
 <%@include file="/WEB-INF/views/manager/main/mgrHeader.jsp"%>
 
 
-<div class="bodyinfo">
+<div class="body-info">
 	<div class="info-detail">
 	<h1 class="info-title">회원정보</h1>
 	<c:choose>

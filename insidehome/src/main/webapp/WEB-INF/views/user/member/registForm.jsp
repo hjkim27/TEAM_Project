@@ -4,13 +4,13 @@
 
 <%@include file="/WEB-INF/views/user/member/common/commHeader.jsp"%>
 
-<div class="bodyinfo">
+<div class="body-info">
 	<div class="info-detail">
 		<h1 class="info-title">회원가입</h1>
 	</div>
 	<hr>
 	<div class="info-detail">
-		<h2 class="info-title">약관동의</h2>
+		<h2>약관동의</h2>
 		<p class="info-title-sub">INSIDE.HOME의 홈페이지 이용약관, 개인정보 수집 밎 이용동의에 동의합니다.</p>
 		<div>
 			<textarea class="guideContent" rows="10" readonly="readonly">* 홈페이지 이용 약관 동의
@@ -37,7 +37,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 			<hr>
 			<table class="regist-info">
 				<caption class="regist-info">
-					<h2 class="info-title">필수정보 입력</h2>
+					<h2>필수정보 입력</h2>
 					<p class="info-title-sub">회원가입 시 필수 입력사항입니다.</p>
 				</caption>
 				<tbody>
@@ -64,7 +64,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					<tr class="reg-need">
 						<td class="reg-need-label">* 전화번호</td>
 						<td class="reg-need">
-							<form:select path="phone1" class="reg-info-phone1">
+							<form:select path="phone1" >
 								<form:option value="010" label="010"/>
 								<form:option value="011" label="011"/>
 								<form:option value="016" label="016"/>
@@ -80,7 +80,7 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 			<hr>
 			<table class="regist-info">
 				<caption class="regist-info">
-					<h2 class="info-title">선택정보 입력</h2>
+					<h2>선택정보 입력</h2>
 					<p class="info-title-sub">미입력 시 홈페이지 이용에 제약이 있을 수 있습니다.</p>
 				</caption>
 				<tbody>
