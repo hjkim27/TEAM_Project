@@ -51,10 +51,9 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	}
 
 	@Override
-	public int updatePassword(String nickname, String pw, String newPw) throws Exception {
+	public int updatePassword(String nickname, String newPw) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("nickname", nickname);
-		hsm.put("password", pw);
 		hsm.put("newPassword", newPw);
 		return mainDao.updatePw(hsm);
 	}
@@ -65,9 +64,21 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	}
 
 	@Override
-	public void updateMyInfo(MemberSubVo subVo, MemberAddrVo addrVo) throws Exception {
-		subDao.updateSubInfo(subVo);
-		addrDao.updateAddrInfo(addrVo);
+	public void updateMyInfo(MemberInfoDto dto) throws Exception {
+		HashMap<String, Object> hsmSub = new HashMap<String, Object>();
+		hsmSub.put("gender", dto.getGender());
+		hsmSub.put("storedate", dto.getStoredate());
+		hsmSub.put("nickname", dto.getNickname());
+		subDao.updateSubInfo(hsmSub);
+		
+		HashMap<String, Object> hsmAddr = new HashMap<String, Object>();
+		hsmAddr.put("phone1", dto.getPhone1());
+		hsmAddr.put("phone2", dto.getPhone2());
+		hsmAddr.put("addr", dto.getAddr());
+		hsmAddr.put("addrNum", dto.getAddrNum());
+		hsmAddr.put("addrSub", dto.getAddrSub());
+		hsmAddr.put("nickname", dto.getNickname());
+		addrDao.updateAddrInfo(hsmAddr);
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class DropMemberController {
 
 	@RequestMapping(value = "/info/dropForm.do")
 	public String dropMemberForm() throws Exception {
-		return "user/member/mypage/DropMemberForm";
+		return "user/member/mypage/dropMemberForm";
 	}
 
 	@RequestMapping(value = "/info/drop.do", method = RequestMethod.POST)

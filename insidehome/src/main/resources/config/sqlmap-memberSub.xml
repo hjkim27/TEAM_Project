@@ -13,10 +13,11 @@
 		resultType="memberSubVo">
 		select * from MEMBER_SUB where NICKNAME=#{nickname}
 	</select>
-	<update id="updateSubInfo" parameterType="memberSubVo">
+	<update id="updateSubInfo" parameterType="HashMap">
 		update MEMBER_SUB set
 		GENDER=#{gender},
-		STOREDATE=add_months(sysdate, ${storedate})
+		STOREDATE=add_months(sysdate, ${storedate}), 
+		MODDATE=sysdate 
 		where NICKNAME=#{nickname}
 	</update>
 	<delete id="deleteSubInfo" parameterType="String">

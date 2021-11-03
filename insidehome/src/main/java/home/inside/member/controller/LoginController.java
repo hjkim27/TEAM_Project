@@ -103,13 +103,13 @@ public class LoginController {
 				logSer.loginSuccess(cmd.getEmail(), null, null);
 			}
 		}
-		return "user/main/main";
+		return "redirect:/inside/main.do";
 	}
 
 	@RequestMapping(value = "/logout.do")
 	public String logoutSubmit(HttpSession session) throws Exception {
 		session.removeAttribute("loginInside");
-		return "user/main/main";
+		return "redirect:/inside/main.do";
 	}
 
 	@RequestMapping(value = "/searchEmailForm.do")

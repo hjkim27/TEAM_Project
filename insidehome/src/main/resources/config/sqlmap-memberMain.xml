@@ -19,8 +19,7 @@
 			where NICKNAME like '%'||#{nickname}||'%'
 	</select>
 	<update id="updatePw" parameterType="HashMap">
-		update MEMBER_MAIN set PASSWORD=#{password} 
-		where NICKNAME=#{nickname}] and PASSORD=#{password}
+		update MEMBER_MAIN set PASSWORD=#{newPassword} where NICKNAME=#{nickname}
 	</update>
 	<delete id="deleteMainInfo" parameterType="String">
 		delete from MEMBER_MAIN where NICKNAME=#{nickname}

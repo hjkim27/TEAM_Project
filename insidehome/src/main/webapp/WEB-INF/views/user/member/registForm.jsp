@@ -88,9 +88,9 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 						<td class="reg-need-label">주소</td>
 						<td class="reg-need">
 							<span id="guide" style="color: #999; display: none"></span>
-							<form:input path="addrNum" placeholder="우편번호"/>
-							<form:input path="addr" class="reg-info-label" placeholder="주소"/>
-							<input id="find-addr" type="button" onclick="find_addr()" value="우편번호 찾기"><br>
+							<form:input path="addrNum" placeholder="우편번호" readonly="true"/>
+							<form:input path="addr" class="reg-info-label" placeholder="주소" readonly="true"/>
+							<input id="find-addr" type="button" onclick="find_addr();" value="우편번호 찾기"><br>
 						</td>
 					</tr>
 					<tr class="reg-need">

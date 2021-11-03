@@ -17,11 +17,11 @@ public interface IMemberInfoService {
 	//관리자페이지 회원목록 검색
 	public Object searchMemberList(String nickname, String type) throws Exception;
 	//비밀번호 변경
-	public int updatePassword(String nickname, String pw, String newPw) throws Exception;
+	public int updatePassword(String nickname, String newPw) throws Exception;
 	//포인트, 경고횟수 조회
 	public HashMap<String, Object> selectMyCount(String nickname) throws Exception;
 	//개인정보 수정
-	public void updateMyInfo(MemberSubVo subVo, MemberAddrVo addrVo) throws Exception;
+	public void updateMyInfo(MemberInfoDto dto) throws Exception;
 	//아이디/비밀번호 찾기
 	public String findMemberInfo(FindEmailCommand emailCmd, FindPwCommand pwCmd) throws Exception;
 	//회원탈퇴
