@@ -48,7 +48,7 @@
 			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">정보게시판</a></li>
 			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">익명게시판</a></li>
 			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">공지사항</a></li>
-			<li class="head-list"><a class="head-list" href="<c:url value="#"/>">포인트몰</a></li>
+			<li class="head-list"><a class="head-list" href="<c:url value="/goods/list.do"/>">포인트몰</a></li>
 			<li class="head-list"><a class="head-list" href="<c:url value="/inside/checkForm.do"/>">출석체크</a></li>			
 			<li class="head-list"><a href="<c:url value="#"/>">
 				<img class="icon" src="<c:url value="/resources/img/btn_assatalk.png"/>">

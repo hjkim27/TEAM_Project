@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>insidehome</display-name>
   <welcome-file-list>
-    <welcome-file>/WEB-INF/views/user/main/main.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>dispatcher</servlet-name>
@@ -13,6 +13,7 @@
   			classpath:spring-context.xml
   			classpath:spring-mvc.xml
   			classpath:spring-db.xml
+  			classpath:log4j.xml
   			/WEB-INF/spring/root-context.xml
   			/WEB-INF/spring/spring-security.xml
   		</param-value>

@@ -49,10 +49,10 @@
 				<value>classpath*:config/sqlmap-memberAddr.xml</value>
 				<value>classpath*:config/sqlmap-memberDrop.xml</value>
 				<value>classpath*:config/sqlmap-point.xml</value>
+				<value>classpath*:config/sqlmap-goods.xml</value>
+				<value>classpath*:config/sqlmap-goodsImage.xml</value>
+				<value>classpath*:config/sqlmap-goodsSales.xml</value>
 			<!--
-				<value>classpath:config/sqlmap-goods.xml</value>
-				<value>classpath:config/sqlmap-goodsImage.xml</value>
-				<value>classpath:config/sqlmap-goodsSales.xml</value>
 				<value>classpath:config/sqlmap-board.xml</value>
 				<value>classpath:config/sqlmap-boardImage.xml</value>
 				<value>classpath:config/sqlmap-boardRef.xml</value>

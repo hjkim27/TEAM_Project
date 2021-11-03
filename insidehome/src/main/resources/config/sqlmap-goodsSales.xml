@@ -2,3 +2,48 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="goodsSalesVo">
+	<insert id="insertGoodsSales" parameterType="goodsSalesVo">
+		insert into GOODS_SALES(NUM, GOODSCODE, NICKNAME, PRICE, ORDERDATE, SENDSTATE) 
+		values(GOODS_SALES_SEQ.nextval, #{goodsCode}, #{nickname}, #{price}, sysdate, #{sendState})
+	</insert>
+	
+	<delete id="deleteGoodsSales" parameterType="String">
+		delete GOODS_SALES where GOODSCODE=#{goodCode}
+	</delete>
+	
+	<select id="salesCountNickname" parameterType="String" resultType="Integer">
+		select count(GOODSCODE) from GOODS_SALES where NICKNAME=#{nickname}
+	</select>
+	
+	<select id="salesOrderList" resultType="HashMap">
+		select SA.ORDERDATE, SA.GOODSCODE, GD.GOODSNAME, SA.PRICE, SA.NICKNAME, SA.SENDSTATE
+		from GOODS_SALES SA, GOODS GD 
+		where SA.GOODSCODE = GD.GOODSCODE
+		order by SA.SENDSTATE desc, SA.ORDERDATE desc
+	</select>
+	
+	<select id="nickNameOrderList" parameterType="String" resultType="HashMap">
+		select SA.ORDERDATE, SA.GOODSCODE, GD.GOODSNAME, SA.PRICE, SA.NICKNAME, SA.SENDSTATE
+		from GOODS_SALES SA, GOODS GD 
+		where SA.GOODSCODE = GD.GOODSCODE
+		order by SA.SENDSTATE desc, SA.ORDERDATE desc
+		where NICKNAME=#{nickname}
+	</select>
+	
+	<update id="updateOrderState" parameterType="HashMap">
+		update GOODS_SALES set SENDSTATE=#{state} where GOODSCODE=#{goodsCode}
+	</update>
+	
+	<update id="autoSendUpdate" parameterType="String">
+	update GOODS_SALES set SENDSTATE='END' where GOODSCODE=#{GOODSCODE}
+	</update>
+	
+	<select id="autoSendUPdateList" resultType="String">
+	select GOODSCODE from GOODS_SALES where 
+	TO_CHAR(SENDDATE + (interval '7' DAY), 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD')
+	</select>
+	
+</mapper>

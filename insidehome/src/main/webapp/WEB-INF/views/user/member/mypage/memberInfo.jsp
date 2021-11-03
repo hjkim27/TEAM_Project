@@ -50,7 +50,6 @@
 		</ul>
 	</div>
 	<div class="info-detail">
-		<input type="button" onclick="showIdentify();" value="개인정보 수정"/>
 		<form  style="text-align: center;" action="<c:url value="/user/mypage/info/updateForm.do"/>" method="post">
 			<input style="width: 20%; margin-top: 5%;" type="submit" value="개인정보 수정" />			
 			<input style="width: 20%;" type="button" onclick="location.href='<c:url value="/user/mypage/changePwForm.do"/>'" value="비밀번호 변경" />			

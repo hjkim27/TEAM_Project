@@ -16,6 +16,7 @@
 		<c:otherwise>일반회원 : ${fn:length(memberList) }</c:otherwise>
 	</c:choose>
 	</div>
+	<hr>
 	<div class="info-inner">
 		<table>
 			<caption>

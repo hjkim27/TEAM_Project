@@ -4,6 +4,12 @@ public class GoodsImageVo {
 	private int num ;
 	private String goodsCode ;
 	private String saveName ;
+	
+	public GoodsImageVo(String goodsCode, String saveName) {
+		this.goodsCode = goodsCode;
+		this.saveName = saveName;
+	}
+
 	public int getNum() {
 		return num;
 	}
