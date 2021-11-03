@@ -26,4 +26,6 @@ public interface IMemberInfoService {
 	public String findMemberInfo(FindEmailCommand emailCmd, FindPwCommand pwCmd) throws Exception;
 	//회원탈퇴
 	public void dropMember(MemberDropVo dropVo) throws Exception;
+	//입력정보로 회원존재 확인
+	public HashMap<String, Object> loginTmpSuccess(String email) throws Exception;
 }

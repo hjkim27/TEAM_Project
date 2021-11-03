@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import home.inside.common.service.IPointService;
+import home.inside.goods.service.IGoodsService;
 import home.inside.member.service.ILoginService;
 import home.inside.member.service.IMemberInfoService;
 import home.inside.member.util.ChangePwCommand;
@@ -31,10 +32,8 @@ public class MemberInfoController {
 	private IMemberInfoService infoSer;
 	@Autowired
 	private IPointService pointSer;
-	@Autowired
-	private ILoginService logSer;
 	// private IBoardDetailService boardSer;
-	// private IGoodsService goodsSer;
+	private IGoodsService goodsSer;
 	// private IQuestionService qaSer;
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
@@ -46,16 +45,14 @@ public class MemberInfoController {
 		model.addAttribute("infoCount", infoSer.selectMyCount(nickname));
 		model.addAttribute("articleList", new ArrayList<HashMap<String, Object>>()); 
 											// boardSer.searchNickname(nickname, str)
-		model.addAttribute("orderCount", 2);
-											// goodsSer.nicknameOrderCount(nickname)
+		//model.addAttribute("orderCount", goodsSer.nicknameOrderCount(nickname));
 		model.addAttribute("qaCount", 3);
 		model.addAttribute("viewPage", viewPage);
 		if (viewPage.equals("point")) {
 			model.addAttribute("pointList", pointSer.selectList(nickname));
 		}
 		if (viewPage.equals("order")) {
-			model.addAttribute("orderList", new ArrayList<HashMap<String, Object>>()); 
-											// goodsSer.nicknameOrderList(nickname)
+			model.addAttribute("orderList", goodsSer.nicknameOrderList(nickname)); 
 		}
 		return "user/member/mypage/mypageMain";
 	}
@@ -96,8 +93,7 @@ public class MemberInfoController {
 		if(errors.hasErrors()) {
 			return "user/member/mypage/changePwForm";
 		}
-		HashMap<String, Object> info = logSer.loginTmpSuccess(editCmd.getEmail());
-		
+		HashMap<String, Object> info = infoSer.loginTmpSuccess(editCmd.getEmail());
 		String nickname = (String) info.get("NICKNAME");
 		if(nickname==null || nickname.equals("")) {
 			rttr.addFlashAttribute("updateResult", "fail");

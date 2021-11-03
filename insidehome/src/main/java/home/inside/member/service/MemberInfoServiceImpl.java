@@ -11,10 +11,8 @@ import home.inside.member.repository.IMemberMainDao;
 import home.inside.member.repository.IMemberSubDao;
 import home.inside.member.util.FindEmailCommand;
 import home.inside.member.util.FindPwCommand;
-import home.inside.member.vo.MemberAddrVo;
 import home.inside.member.vo.MemberDropVo;
 import home.inside.member.vo.MemberInfoDto;
-import home.inside.member.vo.MemberSubVo;
 
 @Service
 public class MemberInfoServiceImpl implements IMemberInfoService {
@@ -108,5 +106,9 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 		mainDao.deleteMainInfo(nickname);
 		subDao.deleteSubInfo(nickname);
 		addrDao.deleteAddrInfo(nickname);
+	}
+	@Override
+	public HashMap<String, Object> loginTmpSuccess(String email) throws Exception {
+		return mainDao.tmpLogin(email);
 	}
 }
