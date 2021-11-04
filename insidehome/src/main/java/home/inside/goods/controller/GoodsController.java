@@ -22,7 +22,6 @@ import home.inside.goods.service.IGoodsUserService;
 import home.inside.goods.vo.GoodsSalesVo;
 import home.inside.goods.vo.GoodsVo;
 import home.inside.member.service.IMemberInfoService;
-import home.inside.member.service.IMemberService;
 import home.inside.member.vo.MemberInfoDto;
 import home.inside.member.vo.MemberSubVo;
 

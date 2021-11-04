@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 
 public class Test {
 		private String driver = "oracle.jdbc.driver.OracleDriver";
-		private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		private String user = "extester";
+		private String url = "jdbc:oracle:thin:localhost:1521:xe";
+		private String user = "projecthome";
 		private String password = "1234";
 		
 		@org.junit.Test
