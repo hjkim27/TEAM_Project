@@ -111,4 +111,13 @@ public class MemberInfoServiceImpl implements IMemberInfoService {
 	public HashMap<String, Object> loginTmpSuccess(String email) throws Exception {
 		return mainDao.tmpLogin(email);
 	}
+
+	@Override
+	public void updateMyCount(String nickname, int point) throws Exception {
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("nickname", nickname);
+		hsm.put("point", point);
+		subDao.updatePointOrWarn(hsm);
+
+	}
 }

@@ -95,9 +95,9 @@ input:focus, select:focus { outline: none; }
 
 input, btton, select	{ border-radius: 3px; font-family: "24normal"; }
 
-input[type=button], input[type=submit], button { 
+input[type=button], input[type=submit], button:not(.fit-size, .fit-size2) { 
 border: 2px solid #B8DFD8; color: #B8DFD8; background: white; font-size: 15px; font-family: "24bold"; width: auto; margin: 0 0 10px 5px; padding: 4px 5px 4px 5px; }
-input:hover[type=button], input:hover[type=submit], button:hover { 
+input:hover[type=button], input:hover[type=submit], button:hover:not(.fit-size, .fit-size2) { 
 border: 2px solid #B8DFD8; color:white; background: #B8DFD8; font-size: 15px; font-family: "24bold"; width: auto; margin: 0 0 10px 5px; padding: 4px 5px 4px 5px; }
 
 input[id="save-info"]		{ color:white; background: #B8DFD8; font-size: 20px; width: 50%; margin: 0 10% 10px 5px; }
@@ -113,7 +113,8 @@ input[type=text], input[type=password], select { border: 2px solid #EAEAEA; back
 input.reg-info-label 			{ width: 60%; font:10px #EAEAEA;}
 input.reg-info-phone2, input[id="addr"] 	{ width: 45%; }
 input[id="addrNum"] 			{ width: 12.5%; }
-button.fit-size				{ width: 90%; height:90%; margin: 0;}
+button.fit-size , button.fit-size2:hover	{ width: 90%; height:100%; margin: 0; border: 2px solid #B8DFD8; color: #B8DFD8; background: white; font-size: 15px; }
+button.fit-size:hover, button.fit-size2		{ width: 90%; height:100%; margin: 0; border: 2px solid #B8DFD8; color:white; background: #B8DFD8; font-size: 15px; }
 button.mainpage			{ width: auto; }
 
 textarea.guideContent {width: 90%; resize: none; background: #EAEAEA; font-size: 10px; padding: 10px 10px 10px 10px; margin: 10px 10px -10px 10px; }
