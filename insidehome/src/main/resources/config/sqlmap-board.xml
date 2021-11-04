@@ -67,11 +67,14 @@
 		    from (
 		        (select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
 		        from BOARD where BOARDCODE=#{boardCode} and notify='no'
-					<if test="type!=null">
-					and (${type} like '%'||#{word}||'%')
+					<if test='type.equals("title")'>
+					and (TITLE like '%'||#{word}||'%')
 					</if>
-					<if test="type2!=null">
-					and (${type} like '%'||#{word}||'%' or ${type2} like '%'||#{word}||'%')
+					<if test='type.equals("content")'>
+					and (CONTENT like '%'||#{word}||'%')
+					</if>
+					<if test='type.equals("double")'>
+					and (TITLE like '%'||#{word}||'%' or CONTENT like '%'||#{word}||'%')
 					</if>
 		        ) b
 		            left outer join
@@ -81,7 +84,11 @@
 		    )
 		where ROWNUM <![CDATA[>=]]> #{startNum} and ROWNUM <![CDATA[<=]]> #{endNum};
 	</select>
-	<select id="selectBoardNumWhenDropMember" parameterType="String" resultType="Integer">
-		select NUM from BOARD where WRITER=#{nickname}
+	<select id="selectBoardWhenMember" parameterType="String" resultType="HashMap">
+		select NUM, BOARDCODE, TITLE, REGDATE from BOARD where WRITER=#{nickname} order by REGDATE desc
+	</select>
+	<select id="isWriterEqualsToNickname" parameterType="HashMap" resultType="Integer">
+		select count(*) from BOARD
+		where NUM=#{num} and WRITER=#{nickname}
 	</select>
 </mapper>

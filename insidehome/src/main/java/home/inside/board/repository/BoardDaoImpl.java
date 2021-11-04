@@ -67,8 +67,18 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public List<Integer> selectBoardNumWhenDropMember(String nickname) throws Exception {
-		return sqlSessionTemplate.selectList("selectBoardNumWhenDropMember", nickname);
+	public List<HashMap<String, Object>> selectSubList(String type) throws Exception {
+		return sqlSessionTemplate.selectList("selectSubList", type);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectBoardWhenMember(String nickname) throws Exception {
+		return sqlSessionTemplate.selectList("selectBoardWhenMember", nickname);
+	}
+
+	@Override
+	public Integer isWriterEqualsToNickname(HashMap<String, Object> hsm) throws Exception {
+		return sqlSessionTemplate.selectOne("isWriterEqualsToNickname", hsm);
 	}
 
 

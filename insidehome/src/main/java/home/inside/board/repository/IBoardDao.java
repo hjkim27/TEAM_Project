@@ -30,9 +30,15 @@ public interface IBoardDao {
 	public List<HashMap<String, Object>> selectListBoard(HashMap<String, Object> hsm) throws Exception;
 	// 일반 게시글 목록 검색(board, boardref) > boardCode, startNum, endNum, type, type2, word
 	public List<HashMap<String, Object>> findListBoard(HashMap<String, Object> hsm) throws Exception;
-
+	// 이달의 추천글, 베스트글 목록(5개)
+	public List<HashMap<String, Object>> selectSubList(String type) throws Exception;
+	
+	
 	/* // 게시글 전체삭제(회원탈퇴)
 	 * 1. 회원 닉네임에 해당하는 게시글 번호 가져와서 > 회원이 작성한 게시글 번호 조회 필요
 	 * 2. 그 번호를 for문으로 돌리면서 게시글 삭제  > for문으로 게시글삭제 진행	 */
-	public List<Integer> selectBoardNumWhenDropMember(String nickname) throws Exception;
+	public List<HashMap<String, Object>> selectBoardWhenMember(String nickname) throws Exception;
+	
+	// 글수정,삭제 요청 시 본인 게시글인지 확인 > num, nickname
+	public Integer isWriterEqualsToNickname(HashMap<String , Object> hsm) throws Exception;
 }
