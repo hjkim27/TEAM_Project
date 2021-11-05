@@ -20,161 +20,161 @@ import home.inside.goods.vo.GoodsVo;
 
 @Service
 public class GoodsManagerServiceImpl implements IGoodsManagerService {
-	@Autowired
-	private IGoodsDao goodsDao;
-	@Autowired
-	private IGoodsImageDao goodsImageDao;
-	@Autowired
-	private IGoodsSalesDao goodsSalesDao;
-	@Autowired
-	private FileUtils util;
-	// 상품 코드 뽑기
-	private RandomStrService rs = new RandomStrService(8);
+   @Autowired
+   private IGoodsDao goodsDao;
+   @Autowired
+   private IGoodsImageDao goodsImageDao;
+   @Autowired
+   private IGoodsSalesDao goodsSalesDao;
+   @Autowired
+   private FileUtils util;
+   // 상품 코드 뽑기
+   private RandomStrService rs = new RandomStrService(8);
 
-	@Override
-	public void insert(GoodsVo goodsVo, MultipartHttpServletRequest mpReq) throws Exception {
-		String goodsCode = rs.nextString();
-		int check = goodsDao.insertCheck(goodsCode);
-		if (check != 0) {
-			goodsCode = rs.nextString();
-		}
-		Map<String, Object> hm = util.goodsFileUpload(goodsCode, mpReq);
-		goodsVo.setGoodsCode((String) hm.get("goodsCode"));
-		List<String> imageList = (List<String>) hm.get("saveNames");
+   @Override
+   public void insert(GoodsVo goodsVo, MultipartHttpServletRequest mpReq) throws Exception {
+      String goodsCode = rs.nextString();
+      int check = goodsDao.insertCheck(goodsCode);
+      if (check != 0) {
+         goodsCode = rs.nextString();
+      }
+      Map<String, Object> hm = util.goodsFileUpload(goodsCode, mpReq);
+      goodsVo.setGoodsCode((String) hm.get("goodsCode"));
+      List<String> imageList = (List<String>) hm.get("saveNames");
 
-		goodsVo.setHeart("no");
-		goodsVo.setStock(20);
+      goodsVo.setHeart("no");
+      goodsVo.setStock(20);
 
-		System.out.println("service.insert: " + goodsVo.toString());
-		goodsDao.insert(goodsVo);
+      goodsDao.insert(goodsVo);
 
-		for (String str : imageList) {
-			GoodsImageVo tmp = new GoodsImageVo(goodsCode, str);
-			goodsImageDao.insert(tmp);
-		}
+      for (String str : imageList) {
+         GoodsImageVo tmp = new GoodsImageVo(goodsCode, str);
+         goodsImageDao.insert(tmp);
+      }
 
-	}
+   }
 
-	@Override
-	public void update(GoodsVo goodsVo, MultipartHttpServletRequest mpReq) throws Exception {
+   @Override
+   public void update(GoodsVo goodsVo, MultipartHttpServletRequest mpReq) throws Exception {
+      if(mpReq.getParameterValues("deleteGoodsImage") != null) {
+         util.goodsFileDelete(goodsVo.getGoodsCode(), mpReq);
+         String[] deleteFile = mpReq.getParameterValues("deleteGoodsImage");
+         for (String str2 : deleteFile) {
+            goodsImageDao.editGoodsImage(goodsVo.getGoodsCode() + "_" + str2);
+         }
+      }
+      if(mpReq.getFiles("plusGoodsImage") != null) {
+         List<String> nameList = util.goodsFileEdit(goodsVo.getGoodsCode(), mpReq);
+         for (String str : nameList) {
+            GoodsImageVo tmp = new GoodsImageVo(goodsVo.getGoodsCode(), str);
+            goodsImageDao.insert(tmp);
+         }
+      }
+      goodsDao.update(goodsVo);
 
-		if (mpReq.getParameterValues("deleteGoodsImage") != null) {
-			util.goodsFileDelete(goodsVo.getGoodsCode(), mpReq);
-			String[] deleteFile = mpReq.getParameterValues("deleteGoodsImage");
-			for (String str2 : deleteFile) {
-				goodsImageDao.editGoodsImage(goodsVo.getGoodsCode() + "_" + str2);
-				System.out.println(str2);
-			}
-		}
-		if (mpReq.getFiles("plusGoodsImage") != null) {
-			List<String> nameList = util.goodsFileEdit(goodsVo.getGoodsCode(), mpReq);
-			for (String str : nameList) {
-				GoodsImageVo tmp = new GoodsImageVo(goodsVo.getGoodsCode(), str);
-				goodsImageDao.insert(tmp);
-			}
-		}
-		goodsDao.update(goodsVo);
+   }
 
-	}
+   @Override
+   public void updateHeart(String type, List<String> selectGoods) throws Exception {
+      for (String str : selectGoods) {
+         HashMap<String, String> hm = new HashMap<String, String>();
+         if (type.equals("recommand")) {
+            hm.put("heart", "yes");
+            hm.put("goodsCode", str);
+         } else if (type.equals("cancle")) {
+            hm.put("heart", "no");
+            hm.put("goodsCode", str);
+         }
+         goodsDao.updateHeart(hm);
+      }
 
-	@Override
-	public void updateHeart(String type, List<String> selectGoods) throws Exception {
-		for (String str : selectGoods) {
-			HashMap<String, String> hm = new HashMap<String, String>();
-			if (type.equals("recommand")) {
-				hm.put("heart", "yes");
-				hm.put("goodsCode", str);
-			} else if (type.equals("cancle")) {
-				hm.put("heart", "no");
-				hm.put("goodsCode", str);
-			}
-			goodsDao.updateHeart(hm);
-		}
+   }
 
-	}
+   @Override
+   public void deleteGoods(String[] selectGoods) throws Exception {
+      for (String str : selectGoods) {
+         util.goodsDelete(str);
+         HashMap<String, String> hm = new HashMap<String, String>();
+         hm.put("goodsCode", str);
+         hm.put("heart", "DEL");
+         goodsDao.updateHeart(hm);
+         goodsImageDao.deleteGoodsImage(str);
+      }
+   }
 
-	@Override
-	public void deleteGoods(String[] selectGoods) throws Exception {
-		for (String str : selectGoods) {
-			util.goodsDelete(str);
-			goodsDao.deleteGoods(str);
-			goodsImageDao.deleteGoodsImage(str);
-		}
-	}
+   // 관리자 조회
+   @Override
+   public List<HashMap<String, Object>> selectAll() throws Exception {
+      List<HashMap<String, Object>> tmp = goodsDao.editSelectAll();
+      for (HashMap<String, Object> hm : tmp) {
+         java.util.Date date = (Date) hm.get("REGDATE");
+         hm.put("REGDATE", dateType(date));
+      }
+      return tmp;
+   }
 
-	// 관리자 조회
-	@Override
-	public List<HashMap<String, Object>> selectAll() throws Exception {
-		List<HashMap<String, Object>> tmp = goodsDao.editSelectAll();
-		for (HashMap<String, Object> hm : tmp) {
-			java.util.Date date = (Date) hm.get("REGDATE");
-			hm.put("REGDATE", dateType(date));
-		}
-		return tmp;
-	}
+   @Override
+   public Map<String, Object> selectOne(String goodsCode) throws Exception {
+      Map<String, Object> hm = new HashMap<String, Object>();
+      GoodsVo goods = goodsDao.selectOne(goodsCode);
+      List<HashMap<String, String>> goodsImages = new ArrayList<HashMap<String, String>>();
+      for (String str : goodsImageDao.selectImage(goodsCode)) {
+         HashMap<String, String> imgImsi = new HashMap<String, String>();
+         imgImsi.put("imgPath", str);
 
-	@Override
-	public Map<String, Object> selectOne(String goodsCode) throws Exception {
-		Map<String, Object> hm = new HashMap<String, Object>();
-		GoodsVo goods = goodsDao.selectOne(goodsCode);
-		List<HashMap<String, String>> goodsImages = new ArrayList<HashMap<String, String>>();
-		for (String str : goodsImageDao.selectImage(goodsCode)) {
-			HashMap<String, String> imgImsi = new HashMap<String, String>();
-			imgImsi.put("imgPath", str);
+         String[] tmp = str.split("_");
+         String result = "";
+         if (tmp.length > 2) {
+            StringBuffer name = new StringBuffer();
+            for (int i = 1; i <= tmp.length - 1; i++) {
+               name.append(tmp[i]);
+               if (tmp.length - 1 != i) {
+                  name.append("_");
+               }
+            }
+            result = String.valueOf(name);
+         } else {
+            result = tmp[tmp.length - 1];
+         }
+         imgImsi.put("saveName", result);
+         goodsImages.add(imgImsi);
+      }
+      hm.put("goods", goods);
+      hm.put("goodsImages", goodsImages);
+      return hm;
+   }
 
-			String[] tmp = str.split("_");
-			String result = "";
-			if (tmp.length > 2) {
-				StringBuffer name = new StringBuffer();
-				for (int i = 1; i <= tmp.length - 1; i++) {
-					name.append(tmp[i]);
-					if (tmp.length - 1 != i) {
-						name.append("_");
-					}
-				}
-				result = String.valueOf(name);
-			} else {
-				result = tmp[tmp.length - 1];
-			}
-			imgImsi.put("saveName", result);
-			goodsImages.add(imgImsi);
-		}
-		hm.put("goods", goods);
-		hm.put("goodsImages", goodsImages);
-		return hm;
-	}
+   @Override
+   public void deleteNotExistImage(String goodsCode) throws Exception {
+      goodsImageDao.deleteGoodsImage(goodsCode);
+   }
 
-	@Override
-	public void deleteNotExistImage(String goodsCode) throws Exception {
-		goodsImageDao.deleteGoodsImage(goodsCode);
-	}
+   @Override
+   public void updateSales(String state, int num) throws Exception {
+      HashMap<String, Object> hm = new HashMap<String, Object>();
+      hm.put("state", state);
+      hm.put("num", num);
+      goodsSalesDao.updateSaleState(hm);
+   }
 
-	@Override
-	public void updateSales(String state, int num) throws Exception {
-		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("state", state);
-		hm.put("num", num);
-		goodsSalesDao.updateSaleState(hm);
-	}
+   @Override
+   public List<HashMap<String, Object>> orderAll() throws Exception {
+      autoSendUpdate();
+      return goodsSalesDao.orderList();
+   }
 
-	@Override
-	public List<HashMap<String, Object>> orderAll() throws Exception {
-		autoSendUpdate();
-		return goodsSalesDao.orderList();
-	}
+   private static Date dateType(java.util.Date date) {
+      SimpleDateFormat after = new SimpleDateFormat("yyyy-MM-dd");
+      String trans = after.format(date);
+      Date result = java.sql.Date.valueOf(trans);
+      return result;
+   }
 
-	private static Date dateType(java.util.Date date) {
-		SimpleDateFormat after = new SimpleDateFormat("yyyy-MM-dd");
-		String trans = after.format(date);
-		Date result = java.sql.Date.valueOf(trans);
-		return result;
-	}
-
-	@Override
-	public void autoSendUpdate() throws Exception {
-		for (String str : goodsSalesDao.autoSendupdateList()) {
-			goodsSalesDao.autoSendupdate(str);
-		}
-	}
+   @Override
+   public void autoSendUpdate() throws Exception {
+      for (String str : goodsSalesDao.autoSendupdateList()) {
+         goodsSalesDao.autoSendupdate(str);
+      }
+   }
 
 }

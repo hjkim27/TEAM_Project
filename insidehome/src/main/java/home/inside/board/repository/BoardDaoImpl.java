@@ -77,8 +77,8 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public Integer isWriterEqualsToNickname(HashMap<String, Object> hsm) throws Exception {
-		return sqlSessionTemplate.selectOne("isWriterEqualsToNickname", hsm);
+	public String articleWriterCheck(int num) throws Exception {
+		return sqlSessionTemplate.selectOne("articleWriterCheck", num);
 	}
 
 

@@ -26,14 +26,15 @@
 	</div>
 	<div class="head-service-area">
 		<ul class="service-list">
-			<li class="service-info-label"><a class="service-info-label" href="<c:url value="#"/>">정보게시판</a></li>
-			<li class="service-info-label"><a class="service-info-label" href="<c:url value="#"/>">익명게시판</a></li>
-			<li class="service-info-label"><a class="service-info-label" href="<c:url value="#"/>">공지사항</a></li>
+			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/board/list.do?boardCode=info"/>">정보게시판</a></li>
+			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/board/list.do?boardCode=who"/>">익명게시판</a></li>
+			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/board/list.do?notify=notice"/>">공지사항</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/goods/list.do"/>">상품관리</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/member/list.do"/>">회원정보</a></li>			
 			<li class="service-info-label"><a href="<c:url value="#"/>">
 				<img class="talk_btn" src="<c:url value="/resources/img/btn_assatalk.png" />">
-				</a></li>			
+				</a>
+			</li>			
 		</ul>
 	</div>
 </header>

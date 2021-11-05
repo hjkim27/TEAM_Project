@@ -19,4 +19,5 @@ public interface IPointService {
 
 	// 회원 탈퇴 시 내용 삭제
 	public void deletePoint(String nickname) throws Exception;
+	
 }

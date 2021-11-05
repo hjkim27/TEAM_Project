@@ -7,6 +7,7 @@ public class ArticleMgrCommand {
 	private String title;
 	private String content;
 	private String notify;
+	
 	public int getNum() {
 		return num;
 	}

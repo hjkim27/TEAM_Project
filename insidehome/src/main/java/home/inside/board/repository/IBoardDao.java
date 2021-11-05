@@ -20,7 +20,7 @@ public interface IBoardDao {
 	public void updateHit(int num) throws Exception;
 	// 게시글 추천수 증가
 	public void updateHeart(int num) throws Exception;
-	// 공지글 게시판에 표시 > notify, num
+	// 공지글 게시판에 표시여부 변경 > notify, num
 	public void changeNotify(HashMap<String, Object> hsm) throws Exception;
 	
 	
@@ -39,6 +39,6 @@ public interface IBoardDao {
 	 * 2. 그 번호를 for문으로 돌리면서 게시글 삭제  > for문으로 게시글삭제 진행	 */
 	public List<HashMap<String, Object>> selectBoardWhenMember(String nickname) throws Exception;
 	
-	// 글수정,삭제 요청 시 본인 게시글인지 확인 > num, nickname
-	public Integer isWriterEqualsToNickname(HashMap<String , Object> hsm) throws Exception;
+	// 글수정,삭제 요청 시 본인 게시글인지 확인 : 글번호로 닉네임 조회> num
+	public String articleWriterCheck(int num) throws Exception;
 }

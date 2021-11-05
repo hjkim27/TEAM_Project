@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import home.inside.board.repository.IBoardDao;
@@ -26,11 +27,11 @@ public class BoardServiceImpl implements IBoardService {
 	private IBoardImageDao imageDao;
 	@Autowired
 	private IBoardRefDao refDao;
-	@Autowired
-	private BoardFileUtil util;
+//	@Autowired
+//	private BoardFileUtil util;
 
 	@Override
-	public void insertBoard(ArticleMgrCommand artCmd, MultipartRequest mpReq) throws Exception {
+	public void insertBoard(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq) throws Exception {
 		// 이미지 등록 관련 내용 추가 필요
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("boardCode", artCmd.getBoardCode());
@@ -42,7 +43,7 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public void updateBoard(ArticleMgrCommand artCmd, MultipartRequest mpReq) throws Exception {
+	public void updateBoard(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq) throws Exception {
 		// 이미지 등록/삭제 관련 내용 추가 필요
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("num", artCmd.getNum());
@@ -96,9 +97,9 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> boardList(String boardCode, PageSearchCommand searchCmd) throws Exception {
+	public List<HashMap<String, Object>> boardList(PageSearchCommand searchCmd) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
-		hsm.put("boardCode", boardCode);
+		hsm.put("boardCode", searchCmd.getBoardCode());
 		hsm.put("startNum", searchCmd.getStartNum());
 		hsm.put("endNum", searchCmd.getEndNum());
 		String word = searchCmd.getWord();
@@ -144,11 +145,12 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public Integer userIsEqualsToWriter(int num, String nickname) throws Exception {
-		HashMap<String, Object> hsm = new HashMap<String, Object>();
-		hsm.put("num", num);
-		hsm.put("nickname", nickname);
-		return dao.isWriterEqualsToNickname(hsm);
+	public boolean userIsEqualsToWriter(int num, String nickname) throws Exception {
+		String writer = dao.articleWriterCheck(num);
+		if(writer!=null && nickname.equals(writer)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-
 }

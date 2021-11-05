@@ -29,6 +29,11 @@ public class MainController {
 		return "redirect:/inside/main.do";
 	}
 
+	@RequestMapping("/manager")
+	public String mgrMainView() throws Exception {
+		return "redirect:/manager/inside/main.do";
+	}
+	
 	@RequestMapping("/manager/inside/main.do")
 	public String mgrMainView(Model model) throws Exception {
 		List<HashMap<String, Object>> orderList = goodsManagerService.orderAll();

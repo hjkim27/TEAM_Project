@@ -1,6 +1,6 @@
 function getContextPath(){
-    var offset=location.href.indexOf(location.host)+location.host.length;
-    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+    let offset=location.href.indexOf(location.host)+location.host.length;
+    let ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
     return ctxPath;
 }
 
@@ -19,7 +19,7 @@ const add_updateFile = () => {
 }
 
 function checkForm(){
-			if(document.goodsForm.goodsName.value == "" || document.goodsForm.content.value == "" || document.goodsForm.stock.value == ""){
+			if(document.goodsForm.goodsName.value == "" || document.goodsForm.content.value == "" ){
 		if(document.goodsForm.goodsName.value == ""){
 			alert("상품 이름이 입력되지 않았습니다.");
 			document.goodsForm.goodsName.focus();
@@ -28,10 +28,6 @@ function checkForm(){
 		if(document.goodsForm.content.value == ""){
 			alert("내용이 입력되지 않았습니다.");
 			document.goodsForm.content.focus();
-			return false;
-		}
-		if(document.goodsForm.stock.value == ""){
-			alert("수량을 선택해주세요.");
 			return false;
 		}
 		}else{
@@ -44,9 +40,9 @@ function checkForm(){
 }
 
 const changeMainIma = () => {
-	var bigPic = document.querySelector("#mimg");
-	var smallPics = document.querySelectorAll(".arimg");
-	for(var i = 0; i < smallPics.length; i++){
+	let bigPic = document.querySelector("#mimg");
+	let smallPics = document.querySelectorAll(".arimg");
+	for(let i = 0; i < smallPics.length; i++){
 		smallPics[i].addEventListener("click", changePic);	//이벤트 처리
 		/*
 		onclick으로 하면 하나의 요소에 하나의 이벤트만 사용 가능 > 여러 이벤트를 처리해야할 경우 사용 불가
@@ -54,15 +50,15 @@ const changeMainIma = () => {
 		 */
 	}
 	function changePic(){
-		var smallPicAttribute = this.getAttribute("src");
+		let smallPicAttribute = this.getAttribute("src");
 		bigPic.setAttribute("src", smallPicAttribute);
 	}
 }
 
 function orderCheck(){
 	if(confirm("구매 하시겠습니까?") == true){
-		var reqUrl = getContextPath()+'/goods/orderPopup/order.do';
-		var pop = window.open(reqUrl, "_blank", "left=300px, top=200px, width=1400px, height=800px");
+		let reqUrl = getContextPath()+'/goods/orderPopup/order.do';
+		let pop = window.open(reqUrl, "_blank", "left=300px, top=200px, width=1400px, height=800px");
 	}else{
 		return false;
 	}
@@ -76,10 +72,8 @@ function addrChange(){
 	}
 }
 		
-function sendReturn(){
-	var salesNum = document.getElementById("sendReturn").value;
-	console.log(salesNum);
-	console.log(document.orderForm.action=getContextPath()+'/manager/main/order.do?state=YET&num='+salesNum);
+function sendCHK(){
+	let salesNum = event.target.value;
 	if(confirm("발송을  취소하시겠습니까?") == true){
 		return document.orderForm.action=getContextPath()+'/manager/main/order.do?state=YET&num='+salesNum;
 }else{

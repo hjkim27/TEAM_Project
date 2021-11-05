@@ -3,6 +3,7 @@ package home.inside.board.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import home.inside.board.util.ArticleMgrCommand;
@@ -13,9 +14,9 @@ import home.inside.board.vo.BoardVo;
 
 public interface IBoardService {
 	// 게시글 작성 + 이미지등록(dao, image)
-	public void insertBoard(ArticleMgrCommand artCmd, MultipartRequest mpReq) throws Exception;
+	public void insertBoard(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq) throws Exception;
 	// 게시글 수정 + 이미지등록/삭제 + 공지글 게시판 표시 수정 (dao, image)
-	public void updateBoard(ArticleMgrCommand artCmd, MultipartRequest mpReq) throws Exception;
+	public void updateBoard(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq) throws Exception;
 	// 게시글 삭제 + 이미지전체삭제 + 댓글전체삭제 (dao, image, ref)
 	public void deleteBoard(int num) throws Exception;
 	
@@ -36,7 +37,7 @@ public interface IBoardService {
 
 	
 	// 게시판 목록 조회 + 게시판 목록검색 (dao)
-	public List<HashMap<String, Object>> boardList(String boardCode, PageSearchCommand searchCmd) throws Exception;
+	public List<HashMap<String, Object>> boardList(PageSearchCommand searchCmd) throws Exception;
 	// 게시판 공지조회 (dao)
 	public List<HashMap<String, Object>> boardNotifyList(String boardCode) throws Exception;
 
@@ -52,6 +53,6 @@ public interface IBoardService {
 	// 회원이 작성한 게시글 목록조회 (dao)
 	public List<HashMap<String, Object>> selectMyArticleList(String nickname) throws Exception;
 	// 로그인한 회원이 작성한 게시글이 맞는지 확인(dao)
-	public Integer userIsEqualsToWriter(int num, String nickname) throws Exception;
+	public boolean userIsEqualsToWriter(int num, String nickname) throws Exception;
 	
 }

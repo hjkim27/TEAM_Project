@@ -1,6 +1,7 @@
 package home.inside.board.util;
 
 public class PageSearchCommand {
+	private String boardCode;
 	private int currentPage;
 	private int startNum;
 	private int endNum;
@@ -10,6 +11,12 @@ public class PageSearchCommand {
 	private String type;
 	private String word;
 	
+	public String getBoardCode() {
+		return boardCode;
+	}
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
+	}
 	public int getCurrentPage() {
 		return currentPage;
 	}

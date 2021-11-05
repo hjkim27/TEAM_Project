@@ -8,25 +8,12 @@
 출석페이지입니다.
 
 <div class="calender">
-	<div class="cal-header">
-		<div></div>
-		
-	</div>
-	<div>
-		<ol class="daylist">
-			<li class="day">일</li>
-			<li class="day">월</li>
-			<li class="day">화</li>
-			<li class="day">수</li>
-			<li class="day">목</li>
-			<li class="day">금</li>
-			<li class="day">토</li>
-		</ol>
-	</div>
+	tr
 </div>
+
 <div>
-	<a href="<c:url value="/inside/check.do"/>">
-		<img src="<c:url value="/resources/img/check-on.png"/>">
+	<a href="<c:url value="/inside/check.do"/>"> <img
+		src="<c:url value="/resources/img/check-on.png"/>">
 	</a>
 </div>
 
