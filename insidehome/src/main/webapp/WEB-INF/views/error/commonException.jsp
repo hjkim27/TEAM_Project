@@ -15,4 +15,5 @@
 		<button class="mainpage" onclick="location.href='<c:url value="/inside/main.do"/>'">메인페이지 이동</button>
 	</div>
 </div>
+</body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import home.inside.goods.service.IGoodsManagerService;
@@ -33,7 +34,7 @@ public class MainController {
 	public String mgrMainView() throws Exception {
 		return "redirect:/manager/inside/main.do";
 	}
-	
+
 	@RequestMapping("/manager/inside/main.do")
 	public String mgrMainView(Model model) throws Exception {
 		List<HashMap<String, Object>> orderList = goodsManagerService.orderAll();
@@ -57,8 +58,19 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/manager/main/order.do")
-	public String order(@RequestParam(value = "state") String state,@RequestParam(value = "num") int num) throws Exception {
+	public String order(@RequestParam(value = "state") String state, @RequestParam(value = "num") int num)
+			throws Exception {
 		goodsManagerService.updateSales(state, num);
 		return "redirect:/manager/inside/main.do";
+	}
+
+	@RequestMapping("/inside/intro.do")
+	public String intro() throws Exception {
+		return "user/main/intro";
+	}
+	
+	@RequestMapping(value = "/inside/map.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String map() throws Exception {
+		return "user/main/insideMap";
 	}
 }

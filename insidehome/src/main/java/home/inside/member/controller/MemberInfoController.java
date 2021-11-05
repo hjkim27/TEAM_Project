@@ -47,6 +47,7 @@ public class MemberInfoController {
 		model.addAttribute("orderCount", goodsSer.nicknameOrderCount(nickname));
 		model.addAttribute("qaCount", 3);
 		model.addAttribute("viewPage", viewPage);
+		model.addAttribute("checkIn",pointSer.selectCheck(nickname));
 		if (viewPage.equals("board")) {
 			model.addAttribute("articleList", new ArrayList<HashMap<String, Object>>());
 			// boardSer.searchNickname(nickname, str)

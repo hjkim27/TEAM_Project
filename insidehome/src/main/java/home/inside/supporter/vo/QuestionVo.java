@@ -11,6 +11,7 @@ public class QuestionVo {
 	private String answer ;
 	private Date askdate ;
 	private Date answerdate ;
+	
 	public int getNum() {
 		return num;
 	}

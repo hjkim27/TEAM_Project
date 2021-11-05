@@ -159,5 +159,5 @@ public class LoginController {
 		model.addAttribute("type", "password");
 
 		return "user/member/findInfoResult";
-	}
+	}	
 }

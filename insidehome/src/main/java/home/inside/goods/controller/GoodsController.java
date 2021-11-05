@@ -44,6 +44,7 @@ public class GoodsController {
 		List<HashMap<String, Object>> goodsList = goodsUserService.selectAll(type);
 		model.addAttribute("type", type);
 		model.addAttribute("goodsList", goodsList);
+		model.addAttribute("mainHeart", (goodsUserService.selectMain().get("mainHeart")));
 		return "user/goods/list";
 	}
 

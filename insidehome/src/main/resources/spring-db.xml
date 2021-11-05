@@ -58,7 +58,6 @@
 				<value>classpath*:config/sqlmap-boardRef.xml</value>
  				<value>classpath*:config/sqlmap-question.xml</value>
 				<value>classpath*:config/sqlmap-warning.xml</value>
-				<value>classpath*:config/sqlmap-talk.xml</value>
 				-->
 			</list>
 		</property>

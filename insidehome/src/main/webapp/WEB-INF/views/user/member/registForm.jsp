@@ -43,7 +43,18 @@
 				<tbody>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 이메일</td>
-						<td class="reg-need"><form:input path="email" class="reg-info-label" placeholder="ex) test@test.com"/><form:errors path="email" /></td>
+						<td class="reg-need">
+							<form:input path="emailPart1" class="reg-info-label"/>@
+							<form:select path="emailPart2" >
+								<form:option value="naver.com" label="naver.com"/>
+								<form:option value="daum.net" label="daum.net"/>
+								<form:option value="nate.com" label="nate.com"/>
+								<form:option value="kakao.com" label="kakao.com"/>
+								<form:option value="gmail.com" label="gmail.com"/>
+								<form:option value="test.com" label="test.com"/>
+							</form:select>
+							<form:errors path="emailPart1" /><form:errors path="emailPart2" />
+							</td>
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 닉네임</td>

@@ -10,6 +10,9 @@
 		<a class="info-title" href="<c:url value="/user/mypage/info/view.do" />">내 정보 관리
 			<img class="explain" title="개인정보 확인" src="<c:url value="/resources/img/icon-infoEdit.png"/>">
 		</a>
+		<c:if test="${checkIn==0}">
+			<a href="<c:url value="/user/inside/check.do"/>">출석하기</a>
+		</c:if>
 	</div>				
 	<hr>
 	<div class="info-detail">
@@ -73,14 +76,14 @@
 		<c:if test="${viewPage eq 'point'}">
 			<div class="info-detail">
 				<h2>포인트 적립 및 사용 내역</h2>
-				<p class="info-title-sub">포인트 변동 내역은 최근 30일간의 내용만 표시됩니다.</p>
+				<p class="info-title-sub">포인트 변동 내역은 최근 14일간의 내용만 표시됩니다.</p>
 			</div>
 			<div class="info-detail">
 				<table>
 					<tbody>
 					<c:if test="${fn:length(pointList) == 0}">
 						<tr>
-							<td colspan="3" class="sub-none-info">최근 30일 간 포인트 변동 내역이 존재하지 않습니다.</td>
+							<td colspan="3" class="sub-none-info">최근 2주 간 포인트 변동 내역이 존재하지 않습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${fn:length(pointList) != 0}">

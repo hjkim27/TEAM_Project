@@ -64,6 +64,7 @@ li.mypage-info-content	{float: left; width: 75%;}
 .next-find:hover	{ font-family: "24bold"; font-size: 15px; color: #C9D6DF; }
 
 .error	{display: block; margin: auto; padding: 0 0 0 0; height: 75%; align-content: center;}
+img.intro {width: 577px;}
 span	{color: red; padding-left: 10px;}
 
 img.explain	{ width: 25px; height: 25px; vertical-align: middle; }

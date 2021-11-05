@@ -47,7 +47,7 @@
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/board/list.do?boardCode=who"/>">익명게시판</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/board/list.do?notify=notice"/>">공지사항</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/goods/list.do"/>">포인트몰</a></li>
-			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/inside/checkForm.do"/>">출석체크</a></li>			
+			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/inside/intro.do"/>">소개글</a></li>			
 			<li class="service-info-label"><a href="<c:url value="#"/>">
 				<img class="talk_btn" src="<c:url value="/resources/img/btn_assatalk.png"/>">
 				</a></li>			

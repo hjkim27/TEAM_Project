@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 	<div class="head-area">
 		<ul class="head-list">
 			<li class="head-info-label"><a class="head-info-label" href="<c:url value="#"/>">고객센터</a></li>
-			<li class="head-info-label"><a class="head-info-label" href="<c:url value="/member/logout.do"/>">로그아웃</a></li>				
+			<li class="head-info-label"><a class="head-info-label" href="<c:url value="/member/logout.do"/>">[ ${mgrInside}_관리자]로그아웃</a></li>				
 		</ul>
 	</div>
 	<div class="logo-area">
