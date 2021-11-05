@@ -1,4 +1,7 @@
 package home.inside.board.controller;
+import java.util.HashMap;
+import java.util.List;
+
 // 나네....
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +19,30 @@ public class BoardController {
 	// 공지게시글 상세페이지 요청
 	@RequestMapping("/board/read/notice.do")
 	public String readArticleSubmit(int boardNum, Model model) throws Exception {
+		model.addAttribute("article", ser.readBoard(boardNum));
 		return "/user/board/detail";
 	}
 
 	// 게시글 목록/검색 요청
 	@RequestMapping("/board/list.do")
 	public String listArticleView(String notify, PageSearchCommand psCmd, Model model) throws Exception {
+		String boardCode = psCmd.getBoardCode();
+		int pageSize = 20;
+		psCmd.setPageSize(pageSize);
+		if(psCmd.getCount()==0) {
+			int count = ser.boardListSize(boardCode, notify);
+			psCmd.setCount(count);
+			psCmd.setNumber(count/pageSize+1);
+		}
+		if(boardCode!=null && (boardCode.equals("info") || boardCode.equals("who"))) {
+			model.addAttribute("notifyList", ser.boardNotifyList(boardCode));
+			if(boardCode.equals("info")) {
+				model.addAttribute("heartList", ser.selectSubList("heart"));
+				model.addAttribute("hitList", ser.selectSubList("hit"));
+			}
+		}
+		model.addAttribute("boardList", ser.boardList(notify, psCmd));
+		model.addAttribute("psCmd", psCmd);
 		return "/user/board/list";
 	}
 }

@@ -33,7 +33,6 @@ public interface IBoardDao {
 	// 이달의 추천글, 베스트글 목록(5개)
 	public List<HashMap<String, Object>> selectSubList(String type) throws Exception;
 	
-	
 	/* // 게시글 전체삭제(회원탈퇴)
 	 * 1. 회원 닉네임에 해당하는 게시글 번호 가져와서 > 회원이 작성한 게시글 번호 조회 필요
 	 * 2. 그 번호를 for문으로 돌리면서 게시글 삭제  > for문으로 게시글삭제 진행	 */
@@ -41,4 +40,11 @@ public interface IBoardDao {
 	
 	// 글수정,삭제 요청 시 본인 게시글인지 확인 : 글번호로 닉네임 조회> num
 	public String articleWriterCheck(int num) throws Exception;
+	
+	// 게시글 갯수 확인 > boardCode
+	public Integer boardSize(String boardCode) throws Exception;
+	// 공지 갯수 확인
+	public Integer notifySize() throws Exception;
+		
 }
+

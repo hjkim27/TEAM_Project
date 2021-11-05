@@ -97,12 +97,18 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> boardList(PageSearchCommand searchCmd) throws Exception {
+	public List<HashMap<String, Object>> boardList(String notify, PageSearchCommand searchCmd) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("boardCode", searchCmd.getBoardCode());
 		hsm.put("startNum", searchCmd.getStartNum());
 		hsm.put("endNum", searchCmd.getEndNum());
 		String word = searchCmd.getWord();
+		if(notify!=null) {
+			hsm.put("notify", notify);
+		}else {
+			hsm.put("notify", "no");
+		}
+		
 		if (word == null || word.trim().isEmpty()) {
 			return dao.selectListBoard(hsm);
 		} else {
@@ -147,10 +153,20 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public boolean userIsEqualsToWriter(int num, String nickname) throws Exception {
 		String writer = dao.articleWriterCheck(num);
-		if(writer!=null && nickname.equals(writer)) {
+		if (writer != null && nickname.equals(writer)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
+	@Override
+	public Integer boardListSize(String boardCode, String notify) throws Exception {
+		if(notify!=null) {
+			return dao.notifySize();
+		}else {
+			return dao.boardSize(boardCode);
+		}
+	}
+
 }

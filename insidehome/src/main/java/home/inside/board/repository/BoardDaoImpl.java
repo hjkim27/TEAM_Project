@@ -13,7 +13,7 @@ import home.inside.board.vo.BoardVo;
 public class BoardDaoImpl implements IBoardDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
+
 	@Override
 	public void insertArticle(HashMap<String, Object> hsm) throws Exception {
 		sqlSessionTemplate.insert("insertArticle", hsm);
@@ -26,7 +26,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public void updateArticle(HashMap<String, Object> hsm) throws Exception {
-		sqlSessionTemplate.update("updateArticle",hsm);
+		sqlSessionTemplate.update("updateArticle", hsm);
 	}
 
 	@Override
@@ -36,16 +36,16 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public void updateHit(int num) throws Exception {
-		sqlSessionTemplate.update("updateHit",num);
+		sqlSessionTemplate.update("updateHit", num);
 
 	}
 
 	@Override
 	public void updateHeart(int num) throws Exception {
-		sqlSessionTemplate.update("updateHeart",num);
+		sqlSessionTemplate.update("updateHeart", num);
 
 	}
-	
+
 	@Override
 	public void changeNotify(HashMap<String, Object> hsm) throws Exception {
 		sqlSessionTemplate.update("changeBoardCode", hsm);
@@ -81,5 +81,14 @@ public class BoardDaoImpl implements IBoardDao {
 		return sqlSessionTemplate.selectOne("articleWriterCheck", num);
 	}
 
+	@Override
+	public Integer boardSize(String boardCode) throws Exception {
+		return sqlSessionTemplate.selectOne("boardSize", boardCode);
+	}
+
+	@Override
+	public Integer notifySize() throws Exception {
+		return sqlSessionTemplate.selectOne("notifySize");
+	}
 
 }

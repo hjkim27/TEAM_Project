@@ -2,7 +2,7 @@ package home.inside.board.util;
 
 public class PageSearchCommand {
 	private String boardCode;
-	private int currentPage;
+	private Integer currentPage;
 	private int startNum;
 	private int endNum;
 	private int count;
@@ -11,16 +11,23 @@ public class PageSearchCommand {
 	private String type;
 	private String word;
 	
+	public PageSearchCommand() {
+		if(currentPage==null) {
+			currentPage = 1;
+		}
+		startNum = pageSize*(currentPage-1)+1;
+	}
+	
 	public String getBoardCode() {
 		return boardCode;
 	}
 	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
 	}
-	public int getCurrentPage() {
+	public Integer getCurrentPage() {
 		return currentPage;
 	}
-	public void setCurrentPage(int currentPage) {
+	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
 	}
 	public int getStartNum() {
@@ -30,7 +37,7 @@ public class PageSearchCommand {
 		this.startNum = startNum;
 	}
 	public int getEndNum() {
-		return endNum;
+		return pageSize*currentPage;
 	}
 	public void setEndNum(int endNum) {
 		this.endNum = endNum;
@@ -66,5 +73,12 @@ public class PageSearchCommand {
 		this.word = word;
 	}
 
+	@Override
+	public String toString() {
+		return "PageSearchCommand [boardCode=" + boardCode + ", currentPage=" + currentPage + ", startNum=" + startNum
+				+ ", endNum=" + endNum + ", count=" + count + ", pageSize=" + pageSize + ", number=" + number
+				+ ", type=" + type + ", word=" + word + "]";
+	}
 
+	
 }

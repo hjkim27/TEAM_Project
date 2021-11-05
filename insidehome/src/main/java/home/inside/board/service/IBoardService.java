@@ -37,10 +37,9 @@ public interface IBoardService {
 
 	
 	// 게시판 목록 조회 + 게시판 목록검색 (dao)
-	public List<HashMap<String, Object>> boardList(PageSearchCommand searchCmd) throws Exception;
+	public List<HashMap<String, Object>> boardList(String notify, PageSearchCommand searchCmd) throws Exception;
 	// 게시판 공지조회 (dao)
 	public List<HashMap<String, Object>> boardNotifyList(String boardCode) throws Exception;
-
 	
 
 	// 댓글등록(ref)
@@ -55,4 +54,6 @@ public interface IBoardService {
 	// 로그인한 회원이 작성한 게시글이 맞는지 확인(dao)
 	public boolean userIsEqualsToWriter(int num, String nickname) throws Exception;
 	
+	// 게시글 갯수 조회(dao)
+	public Integer boardListSize(String boardCode, String notify) throws Exception;
 }
