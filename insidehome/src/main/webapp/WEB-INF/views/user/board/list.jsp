@@ -75,6 +75,61 @@
 			</tbody>
 		</table>		
 	</div>
+		<c:if test="${psCmd.count > 0 }">
+			<c:set var="pageCount" value="${psCmd.number}"/>
+			<fmt:parseNumber var="pageCount" value="${pageCount }" integerOnly="true"/>
+			
+			<c:set var="pageBlock" value="${5 }"/>
+			
+			<fmt:parseNumber var="result" value="${(psCmd.currentPage-1)/pageBlock }" integerOnly="true"/>
+			<c:set var="startPage" value="${result*pageBlock + 1 }"></c:set>
+			<c:set var="endPage" value="${startPage + pageBlock -1 }"></c:set>
+			
+			<c:if test="${endPage>pageCount }">
+				<c:set var="endPage" value="${pageCount }"/>
+			</c:if>
+			<c:choose>
+				<c:when test="${psCmd.word}">
+					<c:set var="options" value="type=${psCmd.type}&word=${psCmd.word}&"></c:set>
+				</c:when>
+				<c:otherwise>
+					<c:set var="options" value=""></c:set>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:if test="${startPage>pageBlock }">
+				<input type="button" onclick="location.href='list.do?${option}pageNum=${startPage-pageBlock}'" value="◀">
+			</c:if>
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" >
+				<a href="list.do?psCmd=${psCmd}&pageNum=${i }">[${i }]</a>
+			</c:forEach>
+			<c:if test="${endPage<pageCount }">
+				<input type="button" onclick="location.href='list.do?${option}&pageNum=${startPage+pageBlock}'" value="▶">
+			</c:if>
+		
+		
+		
+			<c:choose>
+				<c:when test="${op!=null}">
+					<c:set var="options" value="type=${op.type}&str=${op.str}&"></c:set>
+				</c:when>
+				<c:otherwise>
+					<c:set var="options" value=""></c:set>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:if test="${startPage>pageBlock }">
+				<a href="list.board?${options}pageNum=${startPage-pageBlock }">[이전]</a>
+			</c:if>
+			<c:forEach var="i" begin="${startPage }" end="${endPage }" >
+				<a href="list.board?${options}pageNum=${i }">[${i }]</a>
+			</c:forEach>
+			<c:if test="${endPage<pageCount }">
+				<a href="list.board?${options}pageNum=${startPage+pageBlock }">[다음]</a>
+			</c:if>
+		
+		
+		</c:if>
 </div>
 
 <%@include file="/WEB-INF/views/user/main/userFooter.jsp"%>
