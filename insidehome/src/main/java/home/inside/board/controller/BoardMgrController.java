@@ -50,11 +50,10 @@ public class BoardMgrController {
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
 	public String updateNoticeSubmit(ArticleMgrCommand artCmd) throws Exception {
 		// Validation추가
-		/* readArticleView에서 조건 처리한거처럼
-		 * 만약 readBoard(num) 이 null 이면
-		 * 게시글 목록으로 redirect
-		 * 그게 아니면 아래대로.....
-		*/
+		/*
+		 * readArticleView에서 조건 처리한거처럼 만약 readBoard(num) 이 null 이면 게시글 목록으로 redirect 그게
+		 * 아니면 아래대로.....
+		 */
 		ser.updateBoard(artCmd, null);
 		return "redirect:/manager/board/list.do";
 	}
@@ -70,7 +69,7 @@ public class BoardMgrController {
 	@RequestMapping(value = "/read.do/{num}")
 	public String readArticleView(@PathVariable(value = "num") int num, Model model) throws Exception {
 		BoardVo tmp = ser.readBoard(num);
-		if(tmp==null) {
+		if (tmp == null) {
 			return "redirect:/manager/board/list.do";
 		}
 		model.addAttribute("board", tmp);
@@ -79,8 +78,30 @@ public class BoardMgrController {
 
 	// 게시판 목록조회 요청
 	@RequestMapping(value = "/list.do")
-	public String listArticleView(String notify, PageSearchCommand psCmd, Model model) throws Exception {
-		// 이거빼고해요
+	public String listArticleView(PageSearchCommand psCmd, Model model) throws Exception {
+		Integer pageNum = psCmd.getPageNum();
+		pageNum = (pageNum == null) ? 1 : pageNum;
+		int pageSize = 20;
+		psCmd.setPageSize(pageSize);
+		psCmd.setCurrentPage(pageNum);
+		psCmd.setStartNum(pageSize * (pageNum - 1) + 1);
+		psCmd.setEndNum(pageSize * pageNum);
+		String boardCode = (psCmd.getBoardCode() == null) ? "info" : psCmd.getBoardCode();
+		String notify = (boardCode.equals("notice")) ? "notice" : "no";
+
+		int count = 0;
+		if (boardCode.equals("notice")) {
+			count = ser.notiListSize(psCmd.getType(), psCmd.getWord());
+		} else {
+			count = ser.boardListSize(boardCode, psCmd.getType(), psCmd.getWord());
+		}
+		int tmp = (count % pageSize == 0) ? 0 : 1;
+		psCmd.setNumber(count / pageSize + tmp);
+		count -= pageSize * (pageNum - 1);
+		psCmd.setCount(count);
+
+		model.addAttribute("boardList", ser.boardList(notify, psCmd));
+		model.addAttribute("psCmd", psCmd);
 		return "/manager/board/list";
 	}
 }

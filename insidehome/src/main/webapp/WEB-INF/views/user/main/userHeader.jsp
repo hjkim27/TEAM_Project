@@ -45,7 +45,7 @@
 		<ul class="service-list">
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/board/list.do?boardCode=info"/>">정보게시판</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/board/list.do?boardCode=who"/>">익명게시판</a></li>
-			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/board/list.do?notify=notice"/>">공지사항</a></li>
+			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/board/list.do?boardCode=notice"/>">공지사항</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/goods/list.do"/>">포인트몰</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/inside/intro.do"/>">소개글</a></li>			
 			<li class="service-info-label"><a href="<c:url value="#"/>">

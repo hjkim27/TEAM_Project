@@ -1,7 +1,9 @@
 package home.inside.board.util;
 
 public class PageSearchCommand {
+	private int num;
 	private String boardCode;
+	private Integer pageNum;
 	private Integer currentPage;
 	private int startNum;
 	private int endNum;
@@ -10,18 +12,17 @@ public class PageSearchCommand {
 	private int number;
 	private String type;
 	private String word;
-	
-	public PageSearchCommand() {
-		if(currentPage==null) {
-			currentPage = 1;
-		}
-	}
-	
 	public String getBoardCode() {
 		return boardCode;
 	}
 	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
+	}
+	public Integer getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
 	}
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -30,13 +31,13 @@ public class PageSearchCommand {
 		this.currentPage = currentPage;
 	}
 	public int getStartNum() {
-		return pageSize*(currentPage-1)+1;
+		return startNum;
 	}
 	public void setStartNum(int startNum) {
 		this.startNum = startNum;
 	}
 	public int getEndNum() {
-		return pageSize*currentPage;
+		return endNum;
 	}
 	public void setEndNum(int endNum) {
 		this.endNum = endNum;
@@ -71,13 +72,13 @@ public class PageSearchCommand {
 	public void setWord(String word) {
 		this.word = word;
 	}
-
 	@Override
 	public String toString() {
-		return "PageSearchCommand [boardCode=" + boardCode + ", currentPage=" + currentPage + ", startNum=" + startNum
-				+ ", endNum=" + endNum + ", count=" + count + ", pageSize=" + pageSize + ", number=" + number
-				+ ", type=" + type + ", word=" + word + "]";
+		return "PageSearchCommand [boardCode=" + boardCode + ", pageNum=" + pageNum + ", currentPage=" + currentPage
+				+ ", startNum=" + startNum + ", endNum=" + endNum + ", count=" + count + ", pageSize=" + pageSize
+				+ ", number=" + number + ", type=" + type + ", word=" + word + "]";
 	}
-
+	
+	
 	
 }

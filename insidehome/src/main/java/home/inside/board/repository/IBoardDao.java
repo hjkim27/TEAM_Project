@@ -44,9 +44,9 @@ public interface IBoardDao {
 	public String articleWriterCheck(int num) throws Exception;
 	
 	// 게시글 갯수 확인 > boardCode
-	public Integer boardSize(String boardCode) throws Exception;
+	public Integer boardSize(HashMap<String, Object> hsm) throws Exception;
 	// 공지 갯수 확인
-	public Integer notifySize() throws Exception;
+	public Integer notifySize(HashMap<String, Object> hsm) throws Exception;
 		
 }
 

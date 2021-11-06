@@ -62,7 +62,7 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public void deleteBoard(int num, String notify) throws Exception {
 		dao.deleteArticle(num);
-		if(notify!=null && notify.equals("no")) {
+		if (notify != null && notify.equals("no")) {
 			imageDao.deleteAllArticleImage(num);
 			refDao.deleteAllRef(num);
 		}
@@ -109,13 +109,9 @@ public class BoardServiceImpl implements IBoardService {
 		hsm.put("boardCode", searchCmd.getBoardCode());
 		hsm.put("startNum", searchCmd.getStartNum());
 		hsm.put("endNum", searchCmd.getEndNum());
-		String word = searchCmd.getWord();
-		if (notify != null) {
-			hsm.put("notify", notify);
-		} else {
-			hsm.put("notify", "no");
-		}
+		hsm.put("notify", notify);
 
+		String word = searchCmd.getWord();
 		if (word == null || word.trim().isEmpty()) {
 			return dao.selectListBoard(hsm);
 		} else {
@@ -168,12 +164,23 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public Integer boardListSize(String boardCode, String notify) throws Exception {
-		if (notify != null) {
-			return dao.notifySize();
-		} else {
-			return dao.boardSize(boardCode);
+	public Integer boardListSize(String boardCode, String type, String word) throws Exception {
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("boardCode", boardCode);
+		hsm.put("word", word);
+		if (type != null && !type.trim().isEmpty()) {
+			hsm.put("type", type);
 		}
+		return dao.boardSize(hsm);
+
+	}
+
+	@Override
+	public Integer notiListSize(String type, String word) throws Exception {
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("type", type);
+		hsm.put("word", word);
+		return dao.notifySize(hsm);
 	}
 
 }

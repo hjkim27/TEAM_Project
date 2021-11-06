@@ -87,13 +87,13 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public Integer boardSize(String boardCode) throws Exception {
-		return sqlSessionTemplate.selectOne("boardSize", boardCode);
+	public Integer boardSize(HashMap<String, Object> hsm) throws Exception {
+		return sqlSessionTemplate.selectOne("boardSize", hsm);
 	}
 
 	@Override
-	public Integer notifySize() throws Exception {
-		return sqlSessionTemplate.selectOne("notifySize");
+	public Integer notifySize(HashMap<String, Object> hsm) throws Exception {
+		return sqlSessionTemplate.selectOne("notifySize", hsm);
 	}
 
 }

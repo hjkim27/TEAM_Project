@@ -8,6 +8,7 @@
 
 <div class="body-info">
 	<div class="info-detail">
+		${psCmd }
 		<c:if test="${psCmd.boardCode eq 'info' }">
 			<ul>
 				<li>이번주 인기글</li>
@@ -33,7 +34,19 @@
 	<div class="info-detail">
 		<table>
 			<caption>
-				검색관련 입력 부분
+				<form action="list.do">
+					<select name="type">
+						<option value="title" <c:if test="${psCmd.type eq 'title'}">selected</c:if>>제목</option>
+						<option value="content"  <c:if test="${psCmd.type eq 'content'}">selected</c:if>>내용</option>
+						<option value="double" <c:if test="${psCmd.type eq 'double'}">selected</c:if>>제목+내용</option>
+					</select>
+					<input type="text" name="word" value="${psCmd.word }" placeholder="검색할 내용 입력">
+					<input type="hidden" name="boardCode" value="${psCmd.boardCode}">
+					<input type="submit" value="검색">
+				</form>
+				<c:if test="${fn:length(boardList)==0 and psCmd.word!=null}">
+					<br> 검색 결과가 존재하지 않습니다.
+				</c:if>
 			</caption>
 			<thead>
 				<tr>
@@ -45,7 +58,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${ notify ne 'notice' }">
+				<c:if test="${ psCmd.boardCode ne 'notice' }">
 					<c:forEach items="${notifyList}" var="noti">
 						<tr>
 							<td align="center">[공지]</td>
@@ -70,14 +83,16 @@
 						<td align="center"><fmt:formatDate value="${article.REGDATE}" pattern="yyyy-MM-dd" /></td>
 						<td align="center">${article.HIT} </td>
 					</tr>
-					<c:set var="boardNbr" value="${boardNbr-1 }"></c:set>
+					<c:set var="boardNbr" value="${boardNbr-1 }"/>
 				</c:forEach>
 			</tbody>
 		</table>		
 	</div>
-		<c:if test="${psCmd.count > 0 }">
-			<c:set var="pageCount" value="${psCmd.number}"/>
-			<fmt:parseNumber var="pageCount" value="${pageCount }" integerOnly="true"/>
+	
+	
+	
+		<c:if test="${psCmd.count > psCmd.pageSize }">
+			<fmt:parseNumber var="pageCount" value="${psCmd.number}" integerOnly="true"/>
 			
 			<c:set var="pageBlock" value="${5 }"/>
 			
@@ -89,46 +104,24 @@
 				<c:set var="endPage" value="${pageCount }"/>
 			</c:if>
 			<c:choose>
-				<c:when test="${psCmd.word}">
-					<c:set var="options" value="type=${psCmd.type}&word=${psCmd.word}&"></c:set>
+				<c:when test="${psCmd.word!=null}">
+					<c:set var="options" value="boardCode=${psCmd.boardCode}&type=${psCmd.type}&word=${psCmd.word}&"></c:set>
 				</c:when>
 				<c:otherwise>
-					<c:set var="options" value=""></c:set>
+					<c:set var="options" value="boardCode=${psCmd.boardCode}&"></c:set>
 				</c:otherwise>
 			</c:choose>
 			
+			
 			<c:if test="${startPage>pageBlock }">
-				<input type="button" onclick="location.href='list.do?${option}pageNum=${startPage-pageBlock}'" value="◀">
+				<input type="button" onclick="location.href='list.do?${options}pageNum=${startPage-pageBlock}'" value="◀">
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}" >
-				<a href="list.do?psCmd=${psCmd}&pageNum=${i }">[${i }]</a>
+				<a href="list.do?${options}pageNum=${i }">[${i }]</a>
 			</c:forEach>
 			<c:if test="${endPage<pageCount }">
-				<input type="button" onclick="location.href='list.do?${option}&pageNum=${startPage+pageBlock}'" value="▶">
+				<input type="button" onclick="location.href='list.do?${options}pageNum=${startPage+pageBlock}'" value="▶">
 			</c:if>
-		
-		
-		
-			<c:choose>
-				<c:when test="${op!=null}">
-					<c:set var="options" value="type=${op.type}&str=${op.str}&"></c:set>
-				</c:when>
-				<c:otherwise>
-					<c:set var="options" value=""></c:set>
-				</c:otherwise>
-			</c:choose>
-			
-			<c:if test="${startPage>pageBlock }">
-				<a href="list.board?${options}pageNum=${startPage-pageBlock }">[이전]</a>
-			</c:if>
-			<c:forEach var="i" begin="${startPage }" end="${endPage }" >
-				<a href="list.board?${options}pageNum=${i }">[${i }]</a>
-			</c:forEach>
-			<c:if test="${endPage<pageCount }">
-				<a href="list.board?${options}pageNum=${startPage+pageBlock }">[다음]</a>
-			</c:if>
-		
-		
 		</c:if>
 </div>
 

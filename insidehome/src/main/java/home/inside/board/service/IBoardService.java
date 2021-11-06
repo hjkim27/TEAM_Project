@@ -57,5 +57,7 @@ public interface IBoardService {
 	public boolean userIsEqualsToWriter(int num, String nickname) throws Exception;
 	
 	// 게시글 갯수 조회(dao)
-	public Integer boardListSize(String boardCode, String notify) throws Exception;
+	public Integer boardListSize(String boardCode, String type, String word) throws Exception;
+	// 공지글 갯수 조회(dao)
+	public Integer notiListSize(String type, String word) throws Exception;
 }
