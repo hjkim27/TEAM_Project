@@ -1,6 +1,4 @@
 package home.inside.board.controller;
-import java.util.HashMap;
-import java.util.List;
 
 // 나네....
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +35,13 @@ public class BoardController {
 		if(boardCode!=null && (boardCode.equals("info") || boardCode.equals("who"))) {
 			model.addAttribute("notifyList", ser.boardNotifyList(boardCode));
 			if(boardCode.equals("info")) {
-				model.addAttribute("heartList", ser.selectSubList("heart"));
-				model.addAttribute("hitList", ser.selectSubList("hit"));
+				model.addAttribute("heartList", ser.selectHeartList());
+				model.addAttribute("hitList", ser.selectHitList());
 			}
 		}
 		model.addAttribute("boardList", ser.boardList(notify, psCmd));
 		model.addAttribute("psCmd", psCmd);
+		System.out.println(psCmd);
 		return "/user/board/list";
 	}
 }

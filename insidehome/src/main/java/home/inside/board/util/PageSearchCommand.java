@@ -15,7 +15,6 @@ public class PageSearchCommand {
 		if(currentPage==null) {
 			currentPage = 1;
 		}
-		startNum = pageSize*(currentPage-1)+1;
 	}
 	
 	public String getBoardCode() {
@@ -31,7 +30,7 @@ public class PageSearchCommand {
 		this.currentPage = currentPage;
 	}
 	public int getStartNum() {
-		return startNum;
+		return pageSize*(currentPage-1)+1;
 	}
 	public void setStartNum(int startNum) {
 		this.startNum = startNum;

@@ -16,12 +16,12 @@
 		where BOARDNUM=#{boardNum}
 	</update>
 	<delete id="deleteRef" parameterType="Integer">
-		delete BOARD_REF where NUM=#{num}
+		delete from BOARD_REF where NUM=#{num}
 	</delete>
 	
 	
 	<delete id="deleteAllRef" parameterType="Integer">
-		delete BOARD_REF where BOARDNUM=#{boardNum}
+		delete from BOARD_REF where BOARDNUM=#{boardNum}
 	</delete>
 	<select id="selectListRef" parameterType="Integer" resultType="boardRefVo">
 		select * from BOARD_REF where BOARDNUM=#{boardNum} order by REFNUM, DEPTH, NUM

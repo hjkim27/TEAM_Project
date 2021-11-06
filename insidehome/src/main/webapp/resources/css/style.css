@@ -112,13 +112,16 @@ input[type=text], input[type=password], select { border: 2px solid #EAEAEA; back
 
 
 input.reg-info-label 			{ width: 60%; font:10px #EAEAEA;}
-input.reg-info-phone2, input[id="addr"] 	{ width: 45%; }
-input[id="addrNum"] 			{ width: 12.5%; }
+input.reg-info-phone2	{ width: 45%; }
+input[id="emailPart1"] ,select[id="emailPart2"] 	{ width: 28%; border: 2px solid #EAEAEA; color: #D5D5D5; background: white; font-size: 15px; font-family: "24bold"}
+ 
+input[id="addrNum"], input[id="find-addr"], input[id="find-addr"]:hover	{ width: 12.5%; }
+input[id="addr"] 	{ width: 32%; }
 button.fit-size , button.fit-size2:hover	{ width: 90%; height:100%; margin: 0; border: 2px solid #B8DFD8; color: #B8DFD8; background: white; font-size: 15px; }
 button.fit-size:hover, button.fit-size2		{ width: 90%; height:100%; margin: 0; border: 2px solid #B8DFD8; color:white; background: #B8DFD8; font-size: 15px; }
 button.mainpage			{ width: auto; }
 
-textarea.guideContent {width: 90%; resize: none; background: #EAEAEA; font-size: 10px; padding: 10px 10px 10px 10px; margin: 10px 10px -10px 10px; }
+textarea.guideContent {width: 90%; resize: none; background: #EAEAEA;  padding: 10px 10px 10px 10px; margin: 10px 10px -10px 10px; }
 textarea:focus.guideContent{outline: none;}
 
 input[type='radio'], input[type='checkbox'] 
@@ -126,7 +129,7 @@ input[type='radio'], input[type='checkbox']
 input[type='radio']:before, input[type='checkbox']:before 
 { content:''; display:block; width:100%; height:100%; margin: 0; border-radius:50%;}
 input[type='radio']:checked:before , input[type='checkbox']:checked:before
-{ background:#FFE194; }
+{ background:#4D4F6F; }
 
 
 

@@ -60,10 +60,12 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public void deleteBoard(int num) throws Exception {
+	public void deleteBoard(int num, String notify) throws Exception {
 		dao.deleteArticle(num);
-		imageDao.deleteAllArticleImage(num);
-		refDao.deleteAllRef(num);
+		if(notify!=null && notify.equals("no")) {
+			imageDao.deleteAllArticleImage(num);
+			refDao.deleteAllRef(num);
+		}
 	}
 
 	@Override
@@ -82,8 +84,13 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> selectSubList(String type) throws Exception {
-		return dao.selectSubList(type);
+	public List<HashMap<String, Object>> selectHeartList() throws Exception {
+		return dao.selectHeartList();
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectHitList() throws Exception {
+		return dao.selectHitList();
 	}
 
 	@Override
@@ -103,12 +110,12 @@ public class BoardServiceImpl implements IBoardService {
 		hsm.put("startNum", searchCmd.getStartNum());
 		hsm.put("endNum", searchCmd.getEndNum());
 		String word = searchCmd.getWord();
-		if(notify!=null) {
+		if (notify != null) {
 			hsm.put("notify", notify);
-		}else {
+		} else {
 			hsm.put("notify", "no");
 		}
-		
+
 		if (word == null || word.trim().isEmpty()) {
 			return dao.selectListBoard(hsm);
 		} else {
@@ -159,12 +166,12 @@ public class BoardServiceImpl implements IBoardService {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public Integer boardListSize(String boardCode, String notify) throws Exception {
-		if(notify!=null) {
+		if (notify != null) {
 			return dao.notifySize();
-		}else {
+		} else {
 			return dao.boardSize(boardCode);
 		}
 	}

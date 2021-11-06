@@ -62,8 +62,8 @@
 							<tr>
 								<td class="sub-date"><fmt:formatDate value="${article.REGDATE}" pattern="yyyy-MM-dd" /></td>
 								<td class="sub-type">
-									<c:if test="${arcicle.BOARDCODE eq 'info'}">[정보]</c:if>
-									<c:if test="${arcicle.BOARDCODE eq 'who'}">[익명]</c:if>
+									<c:if test="${arcicle.BOARDCODE eq 'info'}">[ 정보 ]</c:if>
+									<c:if test="${arcicle.BOARDCODE eq 'who'}">[ 익명 ]</c:if>
 								</td>
 								<td class="sub-detail"><a href="/user/board/read.do/${article.NUM} ">${article.TITLE}</a></td>
 							</tr>
@@ -76,7 +76,7 @@
 		<c:if test="${viewPage eq 'point'}">
 			<div class="info-detail">
 				<h2>포인트 적립 및 사용 내역</h2>
-				<p class="info-title-sub">포인트 변동 내역은 최근 14일간의 내용만 표시됩니다.</p>
+				<p class="info-title-sub">포인트 변동 내역은 최근 30일간의 내용만 표시됩니다.</p>
 			</div>
 			<div class="info-detail">
 				<table>

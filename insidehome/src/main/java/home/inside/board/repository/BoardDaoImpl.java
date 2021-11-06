@@ -48,7 +48,7 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public void changeNotify(HashMap<String, Object> hsm) throws Exception {
-		sqlSessionTemplate.update("changeBoardCode", hsm);
+		sqlSessionTemplate.update("changeNotify", hsm);
 	}
 
 	@Override
@@ -67,8 +67,13 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> selectSubList(String type) throws Exception {
-		return sqlSessionTemplate.selectList("selectSubList", type);
+	public List<HashMap<String, Object>> selectHeartList() throws Exception {
+		return sqlSessionTemplate.selectList("selectHeartList");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectHitList() throws Exception {
+		return sqlSessionTemplate.selectList("selectHitList");
 	}
 
 	@Override

@@ -7,8 +7,8 @@
 	<insert id="insertArticle" parameterType="HashMap">
 		insert into BOARD(NUM, BOARDCODE, WRITER, TITLE, CONTENT, NOTIFY)
 		values (BOARD_SEQ.nextval, #{boardCode}, #{nickname}, #{title}, #{content}, #{notify})
-		<selectKey resultType="Integer" keyProperty="NUM">
-			select NVL(max(NUM),0) from BOARD
+		<selectKey resultType="Integer" keyProperty="num">
+			select NVL(max(num),0) from BOARD
 		</selectKey>
 	</insert>
 	<select id="readArticle" parameterType="Integer" resultType="boardVo">
@@ -19,7 +19,7 @@
 		where NUM=#{num}
 	</update>
 	<delete id="deleteArticle" parameterType="Integer">
-		delete BOARD where NUM=#{num}
+		delete from BOARD where NUM=#{num}
 	</delete>
 	
 	
@@ -37,9 +37,9 @@
 	
 	<select id="selectListNotify" parameterType="String" resultType="HashMap">
 		select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT 
-    		from (select ROWNUM RNUM, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT 
-					from (select * from BOARD order by REGDATE desc, NUM desc) 
-					where BOARDCODE=#{boardCode} and NOTIFY='notice')
+   		from (select ROWNUM RNUM, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT 
+				from (select * from BOARD order by REGDATE desc, NUM desc) 
+				where BOARDCODE=#{boardCode} and NOTIFY='notice')
 	</select>
 	<select id="selectListBoard" parameterType="HashMap" resultType="HashMap">
 		select ROWNUM RNUM, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART, CNT 
@@ -84,18 +84,26 @@
 		    )
 		where ROWNUM <![CDATA[>=]]> #{startNum} and ROWNUM <![CDATA[<=]]> #{endNum}
 	</select>
-	<select id="selectSubList" parameterType="String" resultType="HashMap">
+	<select id="selectHitList" resultType="HashMap">
 		select NUM, TITLE 
 		from (select NUM, TITLE, HEART, HIT, REGDATE 
 				from BOARD 
 				where REGDATE<![CDATA[>=]]>sysdate-7 and BOARDCODE='info' and NOTIFY='no' 
-				<if test='_parameter.equals("heart")'>
-				order by HEART desc)
-				</if>
-				<if test='_parameter.equals("hit")'>
 				order by HIT desc)
-				</if>
-		where ROWNUM <![CDATA[>=]]> 5
+		where ROWNUM <![CDATA[<=]]> 5
+	</select>
+	<select id="selectHeartList" resultType="HashMap">
+		select * 
+		from (select a.num, a.title, a.regdate, b.tmp
+        	 from (
+              		(select NUM, TITLE, HEART, HIT, REGDATE from board 
+               		 where  BOARDCODE='info' and NOTIFY='no') a
+                 			inner join
+               		(select num, sum(heart+hit) tmp from board group by num ) b
+                 			on a.num=b.num
+             	)
+        	 order by b.tmp desc)
+		where ROWNUM <![CDATA[<=]]> 5
 	</select>
 	<select id="selectBoardWhenMember" parameterType="String" resultType="HashMap">
 		select NUM, BOARDCODE, TITLE, REGDATE from BOARD where WRITER=#{nickname} order by REGDATE desc
