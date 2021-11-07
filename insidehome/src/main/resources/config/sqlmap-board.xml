@@ -42,30 +42,34 @@
 				where BOARDCODE=#{boardCode} and NOTIFY='notice')
 	</select>
 	<select id="selectListBoard" parameterType="HashMap" resultType="HashMap">
-		select * 
-		from (
-		    select ROWNUM RNUM, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART, CNT 
-		    from (
-		        (select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
-		            <if test='notify.equals("no")'>
-						from BOARD where BOARDCODE=#{boardCode} and notify='no') b 
-			        </if>
-			        <if test='!notify.equals("no")'>
-				        from BOARD where notify!='no') b 
-			        </if>
-		            left outer join
-		        (select count(BOARDNUM) cnt, BOARDNUM from BOARD_REF group by BOARDNUM) rb
-		        on b.NUM=rb.BOARDNUM)
-		    order by REGDATE desc, NUM desc
-		    )
-		where RNUM <![CDATA[>=]]> #{startNum} and RNUM <![CDATA[<=]]> #{endNum}
+		select * from (
+			select  rownum rnum, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART  
+			from (
+				select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
+				from (
+    				(select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
+					 	<if test='notify.equals("no")'>
+							from BOARD where BOARDCODE=#{boardCode} and notify='no') b 
+			        	</if>
+			       		<if test='!notify.equals("no")'>
+				   		    from BOARD where notify!='no') b 
+			        	</if>
+        				left outer join
+    				(select count(BOARDNUM) cnt, BOARDNUM 
+    				 from BOARD_REF group by BOARDNUM) rb
+        				on b.NUM=rb.BOARDNUM
+        			)
+				order by regdate desc
+				)
+			) where RNUM <![CDATA[>=]]> #{startNum} and RNUM <![CDATA[<=]]> #{endNum}
 	</select>
 	<select id="findListBoard" parameterType="HashMap" resultType="HashMap">
-		select * 
-		from (
-		    select ROWNUM RNUM, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART, CNT 
-		    from (
-			        (select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
+		select * from (
+			select  rownum rnum, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART  
+			from (
+				select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
+				from (
+    				(select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
 						<if test='notify.equals("no")'>
 						from BOARD where BOARDCODE=#{boardCode} and notify='no' 
 				        </if>
@@ -82,12 +86,14 @@
 						and (TITLE like '%'||#{word}||'%' or CONTENT like '%'||#{word}||'%')
 						</if>
 			        ) b
-			            left outer join
-			        (select count(BOARDNUM) cnt, BOARDNUM from BOARD_REF group by BOARDNUM) rb
-			        on b.NUM=rb.BOARDNUM)
-		    order by REGDATE desc, NUM desc
-		    )
-		where RNUM <![CDATA[>=]]> #{startNum} and RNUM <![CDATA[<=]]> #{endNum}
+			           left outer join
+    				(select count(BOARDNUM) cnt, BOARDNUM 
+    				 from BOARD_REF group by BOARDNUM) rb
+        				on b.NUM=rb.BOARDNUM
+        			)
+				order by regdate desc
+				)
+			) where RNUM <![CDATA[>=]]> #{startNum} and RNUM <![CDATA[<=]]> #{endNum}
 	</select>
 	<select id="selectHitList" resultType="HashMap">
 		select NUM, TITLE 
@@ -102,7 +108,7 @@
 		from (select a.num, a.title, a.regdate, b.tmp
         	 from (
               		(select NUM, TITLE, HEART, HIT, REGDATE from board 
-               		 where  BOARDCODE='info' and NOTIFY='no') a
+               		 where  BOARDCODE='info' and NOTIFY='no' and REGDATE<![CDATA[>=]]>sysdate-7) a
                  			inner join
                		(select num, sum(heart+hit) tmp from board group by num ) b
                  			on a.num=b.num

@@ -8,6 +8,20 @@
 
 <div class="body-info">
 	<div class="info-detail">
+		<c:choose>
+			<c:when test="${psCmd.boardCode eq 'info'}">
+		      <h1 class="info-title">정보게시판</h1>
+			</c:when>
+			<c:when test="${psCmd.boardCode eq 'who'}">
+		      <h1 class="info-title">익명게시판</h1>
+			</c:when>
+			<c:otherwise>
+		      <h1 class="info-title">공지사항</h1>
+			</c:otherwise>
+		</c:choose>	
+   </div>
+   <hr>
+	<div class="info-inner">
 		<table>
 			<caption>
 				<form action="list.do">
@@ -16,9 +30,10 @@
 						<option value="content"  <c:if test="${psCmd.type eq 'content'}">selected</c:if>>내용</option>
 						<option value="double" <c:if test="${psCmd.type eq 'double'}">selected</c:if>>제목+내용</option>
 					</select>
-					<input type="text" name="word" value="${psCmd.word }" placeholder="검색할 내용 입력">
+					<input class="searchText" type="text" name="word" value="${psCmd.word }" placeholder="검색할 내용 입력">
 					<input type="hidden" name="boardCode" value="${psCmd.boardCode}">
 					<input type="submit" value="검색">
+					<input type="button" onclick="location.href='<c:url value="/manager/board/registForm.do"/>'" value="글 작성">
 				</form>
 				<c:if test="${fn:length(boardList)==0 and psCmd.word!=null}">
 					<br> 검색 결과가 존재하지 않습니다.
@@ -38,7 +53,7 @@
 				<c:forEach items="${boardList}" var="article">
 					<tr>
 						<td align="center">${boardNbr}</td>
-						<td>
+						<td width="50%;"align="left" style="padding-left: 40px;">
 							<a href="read.do/${article.NUM}"> ${article.TITLE}
 							 [좋아요 ${article.HEART}] 
 							<c:if test="${article.CNT ne null}">

@@ -17,7 +17,8 @@ public class BoardController {
 	// 공지게시글 상세페이지 요청
 	@RequestMapping("/board/read/notice.do")
 	public String readArticleSubmit(int boardNum, Model model) throws Exception {
-		model.addAttribute("article", ser.readBoard(boardNum));
+		ser.updateHit(boardNum);
+		model.addAttribute("board", ser.readBoard(boardNum));
 		return "/user/board/detail";
 	}
 
@@ -42,7 +43,7 @@ public class BoardController {
 		}
 		int tmp = (count % pageSize == 0) ? 0 : 1;
 		psCmd.setNumber(count / pageSize + tmp);
-		count -= pageSize*(pageNum-1);
+		count -= pageSize * (pageNum - 1);
 		psCmd.setCount(count);
 
 		if (boardCode.equals("info") || boardCode.equals("who")) {

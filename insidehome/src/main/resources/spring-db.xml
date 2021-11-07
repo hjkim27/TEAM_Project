@@ -53,9 +53,9 @@
 				<value>classpath*:config/sqlmap-goodsImage.xml</value>
 				<value>classpath*:config/sqlmap-goodsSales.xml</value>
 				<value>classpath*:config/sqlmap-board.xml</value>
-			<!--
 				<value>classpath*:config/sqlmap-boardImage.xml</value>
 				<value>classpath*:config/sqlmap-boardRef.xml</value>
+			<!--
  				<value>classpath*:config/sqlmap-question.xml</value>
 				<value>classpath*:config/sqlmap-warning.xml</value>
 				-->

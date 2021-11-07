@@ -38,27 +38,26 @@ function removeCheck(){
          </caption>
          <thead>
             <tr>
-               <th></th><th>추천</th><th>상품명</th><th>등록일자</th><th>판매량</th><th>재고수량</th>
+               <th>추천</th><th>상품명</th><th>등록일자</th><th>판매량</th><th>재고수량</th>
             </tr>
          </thead>
          <tbody>
             <c:forEach items="${goodsList}" var="goodsOne" >
                <tr style="text-align: center;">
                   
-                  <td>
-                     <input type="checkbox" name="selectGoods" value="${goodsOne.GOODSCODE}&${goodsOne.HEART}"/>
-                  </td>
-                  <td>
+                  <td align="left">
+                  	<label>
+                     <input id="goodsCheck" type="checkbox" name="selectGoods" value="${goodsOne.GOODSCODE}&${goodsOne.HEART}"/>
                      <c:if test="${goodsOne.HEART eq 'yes'}">
-                        <c:set var="heart" value="SELECT" />
+                        <b style="color: #FFE194">select</b>
                      </c:if>
                      <c:if test="${goodsOne.HEART eq 'no'}">
-                        <c:set var="heart" value="" />
+                        <b style="color: #EAEAEA">select</b>
                      </c:if>
-                  <c:out value="${heart}" />
+                    </label>
                   </td>
 
-                  <td style="text-align: left; padding-left: 2%;"><a href="<c:url value="/manager/goods/updateGoods.do/${goodsOne.GOODSCODE}" />">
+                  <td style="text-align: left; padding-left: 2%;" width="50%"><a href="<c:url value="/manager/goods/updateGoods.do/${goodsOne.GOODSCODE}" />">
                   <c:out value="${goodsOne.GOODSNAME}"/></a></td>
                   <td>
                   <c:out value="${goodsOne.REGDATE}"/></td>

@@ -48,13 +48,15 @@ public class BoardMgrController {
 
 	// 공지 수정 요청
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
-	public String updateNoticeSubmit(ArticleMgrCommand artCmd) throws Exception {
+	public String updateNoticeSubmit(ArticleMgrCommand artCmd, Model model) throws Exception {
 		// Validation추가
 		/*
 		 * readArticleView에서 조건 처리한거처럼 만약 readBoard(num) 이 null 이면 게시글 목록으로 redirect 그게
 		 * 아니면 아래대로.....
 		 */
 		ser.updateBoard(artCmd, null);
+		model.addAttribute("boardCode",artCmd.getBoardCode());
+		model.addAttribute("notify",artCmd.getNotify());
 		return "redirect:/manager/board/list.do";
 	}
 

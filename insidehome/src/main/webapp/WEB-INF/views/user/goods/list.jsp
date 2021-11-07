@@ -15,20 +15,27 @@ if(result == 'fail'){
 }
 </script>
 <link href="<c:url value="/resources/css/goodsMain.css" />" rel="stylesheet" />
+ 
+ 
+ <div class="body-info">
+ <div class="info-detail">
+	   <div class="goods-title3">
+	   		추천상품
+    	  <p class="goods-title3">이런 상품은 어때요?</p>
+	   </div>
+	   <select name="type" onchange="selectBoxChange(this.value);">
+			<option value="dateDesc" <c:if test="${type eq 'dateDesc'}">selected="selected"</c:if>>최신순</option>
+			<option value="priceDesc" <c:if test="${type eq 'priceDesc'}">selected="selected"</c:if>>높은 가격순</option>
+			<option value="priceAsc" <c:if test="${type eq 'priceAsc'}">selected="selected"</c:if>>낮은 가격순</option>
+		</select>
+   </div>
+   <hr>
+
+
 <div>
-	<img class="banner" src="<c:url value="/resources/img/goods-list.png"/>">
-</div>
-<div>
-	<select name="type" onchange="selectBoxChange(this.value);">
-		<option value="dateDesc" <c:if test="${type eq 'dateDesc'}">selected="selected"</c:if>>최신순</option>
-		<option value="priceDesc" <c:if test="${type eq 'priceDesc'}">selected="selected"</c:if>>높은 가격순</option>
-		<option value="priceAsc" <c:if test="${type eq 'priceAsc'}">selected="selected"</c:if>>낮은 가격순</option>
-	</select>
+	
 </div>
 <table>
-	<caption>
-		추천상품
-	</caption>
 	<tbody>
 	<c:forEach items="${mainHeart}" var="heartOne" varStatus="status">
 			<c:if test="${status.index != 0 and status.index %5 == 0}">
@@ -99,4 +106,5 @@ if(result == 'fail'){
 		</tr>
 	</tbody>
 </table>     
+</div>
 <%@include file="/WEB-INF/views/user/main/userFooter.jsp"%>

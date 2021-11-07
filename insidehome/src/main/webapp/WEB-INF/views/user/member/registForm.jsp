@@ -62,8 +62,8 @@ INSIDE.HOME 서비스 및 제품(이하 '서비스')을 이용해 주셔서 감�
 					</tr>
 					<tr class="reg-need">
 						<td class="reg-need-label">* 닉네임</td>
-						<td class="reg-need"><form:input path="nickname"
-								class="reg-info-label" placeholder="2글자 이상 입력" />
+						<td class="reg-need">
+							<form:input path="nickname" class="reg-info-label" placeholder="2글자 이상 입력" />
 							<form:errors path="nickname" /></td>
 					</tr>
 					<tr class="reg-need">

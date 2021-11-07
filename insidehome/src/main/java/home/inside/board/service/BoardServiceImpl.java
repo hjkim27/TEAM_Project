@@ -18,6 +18,7 @@ import home.inside.board.util.PageSearchCommand;
 import home.inside.board.vo.BoardImageVo;
 import home.inside.board.vo.BoardRefVo;
 import home.inside.board.vo.BoardVo;
+import home.inside.common.util.FileUtils;
 
 @Service
 public class BoardServiceImpl implements IBoardService {
@@ -27,12 +28,11 @@ public class BoardServiceImpl implements IBoardService {
 	private IBoardImageDao imageDao;
 	@Autowired
 	private IBoardRefDao refDao;
-//	@Autowired
-//	private BoardFileUtil util;
+	@Autowired
+	private  FileUtils util;
 
 	@Override
 	public void insertBoard(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq) throws Exception {
-		// 이미지 등록 관련 내용 추가 필요
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("boardCode", artCmd.getBoardCode());
 		hsm.put("nickname", artCmd.getWriter());
@@ -40,6 +40,14 @@ public class BoardServiceImpl implements IBoardService {
 		hsm.put("content", artCmd.getContent());
 		hsm.put("notify", artCmd.getNotify());
 		dao.insertArticle(hsm);
+		if(mpReq != null) {
+			List<BoardImageVo> boarImaList = util.boardFileUpload(mpReq);
+			if(boarImaList.size() > 0) {
+				for(BoardImageVo imageVo : boarImaList) {
+					imageDao.insertArticleImage(imageVo);				
+				}
+			}
+		}
 	}
 
 	@Override
@@ -50,12 +58,26 @@ public class BoardServiceImpl implements IBoardService {
 		hsm.put("title", artCmd.getTitle());
 		hsm.put("content", artCmd.getContent());
 		hsm.put("boardCode", artCmd.getBoardCode());
-		hsm.put("num", artCmd.getNum());
 		dao.updateArticle(hsm);
 		String notify = artCmd.getNotify();
 		if (notify != null && !notify.equals("no")) {
 			hsm.put("notify", notify);
 			dao.changeNotify(hsm);
+		}
+		if(mpReq != null) {
+			List<BoardImageVo> boarImaList = util.boardFileEdit(mpReq);
+			if(boarImaList.size() > 0) {
+				for(BoardImageVo imageVo : boarImaList) {
+					imageVo.setBoardNum(artCmd.getNum());
+					imageDao.insertArticleImage(imageVo);				
+				}
+			}
+			String[] deleteFile = util.boardFileDelete(mpReq);
+			if(deleteFile!= null) {
+				for(String str: deleteFile) {
+					imageDao.deleteNotExistImage(str);
+				}
+			}
 		}
 	}
 
@@ -66,6 +88,11 @@ public class BoardServiceImpl implements IBoardService {
 			imageDao.deleteAllArticleImage(num);
 			refDao.deleteAllRef(num);
 		}
+	}
+	
+	@Override
+	public void deleteNotExistImage(String saveName) throws Exception {
+		imageDao.deleteNotExistImage(saveName);
 	}
 
 	@Override

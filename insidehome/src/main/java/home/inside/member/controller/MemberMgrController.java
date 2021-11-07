@@ -72,6 +72,7 @@ public class MemberMgrController {
 			nickname = (String)info.get("NICKNAME");
 			if(nickname!=null) {
 				session.setAttribute("mgrInside", nickname);
+				session.setAttribute("loginInside", nickname);
 				logSer.loginSuccess(email, null, null);
 			}
 		}

@@ -1,78 +1,133 @@
 package home.inside.board.controller;
-// 지은이 고생해
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import home.inside.board.service.IBoardService;
 import home.inside.board.util.ArticleMgrCommand;
+import home.inside.board.vo.BoardImageVo;
+import home.inside.board.vo.BoardRefVo;
+import home.inside.board.vo.BoardVo;
+import home.inside.common.service.IPointService;
+import home.inside.member.service.IMemberInfoService;
 
 @Controller
 @RequestMapping("/user/board")
 public class BoardUserController {
 	@Autowired
 	private IBoardService ser;
-
+	@Autowired
+	private IMemberInfoService memSer;
+	@Autowired
+	private IPointService poSer;
+	
 	// 회원 글 작성 폼 요청
 	@RequestMapping(value = "/registForm.do")
-	public String registArticleForm(ArticleMgrCommand artCmd, Model model, HttpSession session) throws Exception {
-		String nickname = (String) session.getAttribute("loginInside");
-		artCmd.setWriter(nickname);
-		artCmd.setNotify("no");
-		return "/user/board/registForm";
+	public String registArticleForm(ArticleMgrCommand artCmd, Model model) throws Exception {
+		model.addAttribute("artCmd", artCmd);
+		return "user/board/registForm";
 	}
 
 	// 회원 글 작성 요청
 	@RequestMapping(value = "/regist.do", method = RequestMethod.POST)
-	public String registArticleSubmit(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq) throws Exception {
-		/* artCmd 에 num을 제외하고는 null 이면 안됨
-		 * null 이면 작성거절하고 글작성폼으로 리턴
-		 * artCmd에 num을 제외하고 null이 없으면 글 작성요청 후 목록 redirect */
-		return "redirect:/board/list.do";
+	public String registArticleSubmit(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq, HttpSession session) throws Exception {
+ 		String nickname = (String) session.getAttribute("loginInside");
+		artCmd.setWriter(nickname);
+ 		artCmd.setNotify("no");
+		ser.insertBoard(artCmd, mpReq);
+		poSer.insertPoint(nickname, "write", 50);
+		memSer.updateMyCount(artCmd.getWriter(), 50);
+		return "redirect:/board/list.do?boardCode="+artCmd.getBoardCode();
 	}
 
 	// 회원 글 수정 폼 요청
-	@RequestMapping(value = "/updateForm.do")
-	public String updateArticleForm(int num, Model model, HttpSession session) throws Exception {
-		/* 세션에서 닉네임 가져와 게시글작성자와 현재 로그인한 사용자가 일치하는지 확인
-		 * 일치하지 않으면 list 로 redirect
-		 * 일치하면 게시글 정보 담아서 글수정페이지로*/
-		return "redirect:/board/list.do";
+	@RequestMapping(value = "/updateForm.do/{num}")
+	public String updateArticleForm(@PathVariable(value="num")int num, Model model, HttpSession session) throws Exception {
+		BoardVo board = ser.readBoard(num);
+		String nickname = (String) session.getAttribute("loginInside");
+		if(nickname!=null && !nickname.equals(board.getWriter())) {
+			return "redirect:/board/list.do";			
+		}
+		if(num == 0) {
+			return "redirect:/board/list.do";			
+		}
+		List<BoardImageVo> boardImages = ser.selectListImage(num);
+		for(BoardImageVo v : boardImages) {
+			System.out.println(v.toString());
+		}
+		board.setWriter("123456");
+		model.addAttribute("board", board);
+		model.addAttribute("boardImages", boardImages);
+		return "user/board/updateForm";
 	}
 
 	// 회원 글 수정 요청
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
-	public String updateArticleSubmit(ArticleMgrCommand artCmd, HttpSession session) throws Exception {
+	public String updateArticleSubmit(ArticleMgrCommand artCmd, MultipartHttpServletRequest mpReq, RedirectAttributes rttr) throws Exception {
 		/* artCmd에 null 이 있으면 안됨 
 		 * null 이 있으면 수정 거절하고 글 수정폼으로 리턴
 		 * artCmd 에 null이 없으면 글 수정 요청 후 상세페이지 redirect */
+		ser.updateBoard(artCmd, mpReq);
+		rttr.addAttribute("boardNum", artCmd.getNum());
 		return "redirect:/user/board/read.do";
 	}
 
 	// 회원 글 삭제요청
-	@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
-	public String deleteArticleSubmit(int boardNum) throws Exception {
+	@RequestMapping(value = "/delete.do/{num}")
+	public String deleteArticleSubmit(@PathVariable(value="num")int num, HttpSession session, RedirectAttributes rttr) throws Exception {
 		/* 현재 로그인한 사용자와 글작성자가 일치하는지 확인 */
+		String nickname = (String) session.getAttribute("loginInside");
+		BoardVo board = ser.readBoard(num);
+		if(nickname.equals(board.getWriter())) {
+			ser.deleteBoard(num, "no");
+		}
+		rttr.addAttribute("boardCode", board.getBoardCode());
 		return "redirect:/board/list.do";
 	}
 
 	// 게시글 상세페이지 요청
 	@RequestMapping(value = "/read.do")
-	public String readArticleSubmit(int boardNum, Model model) throws Exception {
+	public String readArticleSubmit(int boardNum, String read, Model model) throws Exception {
 		/* 게시글 내용
 		 * 게시글 이미지목록
 		 * 게시글 댓글목록  첨부*/
-		return "/user/board/detail";
+		BoardVo board = ser.readBoard(boardNum);
+		if(board!=null && read==null) {			
+			ser.updateHit(boardNum);
+		}
+		if(board==null) {
+			return "redirect:/inside/main.do";
+		}
+		List<BoardImageVo> boardImages = ser.selectListImage(boardNum);
+		List<BoardRefVo> boardRefs = ser.selectListRef(boardNum);
+		model.addAttribute("board", board);
+		model.addAttribute("boardImages", boardImages);
+		model.addAttribute("boardRefs", boardRefs);
+		return "user/board/detail";
 	}
 
 	// 게시글 추천요청
-	@RequestMapping(value = "/updateHit.do", method = RequestMethod.POST)
-	public String updateHitSubmit(int boardNum) throws Exception { 
+	@RequestMapping(value = "/updateHeart.do/{num}")
+	public String updateHeartSubmit(@PathVariable(value="num") int num, HttpSession session, RedirectAttributes rttr) throws Exception { 
+		String nickname = (String) session.getAttribute("loginInside");
+		rttr.addAttribute("boardNum", num);
+		rttr.addAttribute("read", "noHit");
+//		if(nickname.equals(ser.readBoard(num).getWriter())){
+//			rttr.addFlashAttribute("heartNo", "fail");
+//			return "redirect:/user/board/read.do";
+//		}
+			ser.updateHeart(num);
 		return "redirect:/user/board/read.do";
 	}
 }

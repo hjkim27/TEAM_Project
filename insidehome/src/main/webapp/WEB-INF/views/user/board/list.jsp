@@ -8,41 +8,58 @@
 
 <div class="body-info">
 	<div class="info-detail">
-		${psCmd }
+		<c:choose>
+			<c:when test="${psCmd.boardCode eq 'info'}">
+		      <h1 class="info-title">정보게시판</h1>
+			</c:when>
+			<c:when test="${psCmd.boardCode eq 'who'}">
+		      <h1 class="info-title">익명게시판</h1>
+			</c:when>
+			<c:otherwise>
+		      <h1 class="info-title">공지사항</h1>
+			</c:otherwise>
+		</c:choose>	
+   </div>
+	<div class="info-inner">
+   <hr>
 		<c:if test="${psCmd.boardCode eq 'info' }">
-			<ul>
-				<li>이번주 인기글</li>
+			<ul style="width: 43%; float: left; line-height: 200%; padding-left: 0; margin-left:5%;" >
+				<li style="border-bottom: 1px #D5D5D5 solid; background: #E8F6EF; "><b>이번주 인기글</b></li>
 				<c:if test="${fn:length(heartList)==0}">
 					<li>이번주 인기글이 존재하지 않습니다.</li>
 				</c:if>
+				<c:set var="heartNum" value="1"/>
 				<c:forEach items="${heartList }" var="heart"> 
- 					<li>${heart.title}</li>
+ 					<li style="border-bottom: 1px #D5D5D5 solid; text-align: left; padding-left: 5%;" >
+ 						<a href="<c:url value="/user/board/read.do?boardNum=${heart.NUM}"/>">[<c:out value="${heartNum}"/>] ${heart.TITLE}</a>
+ 						<c:set var="heartNum" value="${heartNum+1 }"/>
+					</li>
 				</c:forEach>
 			</ul>
-			<ul>
-				<li>BEST</li>
+			<ul style=" width: 43%; float: left; line-height: 200%;">
+				<li style="border-bottom: 1px #D5D5D5 solid; background: #E8F6EF;"><b>BEST</b></li>
 				<c:if test="${fn:length(hitList)==0}">
 					<li>이번주 BEST글이 존재하지 않습니다.</li>
 				</c:if>
 				<c:forEach items="${hitList }" var="hit"> 
-					<li>${hit.title}</li>
+ 					<li style="border-bottom: 1px #D5D5D5 solid; text-align: left; padding-left: 5%; "><a href="<c:url value="/user/board/read.do?boardNum=${hit.NUM}"/>">${hit.TITLE}</a></li>
 				</c:forEach>
 			</ul>
 		</c:if>
-	</div>
-	
-	<div class="info-detail">
 		<table>
-			<caption>
+			<caption style="padding-top: 15px;">
 				<form action="list.do">
 					<select name="type">
 						<option value="title" <c:if test="${psCmd.type eq 'title'}">selected</c:if>>제목</option>
 						<option value="content"  <c:if test="${psCmd.type eq 'content'}">selected</c:if>>내용</option>
 						<option value="double" <c:if test="${psCmd.type eq 'double'}">selected</c:if>>제목+내용</option>
 					</select>
-					<input type="text" name="word" value="${psCmd.word }" placeholder="검색할 내용 입력">
+					<input class="searchText2" type="text" name="word" value="${psCmd.word }" placeholder="검색할 내용 입력">
+					<input style="width: auto; padding: 5px 2% 5px 2%;" type="submit" value="검색">
+					<c:if test="${loginInside!=null and psCmd.boardCode ne 'notice' }">
+						<input style="width: auto; padding: 5px 2% 5px 2%;" type="button" onclick="location.href='<c:url value="/user/board/registForm.do?boardCode=${psCmd.boardCode} "/>'" value="글작성">
+					</c:if>
 					<input type="hidden" name="boardCode" value="${psCmd.boardCode}">
-					<input type="submit" value="검색">
 				</form>
 				<c:if test="${fn:length(boardList)==0 and psCmd.word!=null}">
 					<br> 검색 결과가 존재하지 않습니다.
@@ -52,7 +69,9 @@
 				<tr>
 					<td>글번호</td>
 					<td>제목</td>
-					<td>작성자</td>
+					<c:if test="${psCmd.boardCode ne 'who' }">
+						<td>작성자</td>
+					</c:if>
 					<td>등록일자</td>
 					<td>조회수 </td>
 				</tr>
@@ -61,11 +80,17 @@
 				<c:if test="${ psCmd.boardCode ne 'notice' }">
 					<c:forEach items="${notifyList}" var="noti">
 						<tr>
-							<td align="center">[공지]</td>
-							<td>${noti.TITLE}</td>
-							<td align="center">관리자</td>
-							<td align="center"><fmt:formatDate value="${noti.REGDATE}" pattern="yyyy-MM-dd" /></td>
-							<td align="center">${noti.HIT}</td>
+							<td align="center"><b>[공지]</b></td>
+							<td  width="50%;" align="left" style="padding-left: 40px;">
+								<a href="<c:url value="/board/read/notice.do?boardNum=${noti.NUM}"/>">
+									<b>${noti.TITLE}</b>
+								</a>
+							</td>
+							<c:if test="${psCmd.boardCode ne 'who' }">
+								<td align="center"><b>관리자</b></td>
+							</c:if>
+							<td align="center"><b><fmt:formatDate value="${noti.REGDATE}" pattern="yyyy-MM-dd" /></b></td>
+							<td align="center"><b>${noti.HIT}</b></td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -73,13 +98,19 @@
 				<c:forEach items="${boardList}" var="article">
 					<tr>
 						<td align="center">${boardNbr}</td>
-						<td>${article.TITLE} 
-							[좋아요 ${article.HEART}] 
-							<c:if test="${article.CNT ne null}">
-								(${article.CNT })
-							</c:if>
+						<td  align="left" style="padding-left: 40px;">
+							<a href="<c:url value="/user/board/read.do?boardNum=${article.NUM}"/>">
+								${article.TITLE} 
+								[좋아요 ${article.HEART}] 
+								<c:if test="${article.CNT ne null}">
+									(${article.CNT })
+								</c:if>
+							</a>
+						
 						</td>
-						<td align="center">${article.WRITER}</td>
+						<c:if test="${psCmd.boardCode ne 'who' }">
+							<td align="center">${article.WRITER}</td>
+						</c:if>
 						<td align="center"><fmt:formatDate value="${article.REGDATE}" pattern="yyyy-MM-dd" /></td>
 						<td align="center">${article.HIT} </td>
 					</tr>
@@ -89,9 +120,8 @@
 		</table>		
 	</div>
 	
+	<br>
 	
-	
-		<c:if test="${psCmd.count > psCmd.pageSize }">
 			<fmt:parseNumber var="pageCount" value="${psCmd.number}" integerOnly="true"/>
 			
 			<c:set var="pageBlock" value="${5 }"/>
@@ -112,7 +142,7 @@
 				</c:otherwise>
 			</c:choose>
 			
-			
+			<div align="center">
 			<c:if test="${startPage>pageBlock }">
 				<input type="button" onclick="location.href='list.do?${options}pageNum=${startPage-pageBlock}'" value="◀">
 			</c:if>
@@ -122,7 +152,7 @@
 			<c:if test="${endPage<pageCount }">
 				<input type="button" onclick="location.href='list.do?${options}pageNum=${startPage+pageBlock}'" value="▶">
 			</c:if>
-		</c:if>
+			</div>
 </div>
 
 <%@include file="/WEB-INF/views/user/main/userFooter.jsp"%>

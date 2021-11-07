@@ -109,6 +109,7 @@ public class LoginController {
 	@RequestMapping(value = "/logout.do")
 	public String logoutSubmit(HttpSession session) throws Exception {
 		session.removeAttribute("loginInside");
+		session.removeAttribute("mgrInside");
 		return "redirect:/inside/main.do";
 	}
 

@@ -14,7 +14,8 @@
 	<div class="head-area">
 		<ul class="head-list">
 			<li class="head-info-label"><a class="head-info-label" href="<c:url value="#"/>">고객센터</a></li>
-			<li class="head-info-label"><a class="head-info-label" href="<c:url value="/member/logout.do"/>">[ ${mgrInside}_관리자]로그아웃</a></li>				
+			<li class="head-info-label"><a class="head-info-label" href="<c:url value="/inside/main.do"/>">[ 홈페이지 이동 ]</a></li>				
+			<li class="head-info-label"><a class="head-info-label" href="<c:url value="/member/logout.do"/>">로그아웃</a></li>				
 		</ul>
 	</div>
 	<div class="logo-area">
@@ -31,10 +32,6 @@
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/board/list.do?boardCode=notice"/>">공지사항</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/goods/list.do"/>">상품관리</a></li>
 			<li class="service-info-label"><a class="service-info-label" href="<c:url value="/manager/member/list.do"/>">회원정보</a></li>			
-			<li class="service-info-label"><a href="<c:url value="#"/>">
-				<img class="talk_btn" src="<c:url value="/resources/img/btn_assatalk.png" />">
-				</a>
-			</li>			
 		</ul>
 	</div>
 </header>

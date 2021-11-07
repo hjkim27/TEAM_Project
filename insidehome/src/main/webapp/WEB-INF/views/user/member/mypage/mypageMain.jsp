@@ -57,15 +57,15 @@
 							<td colspan="3" class="sub-none-info">요청 게시글이 존재하지 않습니다.</td>
 						</tr>
 					</c:if>
-					<c:if test="${fn:length(articleList) == 0}">
+					<c:if test="${fn:length(articleList) > 0}">
 						<c:forEach items="${articleList}" var="article">
 							<tr>
 								<td class="sub-date"><fmt:formatDate value="${article.REGDATE}" pattern="yyyy-MM-dd" /></td>
 								<td class="sub-type">
-									<c:if test="${arcicle.BOARDCODE eq 'info'}">[ 정보 ]</c:if>
-									<c:if test="${arcicle.BOARDCODE eq 'who'}">[ 익명 ]</c:if>
+									<c:if test="${article.BOARDCODE eq 'info'}">[ 정보 ]</c:if>
+									<c:if test="${article.BOARDCODE eq 'who'}">[ 익명 ]</c:if>
 								</td>
-								<td class="sub-detail"><a href="/user/board/read.do/${article.NUM} ">${article.TITLE}</a></td>
+								<td class="sub-detail"><a href="<c:url value='/user/board/read.do?boardNum=${article.NUM}'/>">${article.TITLE}</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>
