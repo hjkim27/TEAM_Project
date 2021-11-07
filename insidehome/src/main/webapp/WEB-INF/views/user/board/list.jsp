@@ -123,7 +123,6 @@
 	<br>
 	
 			<fmt:parseNumber var="pageCount" value="${psCmd.number}" integerOnly="true"/>
-			
 			<c:set var="pageBlock" value="${5 }"/>
 			
 			<fmt:parseNumber var="result" value="${(psCmd.currentPage-1)/pageBlock }" integerOnly="true"/>

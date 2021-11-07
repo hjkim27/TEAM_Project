@@ -6,6 +6,15 @@
 
 <%@include file="/WEB-INF/views/user/main/userHeader.jsp"%>
 <link href="<c:url value="/resources/css/goodsDetail.css" />" rel="stylesheet" />
+
+<div class="body-info">
+   <div class="goods-title2">
+   		추천상품
+   	  <p class="goods-title2">이런 상품은 어때요?</p>
+   </div>
+   <hr>
+   <div class="info-inner">
+
 	<span class="order-title">주문/결제</span>
 <hr style="margin:10px 0 10px 0; text-align:left; width: 90%;">
 	<div class="order-goods-box">
@@ -93,6 +102,7 @@
 			</form>
 		</div>
 	</div>
+</div>
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/goodsjs.js" />"></script>
 <script type="text/javascript">

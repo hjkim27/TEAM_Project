@@ -96,10 +96,10 @@
 	</div>
 	<div>
 		<c:choose>
-			<c:when test="${board.boardCode eq 'info' and board.notify eq 'no'}">
+			<c:when test="${board.boardCode eq 'info' and board.notify ne 'yes'}">
 			<c:set var="boardList" value="/board/list.do?boardCode=info" />
 			</c:when>
-			<c:when test="${board.boardCode eq 'who' and board.notify eq 'no'}">
+			<c:when test="${board.boardCode eq 'who' and board.notify ne 'yes'}">
 			<c:set var="boardList" value="/board/list.do?boardCode=who" />
 			</c:when>
 			<c:otherwise>

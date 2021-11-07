@@ -62,7 +62,9 @@ public class GoodsController {
 	@RequestMapping(value = "/user/goods/order.do/{goodsCode}", method = RequestMethod.GET)
 	public String orderGoodsForm(@PathVariable String goodsCode, Model model, HttpSession session, RedirectAttributes rttr ) throws Exception {
 		String nickname = (String) session.getAttribute("loginInside");
-
+		if(nickname==null) {
+			return "redirect:/member/loginForm.do";
+		}
 		HashMap<String, Object> orderInfo = goodsUserService.orderGoodsInfo(goodsCode);
 		HashMap<String, String> goodsImage = (HashMap<String, String>) orderInfo.get("goodsImage");
 		GoodsVo goods = (GoodsVo) orderInfo.get("goods");
