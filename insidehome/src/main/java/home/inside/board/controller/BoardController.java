@@ -52,6 +52,8 @@ public class BoardController {
 				model.addAttribute("heartList", ser.selectHeartList());
 				model.addAttribute("hitList", ser.selectHitList());
 			}
+		} else if(boardCode.equals("notice")) {
+			model.addAttribute("boardCheck", "notify");
 		}
 		model.addAttribute("boardList", ser.boardList(notify, psCmd));
 		model.addAttribute("psCmd", psCmd);

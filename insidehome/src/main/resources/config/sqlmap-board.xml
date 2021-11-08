@@ -43,9 +43,9 @@
 	</select>
 	<select id="selectListBoard" parameterType="HashMap" resultType="HashMap">
 		select * from (
-			select  rownum rnum, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART  
+			select  rownum rnum, NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART, CNT
 			from (
-				select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
+				select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART, CNT 
 				from (
     				(select NUM, WRITER, TITLE, REGDATE, MODDATE, HIT, HEART 
 					 	<if test='notify.equals("no")'>

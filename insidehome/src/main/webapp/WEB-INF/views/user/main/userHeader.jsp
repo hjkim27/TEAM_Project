@@ -23,10 +23,10 @@
 	<div class="head-area">
 		<ul class="head-list">
 			<li class="head-info-label"><a class="head-info-label" href="<c:url value="#"/>">고객센터</a></li>
-			<c:if test="${loginInside != null}">
-				<c:if test="${mgrInside !=null}">
-					<li class="head-info-label"><a class="head-info-label" href="<c:url value="/manager/inside/main.do"/>">[ 관리자페이지 이동 ]</a></li>
-				</c:if>
+			<c:if test="${mgrInside !=null}">
+				<li class="head-info-label"><a class="head-info-label" href="<c:url value="/manager/inside/main.do"/>">[ 관리자페이지 이동 ]</a></li>
+			</c:if>
+			<c:if test="${mgrInside ==null and loginInside != null}">
 				<c:if test="${mgrInside ==null}">
 					<li class="head-info-label"><a class="head-info-label" href="<c:url value="/user/mypage/main.do"/>">[ ${loginInside}_MYPAGE ]</a></li>
 				</c:if>

@@ -41,8 +41,12 @@
 				<c:if test="${fn:length(hitList)==0}">
 					<li>이번주 BEST글이 존재하지 않습니다.</li>
 				</c:if>
+				<c:set var="hitNum" value="1"/>
 				<c:forEach items="${hitList }" var="hit"> 
- 					<li style="border-bottom: 1px #D5D5D5 solid; text-align: left; padding-left: 5%; "><a href="<c:url value="/user/board/read.do?boardNum=${hit.NUM}"/>">${hit.TITLE}</a></li>
+ 					<li style="border-bottom: 1px #D5D5D5 solid; text-align: left; padding-left: 5%; ">
+ 						<a href="<c:url value="/user/board/read.do?boardNum=${hit.NUM}"/>">[<c:out value="${hitNum}"/>] ${hit.TITLE}</a>
+ 						<c:set var="hitNum" value="${hitNum+1 }"/>
+ 					</li>
 				</c:forEach>
 			</ul>
 		</c:if>
@@ -99,11 +103,14 @@
 					<tr>
 						<td align="center">${boardNbr}</td>
 						<td  align="left" style="padding-left: 40px;">
-							<a href="<c:url value="/user/board/read.do?boardNum=${article.NUM}"/>">
+							<c:if test="${boardCheck !=null }">
+								<c:set var="tmpCode" value="&boardCheck=${boardCheck}"></c:set>
+							</c:if>
+							<a href="<c:url value="/user/board/read.do?boardNum=${article.NUM}${tmpCode}"/>">
 								${article.TITLE} 
-								[좋아요 ${article.HEART}] 
+								[좋아요 ${article.HEART}]
 								<c:if test="${article.CNT ne null}">
-									(${article.CNT })
+									<b>(${article.CNT })</b>
 								</c:if>
 							</a>
 						

@@ -2,18 +2,15 @@ package home.inside.board.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import home.inside.board.repository.IBoardDao;
 import home.inside.board.repository.IBoardImageDao;
 import home.inside.board.repository.IBoardRefDao;
 import home.inside.board.util.ArticleMgrCommand;
-import home.inside.board.util.BoardFileUtil;
 import home.inside.board.util.PageSearchCommand;
 import home.inside.board.vo.BoardImageVo;
 import home.inside.board.vo.BoardRefVo;
@@ -157,7 +154,7 @@ public class BoardServiceImpl implements IBoardService {
 	public void insertRef(int boardNum, String nickname, String content) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		hsm.put("boardNum", boardNum);
-		hsm.put("nickname", nickname);
+		hsm.put("writer", nickname);
 		hsm.put("content", content);
 		refDao.insertRef(hsm);
 	}
@@ -208,6 +205,14 @@ public class BoardServiceImpl implements IBoardService {
 		hsm.put("type", type);
 		hsm.put("word", word);
 		return dao.notifySize(hsm);
+	}
+
+	@Override
+	public HashMap<String, Object> isCheckWriterToUser(int boardNum, int num) throws Exception {
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("boardNum", boardNum);
+		hsm.put("num", num);
+		return refDao.isCheckWriterToUser(hsm);
 	}
 
 }

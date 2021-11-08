@@ -40,8 +40,37 @@ var selectBoxChange = function(value){
    <table>
       <tbody>
          <c:forEach items="${mainHeart}" var="heartOne" varStatus="status">
-            <c:if test="${status.index != 0 and status.index %5 == 0}">
+            <c:if test="${status.index == 0 or status.index %5 == 0}">
                <tr></tr>
+                <td class="goods-box">
+                  <a href="<c:url value="/goods/detail.do/${heartOne.GOODSCODE}" />">
+                     <div class="image-box">
+                        <c:choose>
+                           <c:when test="${heartOne.SAVENAME == null}">
+                              <c:set var="imagePath" value="/resources/img/noGoods.gif" />
+                           </c:when>
+                           <c:otherwise>
+                              <c:set var="imagePath"
+                                 value="/display?goodsCode=${heartOne.GOODSCODE}&saveName=${heartOne.SAVENAME}" />
+                           </c:otherwise>
+                        </c:choose>
+                        <img class="image-goods" src="<c:url value="${imagePath}" />" /><br>
+                     </div>
+                     <div class="goods-txt">
+                        <c:choose>
+                           <c:when test="${fn:length(heartOne.GOODSNAME) > 12}">
+                              <c:set var="gname" value="${fn:substring(heartOne.GOODSNAME,0,12)}..."/>
+                           </c:when>
+                           <c:otherwise>
+                              <c:set var="gname" value="${heartOne.GOODSNAME}"/>
+                           </c:otherwise>
+                        </c:choose>
+                        <b><c:out value="${gname }"/></b><br>
+                        <fmt:formatNumber var="price" value="${heartOne.PRICE}" pattern="#,###" />
+                        <c:out value="${price += ' point'}"/>
+                     </div>
+                  </a>
+               </td>
             </c:if>
             <c:if test="${status.index != 0 and status.index %5 != 0}">
                <td class="goods-box">
@@ -91,8 +120,37 @@ var selectBoxChange = function(value){
       <tbody>
             <tr>
          <c:forEach items="${goodsList}" var="goodsOne" varStatus="status">
-         <c:if test="${status.index != 0 and status.index %5 == 0}">
-            <tr></tr>
+         <c:if test="${status.index == 0 or status.index %5 == 0}">
+            <tr></tr><td class="goods-box2">
+            <a href="<c:url value="/goods/detail.do/${goodsOne.GOODSCODE}" />">
+               <div class="image-box">
+                  <c:choose>
+                     <c:when test="${goodsOne.SAVENAME == null}">
+                        <c:set var="imagePath" value="/resources/img/noGoods.gif" />
+                     </c:when>
+                     <c:otherwise>
+                        <c:set var="imagePath"
+                           value="/display?goodsCode=${goodsOne.GOODSCODE}&saveName=${goodsOne.SAVENAME}" />
+                     </c:otherwise>
+                  </c:choose>
+                  <img class="image-goods" src="<c:url value="${imagePath}" />"
+                     alt="<c:out value="${goodsOne.GOODSNAME}" />" /><br>
+               </div>
+               <div class="goods-txt">
+                  <c:choose>
+                     <c:when test="${fn:length(goodsOne.GOODSNAME) > 12}">
+                        <c:set var="gname" value="${fn:substring(goodsOne.GOODSNAME,0,12)}..."/>
+                     </c:when>
+                     <c:otherwise>
+                        <c:set var="gname" value="${goodsOne.GOODSNAME}"/>
+                     </c:otherwise>
+                  </c:choose>
+                  <b><c:out value="${gname }"/></b><br>
+                  <fmt:formatNumber var="price" value="${goodsOne.PRICE}" pattern="#,###" />
+                  <c:out value="${price += ' point'}"/>
+               </div>
+            </a>
+            </td>
          </c:if>
          <c:if test="${status.index != 0 and status.index %5 != 0}">
             <td class="goods-box2">
