@@ -24,19 +24,17 @@ public class QuestionMgrController {
 
 	// QA등록폼 요청
 	@RequestMapping("/qa/insertForm.do")
-	public String insertQaForm(Model model) throws Exception {
-		model.addAttribute("question", new QuestionVo());
+	public String insertQaForm() throws Exception {
 		return "/manager/supporter/qaInsertForm";
 	}
 
 	// QA등록요청
-	@RequestMapping(value="/qa/insert.do", method = RequestMethod.POST)
-	public String insertQaSubmit(String askType, String title, String content, HttpSession session) throws Exception {
+	@RequestMapping(value = "/qa/insert.do", method = RequestMethod.POST)
+	public String insertQaSubmit(@ModelAttribute(value = "askType") String askType,
+			@ModelAttribute(value = "title") String title, @ModelAttribute(value = "content") String content,
+			HttpSession session) throws Exception {
 		String nickname = (String) session.getAttribute("mgrInside");
-		if(askType==null || title==null || content==null) {
-			return "/manager/question/qaInsertForm";
-		}
-		ser.insertQuestion(askType, nickname, title, content);
+		ser.insertQuestion("question", nickname, title, content);
 		return "redirect:/manager/qa/list.do";
 	}
 
@@ -48,16 +46,16 @@ public class QuestionMgrController {
 	}
 
 	// QA수정요청
-	@RequestMapping(value="/qa/update.do")
+	@RequestMapping(value = "/qa/update.do")
 	public String updateQaSubmit(String title, String content, int num) throws Exception {
-		if(num==0 || title==null || content==null) {
+		if (num == 0 || title == null || content == null) {
 			return "/manager/question/insertForm";
 		}
 		return "redirect:/manager/qa/list.do";
 	}
 
 	// QA삭제요청
-	@RequestMapping(value="/qa/delete.do")
+	@RequestMapping(value = "/qa/delete.do")
 	public String deleteQaSubmit(int num) throws Exception {
 		ser.deleteQuestion(num);
 		return "redirect:/manager/qa/list.do";
@@ -86,9 +84,9 @@ public class QuestionMgrController {
 	}
 
 	// 관리자 문의 답변 요청
-	@RequestMapping(value="/ask/answer.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/ask/answer.do", method = RequestMethod.POST)
 	public String updateAskSubmit(String answer, int num) throws Exception {
-		if(answer!=null && !answer.trim().isEmpty()) {
+		if (answer != null && !answer.trim().isEmpty()) {
 			ser.updateAsk(answer, num);
 		}
 		return "redirect:/manager/ask/list.do";

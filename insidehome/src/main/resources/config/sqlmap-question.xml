@@ -5,8 +5,8 @@
 
 <mapper namespace="questionDao">
 	<insert id="insertQuestion" parameterType="HashMap">
-		insert into QUESTION (NUM, ASKTYPE, NICKNAME, TITLE, CONTENT, ASKDATE)
-		values (QUESTION_SEQ.nextval, #{askType}, #{nickname}, #{title}, #{content}, sysdate)
+		insert into QUESTION (NUM, ASKTYPE, NICKNAME, TITLE, CONTENT)
+		values (QUESTION_SEQ.nextval, #{askType}, #{nickname}, #{title}, #{content})
 	</insert>
 	<update id="updateQuestion" parameterType="HashMap">
 		update QUESTION set TITLE=#{title}, CONTENT=#{content} where NUM=#{num}
