@@ -6,21 +6,21 @@
 <%@include file="/WEB-INF/views/user/main/userHeader.jsp"%>
 <% pageContext.setAttribute("replaceChar", "\n");%>
 <div class="body-info">
+	<c:set var="tmpCode" value="&boardName=${boardName}"/>
 	<c:choose>
-		<c:when test="${board.boardCode eq 'info' and board.notify eq 'no'}">
-			<c:set var="boardName" value="정보게시판"/>
+		<c:when test="${boardName eq 'info'}">
+	    	<c:set var="bName" value="정보게시판"/>  
 		</c:when>
-		<c:when test="${board.boardCode eq 'who' and board.notify eq 'no'}">
-			<c:set var="boardName" value="익명게시판"/>
+		<c:when test="${boardName eq 'who'}">
+	    	<c:set var="bName" value="익명게시판"/>  
 		</c:when>
 		<c:otherwise>
-			<c:set var="boardName" value="공지사항"/>
+	    	<c:set var="bName" value="공지사항"/>  
 		</c:otherwise>
 	</c:choose>
-	
-	
 	<div class="info-detail">
-		<h1 class="info-title">${boardName }</h1>
+		<h1 class="info-title">${bName }</h1>
+		
 	</div>
 	<hr>
 	<div class="info-inner">
@@ -29,9 +29,9 @@
 		</div>
 		<table>
 			<thead>
-			<tr>
-				<td align="left" style="padding: 1% 5% 1% 5%;" bgcolor="#E8F6EF">
-					${boardname } &nbsp;${board.title}
+			<tr bgcolor="#E8F6EF" >
+				<td align="left" style="padding: 1% 5% 1% 5%; margin-right: 0;" bgcolor="#E8F6EF">
+					 TITLE: ${board.title}
 				</td>
 			</tr>
 			</thead>
@@ -49,7 +49,7 @@
 							[관리자] &nbsp;|&nbsp; 
 						</c:if> 
 						조회수 <c:out value="${board.hit}"/>
-						<c:if test="${boardName ne '공지사항'}">
+						<c:if test="${bName ne '공지사항'}">
 							 &nbsp;|&nbsp; 추천수 <c:out value="${board.heart}"/>
 						</c:if>
 					</td>
@@ -61,7 +61,7 @@
 							<a onclick="location.href='<c:url value="/user/board/delete.do/${board.num}"/>'">[삭제]</a>
 						</c:if>
 
-						<c:if test="${boardName ne '공지사항'}">
+						<c:if test="${bName ne '공지사항'}">
 							<c:if test="${loginInside ne board.writer }">
 								<a onclick="location.href='<c:url value="#"/>'">[신고]</a>
 								<a onclick="location.href='<c:url value="/user/board/updateHeart.do/${board.num}"/>'">[추천]</a>
@@ -96,21 +96,12 @@
 		</table>
 	</div>
 	<div style="text-align: right;">
-		<c:if test="${board.boardCode eq 'info' and (board.notify ne 'yes')}">
-			<c:set var="boardList" value="/board/list.do?boardCode=info" />
-		</c:if>
-		<c:if  test="${board.boardCode eq 'who' and board.notify ne 'yes'}">
-			<c:set var="boardList" value="/board/list.do?boardCode=who" />
-		</c:if>
-		<c:if test="${boardCheck eq 'notice' and boardCode ne 'notice'}">
-			<c:set var="boardList" value="/board/list.do?boardCode=notice" />
-		</c:if>
 		<hr>
-			<button style="padding: 1% 30px 1% 30px; margin-right: 5%;" onclick="location.href='<c:url value="${boardList}" />'">
-				목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;록
-			</button>
+		<button style="padding: 1% 30px 1% 30px; margin-right: 5%;" onclick="location.href='<c:url value="/board/list.do?boardName=${boardName }" />'">
+			목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;록
+		</button>
 	</div>
-<c:if test="${boardName ne '공지사항'}">
+<c:if test="${bName ne '공지사항'}">
 	<form style="text-align: right;" name="ref-Form" method="post" action="<c:url value="/user/ref/regist.do" />">
 		<textarea style="resize: none; margin: 0 5% 0 0;" 
 			class="guideContent" name="content" cols="100" rows="3" placeholder="댓글 입력" required="required"></textarea>

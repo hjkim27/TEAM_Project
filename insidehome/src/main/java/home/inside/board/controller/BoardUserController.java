@@ -100,12 +100,7 @@ public class BoardUserController {
 
 	// 게시글 상세페이지 요청
 	@RequestMapping(value = "/read.do")
-	public String readArticleSubmit(int boardNum, String read, Model model, HttpSession session, String boardCheck) throws Exception {
-		
-		
-		/* 게시글 내용
-		 * 게시글 이미지목록
-		 * 게시글 댓글목록  첨부*/
+	public String readArticleSubmit(int boardNum, String read, Model model, HttpSession session, String boardName) throws Exception {
 		if(read==null) {			
 			ser.updateHit(boardNum);
 		}
@@ -121,7 +116,7 @@ public class BoardUserController {
 			model.addAttribute("boardRefs", boardRefs);
 		}
 		model.addAttribute("userName", (String)session.getAttribute("loginInside"));
-		model.addAttribute("boardCode", "notice");
+		model.addAttribute("boardName", boardName);
 		return "user/board/detail";
 	}
 
