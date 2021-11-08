@@ -1,5 +1,7 @@
 package home.inside.board.controller;
 
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -99,13 +101,15 @@ public class BoardUserController {
 	// 게시글 상세페이지 요청
 	@RequestMapping(value = "/read.do")
 	public String readArticleSubmit(int boardNum, String read, Model model, HttpSession session, String boardCheck) throws Exception {
+		
+		
 		/* 게시글 내용
 		 * 게시글 이미지목록
 		 * 게시글 댓글목록  첨부*/
-		BoardVo board = ser.readBoard(boardNum);
-		if(board!=null && read==null) {			
+		if(read==null) {			
 			ser.updateHit(boardNum);
 		}
+		BoardVo board = ser.readBoard(boardNum);
 		if(board==null) {
 			return "redirect:/inside/main.do";
 		}
@@ -113,11 +117,11 @@ public class BoardUserController {
 		List<BoardRefVo> boardRefs = ser.selectListRef(boardNum);
 		model.addAttribute("board", board);
 		model.addAttribute("boardImages", boardImages);
-		model.addAttribute("boardRefs", boardRefs);
-		model.addAttribute("userName", (String)session.getAttribute("loginInside"));
-		if(boardCheck!=null) {
-			model.addAttribute("boardCheck", "notify");			
+		if(boardRefs.size()!=0) {
+			model.addAttribute("boardRefs", boardRefs);
 		}
+		model.addAttribute("userName", (String)session.getAttribute("loginInside"));
+		model.addAttribute("boardCode", "notice");
 		return "user/board/detail";
 	}
 

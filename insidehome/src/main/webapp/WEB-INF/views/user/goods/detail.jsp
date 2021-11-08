@@ -40,6 +40,9 @@
 			<div class="detail-info-box">
 				<p class="detail-goodsname">
 					<b style="font-size: 25px;"><c:out value="${goods.goodsName}" /></b>
+					<c:if test="${goods.stock == 0 }">
+						<b style="color: red;"> &nbsp;&nbsp;&nbsp; 품절</b>
+					</c:if>
 				</p>
 				<br>
 				<fmt:formatNumber var="price" value="${goods.price}" pattern="#,###" />
@@ -52,10 +55,13 @@
 				</p>
 				<br>
 			</div>
-			<div class="detail-btn-box">
-				<button class="order-btn" style="width: 95%;"
-					onclick="location.href='<c:url value="/user/goods/order.do/${goods.goodsCode}" />'">구매하기</button>
-			</div>
+			<c:if test="${goods.stock >0}">
+				<div class="detail-btn-box">
+					<button class="order-btn" style="width: 95%;"
+						onclick="location.href='<c:url value="/user/goods/order.do/${goods.goodsCode}" />'">구매하기</button>
+				</div>
+			</c:if>
+			
 		</div>
 	</div>
 </div>

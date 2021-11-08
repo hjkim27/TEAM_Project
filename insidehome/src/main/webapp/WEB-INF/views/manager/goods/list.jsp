@@ -22,6 +22,7 @@ function removeCheck(){
       alert('잘못 선택하셨습니다.');
    }
 </script>
+<div id="top-btn"></div>
 <div class="body-info">
    <form name="goodsForm" method="post">
       <div class="info-detail">
@@ -69,5 +70,11 @@ function removeCheck(){
       </table>
       </div>
    </form>
+   <div style="position: fixed; bottom: 15%; right: 5%;">
+		<a href="#top-btn">
+			<img src="https://img.icons8.com/ultraviolet/50/000000/circled-chevron-up.png"/>
+		</a>
+	</div>
 </div>
+
 <%@include file="/WEB-INF/views/manager/main/mgrFooter.jsp"%>

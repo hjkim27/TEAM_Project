@@ -19,6 +19,7 @@ public class BoardController {
 	public String readArticleSubmit(int boardNum, Model model) throws Exception {
 		ser.updateHit(boardNum);
 		model.addAttribute("board", ser.readBoard(boardNum));
+		model.addAttribute("boardCheck", "notice");
 		return "/user/board/detail";
 	}
 

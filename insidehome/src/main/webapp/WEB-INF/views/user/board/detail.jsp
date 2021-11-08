@@ -102,7 +102,7 @@
 		<c:if  test="${board.boardCode eq 'who' and board.notify ne 'yes'}">
 			<c:set var="boardList" value="/board/list.do?boardCode=who" />
 		</c:if>
-		<c:if test="${boardCheck!=null}">
+		<c:if test="${boardCheck eq 'notice' and boardCode ne 'notice'}">
 			<c:set var="boardList" value="/board/list.do?boardCode=notice" />
 		</c:if>
 		<hr>
@@ -110,7 +110,6 @@
 				목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;록
 			</button>
 	</div>
-
 <c:if test="${boardName ne '공지사항'}">
 	<form style="text-align: right;" name="ref-Form" method="post" action="<c:url value="/user/ref/regist.do" />">
 		<textarea style="resize: none; margin: 0 5% 0 0;" 
@@ -132,7 +131,7 @@
 						<table>
 							<caption>
 								<c:if test="${userName eq oneRef.writer}">
-									<input id="sabtn${oneRef.num}" type="submit" value="저장" disabled/>
+									<input class="ref-save-btn" id="sabtn${oneRef.num}" type="submit" value="저장" disabled/>
 									<button id="edbtn${oneRef.num}" type="button" onclick="return btnActive(${oneRef.num})">수정</button>
 								</c:if>
 								<c:if test="${userName eq oneRef.writer  or userName eq board.writer }">

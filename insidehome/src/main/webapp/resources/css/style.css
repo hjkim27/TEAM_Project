@@ -160,9 +160,10 @@ div.goods-title2{font-family: "24bold"; font-size: 32px; padding: 10px 0 10px 15
 p.goods-title2	{display: inline; font-size: 12px;}
 div.goods-title3{display: inline; font-family: "24bold"; font-size: 32px; padding: 10px 0 10px 15px; color: #B8DFD8; background: none; margin: 0;}
 p.goods-title3	{display: inline; font-size: 12px;}
-div.goods-title4{display: inline; font-family: "24bold"; font-size: 32px; padding: 10px 0 10px 15px; color: #FFE194; background: none; margin: 0;}
+div.goods-title4{display: inline; font-family: "24bold"; font-size: 32px; padding: 10px 0 10px 15px; color: #FFE194; background: none; margin: 0; }
 p.goods-title4	{display: inline; font-size: 12px;}
 
+div.goods-detail{ width: 90%; display: inline-block; margin: 0; padding: 0}
 
 
 div.detail-img-box{display: inline-block; float:left; margin:0 0 10% 0; padding: 0 0 10% 0; width: 320px; height: 320px;}
@@ -183,5 +184,5 @@ textarea.refContent{
 textarea.refContent:disabled{
 	width: 96%; resize: none; background: white; padding: 2% 2% 0 2%; margin: 0 ;
 }
-
+input.ref-save-btn:disabled{border: 0px;color: white;}
 

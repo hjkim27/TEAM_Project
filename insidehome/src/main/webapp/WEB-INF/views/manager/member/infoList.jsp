@@ -7,8 +7,8 @@
 
 <%@include file="/WEB-INF/views/manager/main/mgrHeader.jsp"%>
 
-
-<div class="body-info"  id="top-btn">
+<div id="top-btn"></div>
+<div class="body-info">
 	<div class="info-detail">
 	<h1 class="info-title">회원정보</h1>
 	<c:choose>
@@ -74,11 +74,11 @@
 				</c:forEach>
 			</tbody>
 		</table>
-			<div style="position: fixed; bottom: 15%; right: 5%;">
-				<a href="window.scrollTo(0,0)">
-					<img src="https://img.icons8.com/ultraviolet/50/000000/circled-chevron-up.png"/>
-				</a>
-			</div>
+		</div>
+	<div style="position: fixed; bottom: 15%; right: 5%;">
+		<a href="#top-btn">
+			<img src="https://img.icons8.com/ultraviolet/50/000000/circled-chevron-up.png"/>
+		</a>
 	</div>
 </div>
 

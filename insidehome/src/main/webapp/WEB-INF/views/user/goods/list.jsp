@@ -22,22 +22,13 @@ var selectBoxChange = function(value){
 <div class="body-info">
    <div class="info-detail">
       <div class="goods-title3">
-         추천상품
-         <p class="goods-title3">이런 상품은 어때요?</p>
-      <select name="type" onchange="selectBoxChange(this.value);">
-         <option value="dateDesc"
-            <c:if test="${type eq 'dateDesc'}">selected="selected"</c:if>>최신순</option>
-         <option value="priceDesc"
-            <c:if test="${type eq 'priceDesc'}">selected="selected"</c:if>>높은 가격순</option>
-         <option value="priceAsc"
-            <c:if test="${type eq 'priceAsc'}">selected="selected"</c:if>>낮은 가격순</option>
-      </select>
+         	추천상품<p class="goods-title3">이런 상품은 어때요?</p>
       </div>
    </div>
    <hr>
 
 
-   <table>
+   <table style="margin-bottom: 5%;">
       <tbody>
          <c:forEach items="${mainHeart}" var="heartOne" varStatus="status">
             <c:if test="${status.index == 0 or status.index %5 == 0}">
@@ -108,12 +99,21 @@ var selectBoxChange = function(value){
    </table>
 
    <br>
-   <div class="info-detail">
+   <div class="goods-detail" >
       <div class="goods-title4">
-         상품목록
-         <p class="goods-title4">집 밖은 위험합니다. 집에서 놀아요!</p>
+   		      상품목록<p class="goods-title4">집 밖은 위험합니다. 집에서 놀아요!</p>
       </div>
    </div>
+         <div style="display: inline-block; width: 9%; text-align: right; margin-left: 0; margin-right: 0;" >
+	         <select name="type" onchange="selectBoxChange(this.value);" style="width: 100%;">
+		         <option value="dateDesc"
+		            <c:if test="${type eq 'dateDesc'}">selected="selected"</c:if>>최신순</option>
+		         <option value="priceDesc"
+		            <c:if test="${type eq 'priceDesc'}">selected="selected"</c:if>>높은 가격순</option>
+		         <option value="priceAsc"
+		            <c:if test="${type eq 'priceAsc'}">selected="selected"</c:if>>낮은 가격순</option>
+		      </select>
+         </div>
    <hr>
 
    <table>

@@ -10,15 +10,16 @@
 	<div class="info-detail">
 		<c:choose>
 			<c:when test="${psCmd.boardCode eq 'info'}">
-		      <h1 class="info-title">정보게시판</h1>
+		    	<c:set var="boardName" value="정보게시판"/>  
 			</c:when>
 			<c:when test="${psCmd.boardCode eq 'who'}">
-		      <h1 class="info-title">익명게시판</h1>
+		    	<c:set var="boardName" value="익명게시판"/>  
 			</c:when>
 			<c:otherwise>
-		      <h1 class="info-title">공지사항</h1>
+		    	<c:set var="boardName" value="공지사항"/>  
 			</c:otherwise>
-		</c:choose>	
+		</c:choose>
+			<h1 class="info-title">${boardName }</h1>	
    </div>
 	<div class="info-inner">
    <hr>
@@ -106,13 +107,24 @@
 							<c:if test="${boardCheck !=null }">
 								<c:set var="tmpCode" value="&boardCheck=${boardCheck}"></c:set>
 							</c:if>
-							<a href="<c:url value="/user/board/read.do?boardNum=${article.NUM}${tmpCode}"/>">
-								${article.TITLE} 
-								[좋아요 ${article.HEART}]
-								<c:if test="${article.CNT ne null}">
-									<b>(${article.CNT })</b>
-								</c:if>
-							</a>
+							<c:if test="${boardName ne '공지사항' }">
+								<a href="<c:url value="/user/board/read.do?boardNum=${article.NUM}"/>">
+									${article.TITLE} 
+									[좋아요 ${article.HEART}]
+									<c:if test="${article.CNT ne null}">
+										<b>(${article.CNT })</b>
+									</c:if>
+								</a>
+							</c:if>
+							<c:if test="${boardName eq '공지사항' }">
+								<a href="<c:url value="/board/read/notice.do?boardNum=${article.NUM}${tmpCode}"/>">
+									${article.TITLE} 
+									[좋아요 ${article.HEART}]
+									<c:if test="${article.CNT ne null}">
+										<b>(${article.CNT })</b>
+									</c:if>
+								</a>
+							</c:if>
 						
 						</td>
 						<c:if test="${psCmd.boardCode ne 'who' }">
