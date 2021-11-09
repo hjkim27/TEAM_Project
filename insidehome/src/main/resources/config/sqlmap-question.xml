@@ -9,7 +9,7 @@
 		values (QUESTION_SEQ.nextval, #{askType}, #{nickname}, #{title}, #{content})
 	</insert>
 	<update id="updateQuestion" parameterType="HashMap">
-		update QUESTION set TITLE=#{title}, CONTENT=#{content} where NUM=#{num}
+		update QUESTION set ASKTYPE=#{askType}, TITLE=#{title}, CONTENT=#{content} where NUM=#{num}
 	</update>
 	<delete id="deleteQuestion" parameterType="Integer">
 		delete from QUESTION where NUM=#{NUM}
@@ -31,16 +31,9 @@
 		select * from QUESTION where NUM=#{num}
 	</select>
 	<select id="selectMyAsk" parameterType="String" resultType="questionVo">
-		select * from QUESTION where asktype='ask' and NICKNAME=#{nickname}
+		select * from QUESTION where ASKTYPE='ask' and NICKNAME=#{nickname}
 	</select>
-	<select id="selectAskList" parameterType="String" resultType="questionVo">
-		select * from QUESTION where asktype='ask'  
-		<if test='type != null and type.equals("not")'>
-			and ANSWERDATE is null
-		</if>
-		<if test='type != null and type.equals("end")'>
-			and ANSWERDATE is not null
-		</if>
-			order by num
+	<select id="selectAskList" resultType="questionVo">
+		select * from QUESTION where ASKTYPE='ask' order by ANSWERDATE desc, NUM
 	</select>
 </mapper>

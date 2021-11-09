@@ -25,8 +25,9 @@ public class QuestionServiceImpl implements IQuestionService {
 	}
 
 	@Override
-	public void updateQuestion(String title, String content, int num) throws Exception {
+	public void updateQuestion(String askType, String title, String content, int num) throws Exception {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		hsm.put("askType", askType);
 		hsm.put("title", title);
 		hsm.put("content", content);
 		hsm.put("num", num);
@@ -69,8 +70,8 @@ public class QuestionServiceImpl implements IQuestionService {
 
 
 	@Override
-	public List<QuestionVo> selectAskList(String type) throws Exception {
-		return dao.selectAskList(type);
+	public List<QuestionVo> selectAskList() throws Exception {
+		return dao.selectAskList();
 	}
 
 }

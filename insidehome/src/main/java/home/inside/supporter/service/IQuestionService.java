@@ -10,7 +10,7 @@ public interface IQuestionService {
 	public void insertQuestion(String askType, String nickname, String title, String content) throws Exception;
 
 	// QA수정 > title, content
-	public void updateQuestion(String title, String content, int num) throws Exception;
+	public void updateQuestion(String askType, String title, String content, int num) throws Exception;
 
 	// QA삭제 > num
 	public void deleteQuestion(int num) throws Exception;
@@ -31,5 +31,5 @@ public interface IQuestionService {
 	public List<QuestionVo> selectMyAsk(String nickname) throws Exception;
 
 	// 고객문의 목록조회(관리자)
-	public List<QuestionVo> selectAskList(String type) throws Exception;
+	public List<QuestionVo> selectAskList() throws Exception;
 }

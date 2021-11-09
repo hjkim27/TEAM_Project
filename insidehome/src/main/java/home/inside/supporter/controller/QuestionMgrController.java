@@ -34,7 +34,7 @@ public class QuestionMgrController {
 			@ModelAttribute(value = "title") String title, @ModelAttribute(value = "content") String content,
 			HttpSession session) throws Exception {
 		String nickname = (String) session.getAttribute("mgrInside");
-		ser.insertQuestion("question", nickname, title, content);
+		ser.insertQuestion(askType, nickname, title, content);
 		return "redirect:/manager/qa/list.do";
 	}
 
@@ -47,10 +47,12 @@ public class QuestionMgrController {
 
 	// QA수정요청
 	@RequestMapping(value = "/qa/update.do")
-	public String updateQaSubmit(String title, String content, int num) throws Exception {
+	public String updateQaSubmit(@ModelAttribute(value = "askType") String askType,
+			@ModelAttribute(value = "title") String title, @ModelAttribute(value = "content") String content, int num) throws Exception {
 		if (num == 0 || title == null || content == null) {
-			return "/manager/question/insertForm";
+			return "/manager/question/updateForm";
 		}
+		ser.updateQuestion(askType, title, content, num);
 		return "redirect:/manager/qa/list.do";
 	}
 
@@ -71,8 +73,8 @@ public class QuestionMgrController {
 
 	// ASK목록
 	@RequestMapping("/ask/list.do")
-	public String AskList(String type, Model model) throws Exception {
-		model.addAttribute("qa", ser.selectAskList(type));
+	public String AskList(Model model) throws Exception {
+		model.addAttribute("qa", ser.selectAskList());
 		return "/manager/supporter/askList";
 	}
 
@@ -85,7 +87,7 @@ public class QuestionMgrController {
 
 	// 관리자 문의 답변 요청
 	@RequestMapping(value = "/ask/answer.do", method = RequestMethod.POST)
-	public String updateAskSubmit(String answer, int num) throws Exception {
+	public String updateAskSubmit(@RequestParam(value = "answer")String answer, @RequestParam(value = "num")int num) throws Exception {
 		if (answer != null && !answer.trim().isEmpty()) {
 			ser.updateAsk(answer, num);
 		}

@@ -17,14 +17,16 @@
 	<div class="info-inner">
 		<table>
 			<caption>
-				<input type="button" onclick="location.href='<c:url value="/manager/qa/insertForm.do"/>'" value="QA등록">
-				<input type="button" onclick="location.href='<c:url value="/manager/ask/list.do"/>'" value="고객문의 관리">
+				<input style="width: 10%;" type="button" onclick="location.href='<c:url value="/manager/qa/insertForm.do"/>'" value="QA등록">
+				<input style="width: 10%;" type="button" onclick="location.href='<c:url value="/manager/ask/list.do"/>'" value="고객문의 관리">
+				<input style="width: 10%;" type="button" onclick="location.href='<c:url value="/manager/warning/list.do"/>'" value="신고관리">
 			</caption>
 			<thead>
 				<tr>
 					<td class="table-inner"><b>번호</b></td>
 					<td class="table-inner"><b>제목</b></td>
 					<td class="table-inner"><b>내용</b></td>
+					<td class="table-inner"><b>답변여부</b></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,6 +40,9 @@
 							</a>
 						</td>
 						<td>${info.content}</td>
+						<td>
+							<c:if test="${info.answerdate !=null}">답변완료</c:if>
+						</td>
 					</tr>
 					<c:set var="number" value="${number+1 }"/>
 				</c:forEach>

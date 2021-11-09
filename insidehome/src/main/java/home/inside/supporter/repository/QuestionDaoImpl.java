@@ -58,8 +58,8 @@ public class QuestionDaoImpl implements IQuestionDao {
 	}
 	
 	@Override
-	public List<QuestionVo> selectAskList(String type) throws Exception {
-		return sqlSessionTemplate.selectList("selectAskList", type);
+	public List<QuestionVo> selectAskList() throws Exception {
+		return sqlSessionTemplate.selectList("selectAskList");
 	}
 
 

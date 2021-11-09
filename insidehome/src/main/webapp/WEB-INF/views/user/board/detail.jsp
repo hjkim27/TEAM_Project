@@ -6,7 +6,6 @@
 <%@include file="/WEB-INF/views/user/main/userHeader.jsp"%>
 <% pageContext.setAttribute("replaceChar", "\n");%>
 <div class="body-info">
-	<c:set var="tmpCode" value="&boardName=${boardName}"/>
 	<c:choose>
 		<c:when test="${boardName eq 'info'}">
 	    	<c:set var="bName" value="정보게시판"/>  
@@ -18,10 +17,6 @@
 	    	<c:set var="bName" value="공지사항"/>  
 		</c:otherwise>
 	</c:choose>
-	<div class="info-detail">
-		<h1 class="info-title">${bName }</h1>
-		
-	</div>
 	<hr>
 	<div class="info-inner">
 		<div>
@@ -49,7 +44,7 @@
 							[관리자] &nbsp;|&nbsp; 
 						</c:if> 
 						조회수 <c:out value="${board.hit}"/>
-						<c:if test="${bName ne '공지사항'}">
+						<c:if test="${not fn:endsWith(board.writer, 'inside')}">
 							 &nbsp;|&nbsp; 추천수 <c:out value="${board.heart}"/>
 						</c:if>
 					</td>
@@ -60,13 +55,17 @@
 							<a onclick="location.href='<c:url value="/user/board/updateForm.do/${board.num}"/>'">[수정]</a>
 							<a onclick="location.href='<c:url value="/user/board/delete.do/${board.num}"/>'">[삭제]</a>
 						</c:if>
-
-						<c:if test="${bName ne '공지사항'}">
-							<c:if test="${loginInside ne board.writer }">
-								<a onclick="location.href='<c:url value="#"/>'">[신고]</a>
+						<c:if test="${board.notify eq 'no' and loginInside ne board.writer}">
+							<c:if test="${not fn:endsWith(board.writer, 'inside')}">
+									<form name="warnForm" style="border: 0px;">
+										<input type="hidden" id="warnName" name="warnName" value="${board.writer}" />
+										<input type="hidden" id="warnNum" name="warnNum" value="${board.num}" />
+									</form>
+								<a id="warnbtn" onclick="warnClick(${board.num});">[신고]</a>
 								<a onclick="location.href='<c:url value="/user/board/updateHeart.do/${board.num}"/>'">[추천]</a>
 							</c:if>
 						</c:if>
+						
 					</td>
 				</tr>
 				<tr>
@@ -101,7 +100,7 @@
 			목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;록
 		</button>
 	</div>
-<c:if test="${bName ne '공지사항'}">
+<c:if test="${board.notify eq 'no'}">
 	<form style="text-align: right;" name="ref-Form" method="post" action="<c:url value="/user/ref/regist.do" />">
 		<textarea style="resize: none; margin: 0 5% 0 0;" 
 			class="guideContent" name="content" cols="100" rows="3" placeholder="댓글 입력" required="required"></textarea>

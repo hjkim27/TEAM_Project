@@ -24,5 +24,5 @@ public interface IQuestionDao {
 	// 고객문의 목록조회(고객)
 	public List<QuestionVo> selectMyAsk(String nickname) throws Exception;
 	// 고객문의 목록조회(관리자)
-	public List<QuestionVo> selectAskList(String type) throws Exception;
+	public List<QuestionVo> selectAskList() throws Exception;
 }
