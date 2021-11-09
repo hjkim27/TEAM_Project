@@ -34,7 +34,7 @@
 						<input style="width: 95%; padding: 10px;" type="text" name="title" value="${qa.TITLE }">
 					</td>
 				</tr>
-				<tr>
+				<tr> 
 					<td>
 						<textarea style="width: 98%; resize: none; padding: 10px;" rows="5" cols="30"  name="content">${qa.CONTENT }</textarea>
 					</td>
