@@ -24,9 +24,7 @@ public class FileUtils {
 	private String path = "C:"+File.separator+"TeamProject"+File.separator+"UploadFile"+File.separator;
 	
 	public Map<String, Object> goodsFileUpload(String goodsCode, MultipartHttpServletRequest mpReq) {
-
 		String filePath = path+"GOODS"+File.separator+goodsCode;
-		
 		List<MultipartFile> fileList = mpReq.getFiles("saveGoodsImage");
 		List<String> saveNames = new ArrayList<String>();
 		String name = "";
@@ -34,7 +32,6 @@ public class FileUtils {
 		if(!(folder.exists())) {
 			folder.mkdirs();
 		}
-		
 		for(MultipartFile mf : fileList) {
 			String tmpName =  goodsCode + "_" + mf.getOriginalFilename();
 			tmpName = tmpName.replaceAll(" ", "");
@@ -46,22 +43,18 @@ public class FileUtils {
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-			
 			if(!(name.equals(goodsCode + "_"))) {
 				saveNames.add(tmpName);
 			}
 		}
-		
 		//파일이 잘못생겼을 경우 지우기 위한 처리
 		File noFile = new File(filePath + File.separator + goodsCode + "_");
 		if(noFile.exists()) {
 			noFile.delete();
 		}
-		
 		Map<String, Object> hm = new HashMap<String, Object>();
 		hm.put("goodsCode", goodsCode);
 		hm.put("saveNames", saveNames);
-		
 		
 		return hm;
 	}

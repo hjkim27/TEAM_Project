@@ -69,7 +69,8 @@ public class LoginController {
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginSubmit(@ModelAttribute("cmd") LoginCommand cmd, Errors errors, HttpServletRequest req,
-			HttpServletResponse resp, @CookieValue(value = "tmpPwinssa", required = false)Cookie tmpCookie) throws Exception {
+			HttpServletResponse resp, @CookieValue(value = "tmpPwinssa", required = false)Cookie tmpCookie)
+			throws Exception {
 		new LoginCommandValidator().validate(cmd, errors);
 		if (errors.hasErrors()) {
 			return "user/member/loginForm";
@@ -160,6 +161,7 @@ public class LoginController {
 			String tmpPw = emailSer.emailSend(result);
 			tmpPw = pwdEncoder.encode(tmpPw);
 			Cookie tmpCookie = new Cookie("tmpPwinssa", tmpPw);
+			tmpCookie.setPath("/");
 			tmpCookie.setMaxAge(60*10);//10분간만 유지
 			resp.addCookie(tmpCookie);
 		}

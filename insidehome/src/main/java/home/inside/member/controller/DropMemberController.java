@@ -36,7 +36,6 @@ public class DropMemberController {
 	public String dropMemberSubmit(String email, String password,
 			@RequestParam(value = "agree", defaultValue = "false") Boolean agree, HttpSession session)
 			throws Exception {
-		System.out.println(email + ", " + password + ", " + agree + ", " + session.getAttribute("loginInside"));
 		if (email == null || password == null || agree == null) {
 			return "user/member/mypage/dropMemberForm";
 		}

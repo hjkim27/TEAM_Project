@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-// 로그인 하지 않은 상태에서 특정 페이지 요청 시 로그인 페이지로 이동 처리
+// 로그인 하지 않은 상태에서 특정 페이지 요청 시 메인페이지로 이동 처리
 public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -22,3 +22,11 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		return false;
 	}
 }
+
+
+
+
+
+
+
+

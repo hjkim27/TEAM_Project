@@ -47,6 +47,7 @@ public class WarningController {
 		int warnCount = service.warningCount(nickname);
 		if(warnCount >= 3) {
 			pointService.insertPoint(nickname, "warning", -1000);
+			infoService.updateMyCount(nickname, -1000);
 		}
 		return "user/supporter/warnResultPopup";
 	}
