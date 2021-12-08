@@ -3,6 +3,7 @@ package home.inside.member.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +45,7 @@ public class MemberInfoController {
 	private IBoardService boardSer;
 	@Autowired
 	private IQuestionService qaSer;
-	
+
 	@RequestMapping(value = "/main.do")
 	public String mypage(String viewPage, String str, Model model, HttpSession session) throws Exception {
 		viewPage = (viewPage == null) ? "board" : viewPage;
@@ -52,7 +54,7 @@ public class MemberInfoController {
 		model.addAttribute("orderCount", goodsSer.nicknameOrderCount(nickname));
 		model.addAttribute("qaCount", qaSer.selectMyAsk(nickname));
 		model.addAttribute("viewPage", viewPage);
-		model.addAttribute("checkIn",pointSer.selectCheck(nickname));
+		model.addAttribute("checkIn", pointSer.selectCheck(nickname));
 		model.addAttribute("articleList", boardSer.selectMyArticleList(nickname));
 		if (viewPage.equals("point")) {
 			model.addAttribute("pointList", pointSer.selectList(nickname));
@@ -97,8 +99,10 @@ public class MemberInfoController {
 
 	@RequestMapping(value = "/changePw.do", method = RequestMethod.POST)
 	public String changePwSubmit(@ModelAttribute("editCmd") ChangePwCommand editCmd, Errors errors,
-			RedirectAttributes rttr) throws Exception {
+			RedirectAttributes rttr, @CookieValue(value = "tmpPwinssa", required = false) Cookie tmpCookie)
+			throws Exception {
 		new ChangePwCommandValidatior().validate(editCmd, errors);
+		System.out.println(editCmd);
 		if (errors.hasErrors()) {
 			return "user/member/mypage/changePwForm";
 		}
@@ -107,11 +111,14 @@ public class MemberInfoController {
 		if (nickname == null || nickname.equals("")) {
 			rttr.addFlashAttribute("updateResult", "fail");
 		} else {
-			String newPw = pwdEncoder.encode(editCmd.getNewPassword());
-			if (!pwdEncoder.matches(editCmd.getPassword(), (String) info.get("PASSWORD"))) {
+			String currPw = (String) info.get("PASSWORD");
+			if (tmpCookie != null) {
+				currPw = tmpCookie.getValue();
+			} 
+			if (!pwdEncoder.matches(editCmd.getPassword(), currPw)) {
 				rttr.addFlashAttribute("updateResult", "fail");
 			} else {
-				infoSer.updatePassword(nickname, newPw);
+				infoSer.updatePassword(nickname, pwdEncoder.encode(editCmd.getNewPassword()));
 				rttr.addFlashAttribute("updateResult", "success");
 			}
 		}
