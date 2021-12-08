@@ -37,4 +37,11 @@ public class ChangePwCommand {
 			return false;
 		}
 	}
+	@Override
+	public String toString() {
+		return "ChangePwCommand [email=" + email + ", password=" + password + ", newPassword=" + newPassword
+				+ ", newPasswordCheck=" + newPasswordCheck + "]";
+	}
+	
+	
 }

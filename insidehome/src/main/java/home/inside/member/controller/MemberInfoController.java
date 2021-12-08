@@ -42,8 +42,6 @@ public class MemberInfoController {
 	@Autowired
 	private IBoardService boardSer;
 	@Autowired
-	private IWarningService warnSer;
-	@Autowired
 	private IQuestionService qaSer;
 	
 	@RequestMapping(value = "/main.do")
@@ -86,6 +84,7 @@ public class MemberInfoController {
 			errors.rejectValue("phone2", "required");
 			return "user/member/mypage/changeInfoForm";
 		}
+		System.out.println(myInfo);
 		infoSer.updateMyInfo(myInfo);
 		return "redirect:/user/mypage/info/view.do";
 	}

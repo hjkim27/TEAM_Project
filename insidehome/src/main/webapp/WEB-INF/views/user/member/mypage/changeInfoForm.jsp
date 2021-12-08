@@ -83,7 +83,7 @@
 						<tr class="reg-need">
 							<td class="reg-need-label">* 전화번호</td>
 							<td class="reg-need">
-								<form:select path="${phone1}">
+								<form:select path="phone1">
 									<form:option value="010" label="010" />
 									<form:option value="011" label="011" />
 									<form:option value="016" label="016" />

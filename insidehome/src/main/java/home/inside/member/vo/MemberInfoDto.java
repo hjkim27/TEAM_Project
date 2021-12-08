@@ -86,6 +86,12 @@ public class MemberInfoDto {
 	public void setAddrSub(String addrSub) {
 		this.addrSub = addrSub;
 	}
+	@Override
+	public String toString() {
+		return "MemberInfoDto [email=" + email + ", nickname=" + nickname + ", loginTime=" + loginTime + ", regdate="
+				+ regdate + ", name=" + name + ", gender=" + gender + ", storedate=" + storedate + ", phone1=" + phone1
+				+ ", phone2=" + phone2 + ", addrNum=" + addrNum + ", addr=" + addr + ", addrSub=" + addrSub + "]";
+	}
 	
 	
 	
